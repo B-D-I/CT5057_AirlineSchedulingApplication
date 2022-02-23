@@ -7,11 +7,10 @@ final class PassengerDatabase extends Database {
 
     private final HashMap<String, Object> passengerDetailMap = new HashMap<>();
 
-    Flight flight = new Flight();
+//    Flight flight = new Flight();
+//    HashMap<String, Flight> allFlightsMap = flightDatabase.allFlightsMap;
+
     FlightDatabase flightDatabase = new FlightDatabase();
-    HashMap<String, Flight> allFlightsMap = flightDatabase.allFlightsMap;
-
-
 
 
     public void createPassenger() {

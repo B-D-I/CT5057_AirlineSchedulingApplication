@@ -52,7 +52,7 @@ public class Airports<T> {
     public boolean hasAirport(T s){
         boolean hasAirport;
         if (airportMap.containsKey(s)){
-            System.out.println(s + " is an airport this airline fly's from");
+            System.out.println("This airline does fly from airport: " + s);
             hasAirport = true;
         } else {
             System.out.println("This airline does not fly from airport: " + s);
