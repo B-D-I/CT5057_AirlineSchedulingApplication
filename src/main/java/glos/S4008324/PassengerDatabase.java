@@ -57,11 +57,12 @@ final class PassengerDatabase extends Database {
 
             if (flightDatabase.checkRoute(departureAirport, destinationAirport)) {
 
-                // need to check th flight number between the two routes and schedule a passenger to the flight !!!!!!!!!!!!
+                // find the flight number for the route, then call schedule-seat function
                 String flightNumber = null;
                 for (Flight flight : flightDatabase.allFlightsMap.values()) {
                     if (flight.getDeparture().equals(departureAirport) && flight.getDestination().equals(destinationAirport)) {
                         flightNumber = flight.getFlightNumber();
+                        System.out.println("\nThe flight for this journey is: " +flightNumber + "\n");
                         flightDatabase.scheduleSeat(passenger, flightNumber);
                     }
                 }

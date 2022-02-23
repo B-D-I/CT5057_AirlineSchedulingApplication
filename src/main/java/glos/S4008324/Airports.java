@@ -52,10 +52,10 @@ public class Airports<T> {
     public boolean hasAirport(T s){
         boolean hasAirport;
         if (airportMap.containsKey(s)){
-            System.out.println("graph contains " + s + " as airport");
+            System.out.println(s + " is an airport this airline fly's from");
             hasAirport = true;
         } else {
-            System.out.println("graph does not contain " + s + " as airport");
+            System.out.println("This airline does not fly from airport: " + s);
             hasAirport = false;
         } return hasAirport;
     }
@@ -65,10 +65,10 @@ public class Airports<T> {
         boolean hasRoute;
         if (airportMap.get(s).contains(d)){
             // ALSO NEED TO PRINT THE WEIGHT OF EDGE (DISTANCE)
-            System.out.println("graph has route between " + s + " and " + d);
+            System.out.println("This airline has a route between " + s + " and " + d);
             hasRoute = true;
         } else {
-            System.out.println("graph has no route between " + s + " and " + d);
+            System.out.println("This airline does not have a route between " + s + " and " + d);
             hasRoute = false;
         } return hasRoute;
     }

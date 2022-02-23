@@ -98,14 +98,4 @@ public class Seating extends Flight {
             e.printStackTrace();
         }
     }
-
-
-//    public HashMap<Integer, String> getAircraftSeatAllocationMap() {
-//        return aircraftSeatAllocation;
-//    }
-//    public void printSeating(){
-//        aircraftSeatAllocation.entrySet().forEach(System.out::println);
-//    }
-
-
 }
