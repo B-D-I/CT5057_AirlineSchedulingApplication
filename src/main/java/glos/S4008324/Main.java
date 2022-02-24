@@ -9,10 +9,8 @@ public class Main {
     }
 
     // TO DO:
-    //  passengerDatabase age selection not working?
 
     //  scheduleSeat:
-    //// need to make only the chosen seat class visible
     //// needs to remove selected seat number from flight and allocate passenger to it.
     //// if seat not available, need to offer the option to select another seat or go on wait list (queue)
 
@@ -21,4 +19,6 @@ public class Main {
     // view passenger status for booked flight / waiting lists + positions
 
     // view flight information: flight number, airports, seats and passengers on seats
+
+    // include sorting and searching algorithms
 }

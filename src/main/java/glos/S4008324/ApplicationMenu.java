@@ -49,7 +49,7 @@ class ApplicationMenu {
 
             String adminSelect = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
             switch (adminSelect) {
-                case "S" -> passengerDatabase.createPassenger();
+                case "S" -> passengerDatabase.schedulePassenger();
                 case "C" -> System.out.println("cancel");
                 case "P" -> System.out.println("passenger status");
                 case "F" -> showFlightInfo();
@@ -112,6 +112,7 @@ class ApplicationMenu {
         }
     }
 
+    // should this be display specific flight info???
     public void showFlightInfo(){
         flightDatabase.showAllFlights();
     }

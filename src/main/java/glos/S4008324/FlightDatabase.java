@@ -88,18 +88,15 @@ public class FlightDatabase extends Database {
     }
 
     public boolean checkRoute(String departure, String destination) {
-        boolean hasRoute = airports.hasRoute(departure, destination);
-        return hasRoute;
+        return airports.hasRoute(departure, destination);
     }
 
     public boolean checkAirport(String airport) {
-        boolean hasAirport = airports.hasAirport(airport);
-        return hasAirport;
+        return airports.hasAirport(airport);
     }
 
 
     public void scheduleSeat(Passenger passenger, String flightNumber) {
-
 //        passengerDetailMap.entrySet().forEach(System.out::println);
 //        System.out.println("Passenger Passport Number: " + passenger.toString());
 
@@ -131,9 +128,6 @@ public class FlightDatabase extends Database {
         // get the seating list from chosen flight
         HashMap<String, String> seatingList = flight.getSeatingList();
 
-
-//        if (seatingList.containsValue(seatClass)) {
-
         for (Map.Entry<String, String> seats : seatingList.entrySet()) {
             if (seats.getValue().equals(seatClass)) {
 //                    System.out.println(seats+"\n");
@@ -141,14 +135,12 @@ public class FlightDatabase extends Database {
                 System.out.println(seats.getKey() + ":" + seats.getValue());
             }
         }
-//            }
 
             System.out.println("Do you wish to select a specific seat? (Y|N)");
             String selectSeat = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
 
 
             String seatNumber;
-
             if (selectSeat.equals("Y")) {
                 // Manually pick the seatNo
                 System.out.println("Enter seat number: ");
@@ -170,7 +162,6 @@ public class FlightDatabase extends Database {
                 seatingList.remove(seatNumber);
                 System.out.println(seatingList);
 
-                // need to add to allocated seat list etc..
 
                 // creat a hashmap of chosen seat number and class and add it to hashmap with passenger
                 ArrayList<String> flightInfo = new ArrayList<>();
@@ -184,16 +175,14 @@ public class FlightDatabase extends Database {
                 System.out.println("\n\n");
                 System.out.println(allocatedSeatList);
 
-
-                // if seat not available in class = view all seats with:       System.out.println(seatingList);
-
-//            } else if (!seatingList.containsValue(seatClass)) {
-//                // give option to select another seat or go on waiting list (queue)
-//            }
             }
-        }
 
-        // will write the flight seating list to a txt file .............
+
+
+                // ^^^^ NEED TO CREATE A PERMANENT CSV FILE OF BOOKED SEATS -- IN SEPARATE METHOD
+
+
+                // will write the flight seating list to a txt file .............
 //    public void updateFlightAllocationTxt(String departure, String destination, String dateDeparture, String flightNumber, HashMap<Integer, String> seatList){
 //        try {
 //            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/Flights.txt", true));
@@ -208,4 +197,16 @@ public class FlightDatabase extends Database {
 //            e.printStackTrace();
 //        }
 //    }
-    }
+
+
+
+
+
+                // NEW METHOD FOR UNAVAILABLE SEATING >
+                // if seat not available in class = view all seats with:       System.out.println(seatingList);
+
+//            } else if (!seatingList.containsValue(seatClass)) {
+//                // give option to select another seat or go on waiting list (queue)
+//            }
+            }
+        }
