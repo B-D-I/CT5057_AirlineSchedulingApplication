@@ -1,5 +1,7 @@
 package glos.S4008324;
 
+import com.opencsv.CSVWriter;
+
 import java.io.*;
 import java.util.*;
 
@@ -164,7 +166,6 @@ public class FlightDatabase extends Database {
         System.out.println("\nDo you wish to select a specific seat? (Y|N)");
         String selectSeat = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
 
-
         if (selectSeat.equals("Y")) {
             // Manually pick the seatNo
             System.out.println("Enter seat number: ");
@@ -190,18 +191,33 @@ public class FlightDatabase extends Database {
             seatingList.remove(seatNumber);
             System.out.println(seatingList);
 
+            // STORE IN CSV
+            File file = new File("src/main/java/glos/S4008324/ScheduledSeating.csv");
+            try{
+                FileWriter outputFile = new FileWriter(file);
+                CSVWriter writer = new CSVWriter(outputFile);
+                ArrayList<String[]> scheduledPassengers = new ArrayList<>();
+                scheduledPassengers.add(new String[]{flightNumber, seatNumber, seatClass,
+                        passenger.getPassportNumber(), passenger.getName()});
 
+                writer.writeAll(scheduledPassengers);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // IF PLACING INTO HASHMAP ..
             // creat an Array of chosen seat number and class and add it to hashmap with passenger
-            ArrayList<String> flightInfo = new ArrayList<>();
-            flightInfo.add("Flight number: " + flightNumber);
-            flightInfo.add("Seat number: " + seatNumber);
-            flightInfo.add("Seat class: " + seatClass);
-
-            // add details to allocated seating
-            allocatedSeatList.put(passenger.getPassportNumber(), flightInfo);
-
-            System.out.println("\n\n");
-            System.out.println(allocatedSeatList);
+//            ArrayList<String> flightInfo = new ArrayList<>();
+//            flightInfo.add("Flight number: " + flightNumber);
+//            flightInfo.add("Seat number: " + seatNumber);
+//            flightInfo.add("Seat class: " + seatClass);
+//
+//            // add details to allocated seating
+//            allocatedSeatList.put(passenger.getPassportNumber(), flightInfo);
+//
+//            System.out.println("\n\n");
+//            System.out.println(allocatedSeatList);
 
         }
 
