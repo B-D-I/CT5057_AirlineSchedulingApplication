@@ -52,7 +52,7 @@ class ApplicationMenu {
                 case "S" -> passengerDatabase.schedulePassenger();
                 case "C" -> System.out.println("cancel");
                 case "P" -> System.out.println("passenger status");
-                case "F" -> showFlightInfo();
+                case "F" -> System.out.println("showFlightInfo()");
                 case "Q" -> System.out.println("quit");
                 case "N" -> restrictedMenuLogin();
                 default -> System.out.println("error");
@@ -113,7 +113,7 @@ class ApplicationMenu {
     }
 
     // should this be display specific flight info???
-    public void showFlightInfo(){
-        flightDatabase.showAllFlights();
-    }
+//    public void showFlightInfo(){
+//        flightDatabase.showAllFlights();
+//    }
 }

@@ -44,7 +44,7 @@ JFK
 BHM
 2022-02-28
 MIA
-{1=First, 2=First, 3=First, 4=Economy, 5=Economy, 6=Business, 7=Business, 8=Economy, 9=Economy, 10=Economy, 11=Economy}
+{1=First, 2=First, 3=First, 4=Economy, 5=Economy, 8=Economy, 9=Economy, 10=Economy, 11=Economy}
 
 499
 LTN

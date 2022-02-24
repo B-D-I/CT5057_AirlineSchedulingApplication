@@ -14,7 +14,8 @@ public class Main {
     //// needs to remove selected seat number from flight and allocate passenger to it.
     //// if seat not available, need to offer the option to select another seat or go on wait list (queue)
 
-    // remove passenger from flight and free up the seat. Also give option to add passenger from waiting list onto flight
+    // remove passenger from flight and free up the seat. (add seat back to hashmap)
+    ///  Also give option to add passenger from waiting list onto flight
 
     // view passenger status for booked flight / waiting lists + positions
 

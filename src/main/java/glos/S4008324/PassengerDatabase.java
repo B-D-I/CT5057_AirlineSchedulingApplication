@@ -58,7 +58,7 @@ final class PassengerDatabase extends Database {
                         if (flight.getDeparture().equals(departureAirport) && flight.getDestination().equals(destinationAirport)) {
                             flightNumber = flight.getFlightNumber();
                             System.out.println("\nThe flight for this journey is: " + flightNumber + "\n");
-                            flightDatabase.scheduleSeat(passenger, flightNumber);
+                            flightDatabase.selectSeatClass(passenger, flightNumber);
                         }
                     }
 
