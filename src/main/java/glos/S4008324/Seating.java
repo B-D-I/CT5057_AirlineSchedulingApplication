@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Locale;
+import java.util.Scanner;
 
-public class Seating extends Flight {
+public class Seating {
+
+    Scanner scanner = new Scanner(System.in);
 
     protected int seatCount;
 

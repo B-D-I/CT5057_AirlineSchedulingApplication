@@ -11,7 +11,7 @@ class ApplicationMenu {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     PassengerDatabase passengerDatabase = new PassengerDatabase();
-    Seating seating = new Seating();
+    Flight flight = new Flight();
 
     private static ApplicationMenu menu = null;
 
@@ -66,54 +66,13 @@ class ApplicationMenu {
         System.out.println("Enter password: ");
         String password = scanRead.nextLine();
         if (username.equals(flightDatabase.getDbUsername()) && password.equals(flightDatabase.getDbPassword())) {
-            createFlight();
+            flight.createFlight();
         } else {
             adminMenu();
         }
     }
 
-    // FLIGHT OPERATOR METHOD TO CREATE NEW FLIGHT TO TXT
-    private void createFlight() {
-        System.out.println("Enter departure airport: ");
-        String departure = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
 
-        System.out.println("Enter destination airport: ");
-        String destination = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
 
-        System.out.print("Departure Date (0000-12-03 format): ");
 
-        String dateDeparture = null;
-        try {
-            String departureDate = scanRead.nextLine();
-            LocalDate localDate = LocalDate.parse(departureDate);
-            dateDeparture = localDate.toString();
-        } catch (DateTimeException e) {
-            System.out.println(e);
-            System.out.println("\nPlease enter the date in the correct format\n");
-            createFlight();
-        }
-
-        System.out.println("Enter flight number: ");
-        String flightNumber = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
-
-        // SEATING HASHMAP
-        HashMap<Integer, String> flightSeatingClass = seating.allocateAircraftSeatClass();
-
-        System.out.println("\nSeating List: \n");
-        flightSeatingClass.entrySet().forEach(System.out::println);
-
-        // OPTION TO EDIT THE SEATING LIST
-        System.out.println("\nWould you like to edit this seating list? (Y|N)");
-        String editSeating = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
-        if (editSeating.equals("Y")) {
-            seating.editAircraftSeatClassAllocation(departure, destination, dateDeparture, flightNumber, flightSeatingClass);
-        } else if (editSeating.equals("N")) {
-            seating.updateFlightTxt(departure, destination, dateDeparture, flightNumber, flightSeatingClass);
-        }
-    }
-
-    // should this be display specific flight info???
-//    public void showFlightInfo(){
-//        flightDatabase.showAllFlights();
-//    }
 }

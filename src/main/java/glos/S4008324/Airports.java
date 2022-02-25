@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class Airports<T> {
 
-
     // Hash Map stores graph edges
     private final Map<T, List<T>> airportMap = new HashMap<>();
 

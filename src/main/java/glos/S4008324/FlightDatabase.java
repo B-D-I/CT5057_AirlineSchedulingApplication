@@ -1,6 +1,7 @@
 package glos.S4008324;
 
 import com.opencsv.CSVWriter;
+import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.*;
 import java.util.*;
@@ -170,6 +171,8 @@ public class FlightDatabase extends Database {
             // Manually pick the seatNo
             System.out.println("Enter seat number: ");
             String seatNumber = scanner.nextLine();
+
+//          NOT WORKING>>>
             schedulePassenger(seatingList, seatNumber, flightNumber, seatClass, passenger);
 
             // RANDOM SEAT ALLOCATION...................... unable to convert the int back to string?
@@ -186,25 +189,34 @@ public class FlightDatabase extends Database {
         }
     }
 
-        private void schedulePassenger(HashMap<String, String> seatingList, String seatNumber, String flightNumber, String seatClass, Passenger passenger) {
+        private void schedulePassenger(HashMap<String, String> seatList, String seatingNumber, String flightNumber, String seatClass, Passenger passenger) {
+            // test - not working
+            System.out.println("working");
+
             // delete it from the non-allocated seating list
-            seatingList.remove(seatNumber);
-            System.out.println(seatingList);
+            seatList.remove(seatingNumber);
+            System.out.println(seatList);
 
-            // STORE IN CSV
-            File file = new File("src/main/java/glos/S4008324/ScheduledSeating.csv");
-            try{
-                FileWriter outputFile = new FileWriter(file);
-                CSVWriter writer = new CSVWriter(outputFile);
-                ArrayList<String[]> scheduledPassengers = new ArrayList<>();
-                scheduledPassengers.add(new String[]{flightNumber, seatNumber, seatClass,
-                        passenger.getPassportNumber(), passenger.getName()});
+            // STORE IN CSV ---------- NOT WRITING ??????????
+//            File file = new File("src/main/java/glos/S4008324/ScheduledSeating.csv");
+//            try{
+//                FileWriter outputFile = new FileWriter(file);
+//                CSVWriter writer = new CSVWriter(outputFile);
+////                ArrayList<String[]> scheduledPassengers = new ArrayList<>();
+//
+////                scheduledPassengers.add(new String[]{"working", flightNumber, seatNumber, seatClass,
+////                        passenger.getPassportNumber(), passenger.getName()});
+//
+//                String scheduledPassenger[] = {flightNumber, seatNumber, seatClass,
+//                        passenger.getPassportNumber(), passenger.getName()}
+//
+//                writer.writeNext(scheduledPassenger);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
-                writer.writeAll(scheduledPassengers);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
             // IF PLACING INTO HASHMAP ..
             // creat an Array of chosen seat number and class and add it to hashmap with passenger
@@ -219,10 +231,26 @@ public class FlightDatabase extends Database {
 //            System.out.println("\n\n");
 //            System.out.println(allocatedSeatList);
 
-        }
+
+            //    public void updateFlightAllocationTxt(String departure, String destination, String dateDeparture, String flightNumber, HashMap<Integer, String> seatList){
+//        try {
+//            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/ScheduledSeating.txt", true));
+//            out.write(flightNumber + seatNumber + seatClass + passenger.getPassportNumber() + passenger.getName());
+//            out.close();
+//
+//            System.out.println("\nFlight added");
+//            // REPLACE: .replace("{", " ").replace("},", " ")
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
 
 
         private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
+
+
+        // CREATE A CSV FILE TO STORE INFO, THEN WHEN INITILIASED, PLACE INTO QUEUE
 
             // creat an Array of chosen seat number and class and add it to hashmap with passenger
             ArrayList<String> flightInfo = new ArrayList<>();
