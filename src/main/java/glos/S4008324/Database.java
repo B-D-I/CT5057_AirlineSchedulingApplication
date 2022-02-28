@@ -2,10 +2,9 @@ package glos.S4008324;
 
 import java.util.Scanner;
 
-abstract class Database {
+interface Database {
 
-    Passenger passenger = new Passenger();
-    Airports<String> airports = new Airports<>();
     Scanner scanner = new Scanner(System.in);
+    Passenger passenger = new Passenger();
 
 }

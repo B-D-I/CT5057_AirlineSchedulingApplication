@@ -3,7 +3,7 @@ package glos.S4008324;
 import java.util.HashMap;
 import java.util.Locale;
 
-final class PassengerDatabase extends Database {
+final class PassengerDatabase implements Database {
 
     private final HashMap<String, Object> passengerDetailMap = new HashMap<>();
 

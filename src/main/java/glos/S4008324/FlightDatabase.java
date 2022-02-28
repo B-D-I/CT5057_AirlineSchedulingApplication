@@ -6,7 +6,7 @@ import jdk.swing.interop.SwingInterOpUtils;
 import java.io.*;
 import java.util.*;
 
-public class FlightDatabase extends Database {
+public class FlightDatabase implements Database {
 
     // all flights in flights.txt
     HashMap<String, Flight> allFlightsMap = new HashMap<>();
