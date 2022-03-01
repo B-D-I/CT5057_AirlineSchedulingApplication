@@ -201,6 +201,8 @@ public class FlightDatabase implements Database {
 
                 writer.close();
 
+                System.out.println("\nYou have purchased seat: " + seatingNumber + " : " + seatClass + " , on flight: " + flightNumber + "\n\n");
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

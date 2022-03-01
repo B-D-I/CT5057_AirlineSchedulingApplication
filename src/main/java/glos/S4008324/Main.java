@@ -9,22 +9,16 @@ public class Main {
 
     // TO DO:
 
-    //  scheduleSeat:
-    //// needs to remove selected seat number from flight and allocate passenger to it.
-    //          >> scheduledSeating"".csv    /   CSV OR TXT FILE ? FOR SELECTING PASSENGER
-    //// if seat not available, need to offer the option to select another seat or go on wait list
-    //          >> waitingList"".csv
+    // REMOVE PASSENGER FROM FLIGHT:
+    //  >> SELECT A PASSENGER FROM THE CORRECT FLIGHTS SCHEDULED-SEATING FILE AND REMOVE IT
+    //  >> PLACE THE PASSENGERS FROM THE FLIGHTS WAITING-LIST INTO A QUEUE AND OFFER FIRST PERSON THE SEAT
+    //  >> IF NOT, ADD THE SEAT AND CLASS BACK INTO FLIGHTS.TXT
 
-    // remove passenger from flight and free up the seat
-    //      >> select passport number from correct csv (add seat back to Flights.txt)
-    ///  Also give option to add passenger from waiting list onto flight >> put waitingList"".csv data into queue, first in-fist out
+    // VIEW PASSENGER STATUS:
+    // >> CHOOSE PASSENGER AND PRINT ALL FLIGHTS THEY ARE BOOKED ON, AND ANY WAITING LISTS (WITH POSITION IN LIST)
 
-    // view passenger status for booked flight / waiting lists + positions
+    // VIEW FLIGHT INFORMATION:
+    // >> ENTER FLIGHT NUMBER AND PRINT AIRPORTS, DATE, ALL SEATS AND PASSENGER OF SEAT
 
-    // view flight information: flight number, airports, seats and passengers on seats
-
-    // include sorting and searching algorithms
-
-    // SCHEDULE SEAT:
-    //
+    /// INCLUDE SORTING AND SEARCHING ALGORITHMS
 }

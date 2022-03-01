@@ -109,8 +109,6 @@ public class Seating {
                         "\n" + flight.getDestination() + "\n" + flight.getSeatingList().toString()+ "\n\n");
                 out.close();
 
-            System.out.println("\nFlight added");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
