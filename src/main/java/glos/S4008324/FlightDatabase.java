@@ -190,12 +190,12 @@ public class FlightDatabase implements Database {
         seat.modifyFlightSeating(allFlightsMap);
 
         // STORE IN CSV
-            File file = new File("src/main/java/glos/S4008324/ScheduledSeating.csv");
+            File file = new File("src/main/java/glos/S4008324/ScheduledSeating"+flightNumber+".csv");
             try {
                 FileWriter outputFile = new FileWriter(file, true);
                 CSVWriter writer = new CSVWriter(outputFile);
 
-                String[] scheduledPassenger = {flightNumber, seatingNumber, seatClass, passenger.getPassportNumber(), passenger.getName()};
+                String[] scheduledPassenger = {passenger.getPassportNumber(), passenger.getName(), seatingNumber, seatClass};
 
                 writer.writeNext(scheduledPassenger);
 
