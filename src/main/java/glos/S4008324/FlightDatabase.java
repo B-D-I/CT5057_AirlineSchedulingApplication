@@ -1,7 +1,6 @@
 package glos.S4008324;
 
 import com.opencsv.CSVWriter;
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.*;
 import java.util.*;
@@ -13,15 +12,13 @@ public class FlightDatabase implements Database {
 
     HashMap<String, ArrayList<String>> allocatedSeatList = new HashMap<>();
 
-    Queue<HashMap<String, ArrayList<String>>> waitingList = new LinkedList<>();
+//    Queue<HashMap<String, ArrayList<String>>> waitingList = new LinkedList<>();
 
     Airports<String> airports = new Airports<>();
+    WaitingListEntry waitingList = new WaitingListEntry();
     Seating seat = new Seating();
 
-    private Random random;
-
     public FlightDatabase() {
-        random = new Random();
         createFlightObjectsMap();
     }
 
@@ -149,7 +146,10 @@ public class FlightDatabase implements Database {
             if (seatSelect.equals("S")) {
                 selectSeatClass(passenger, flightNumber);
             } else if (seatSelect.equals("W")) {
-                assignWaitingList(seatClass, flightNumber, passenger);
+//                assignWaitingList(seatClass, flightNumber, passenger);
+
+                // create waiting list object
+                waitingList.updateFlightTxt(flightNumber, seatClass, passenger);
             }
         }
     }
@@ -208,27 +208,44 @@ public class FlightDatabase implements Database {
             }
     }
 
-    private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
-        // STORE IN CSV
-        File file = new File("src/main/java/glos/S4008324/WaitingList"+flightNumber+".csv");
-        try {
-            FileWriter outputFile = new FileWriter(file, true);
-            CSVWriter writer = new CSVWriter(outputFile);
+//    private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
+//        // STORE IN CSV
+//        File file = new File("src/main/java/glos/S4008324/WaitingList"+flightNumber+".csv");
+//        try {
+//            FileWriter outputFile = new FileWriter(file, true);
+//            CSVWriter writer = new CSVWriter(outputFile);
+//
+//            String[] scheduledPassenger = {passenger.getPassportNumber(), passenger.getName(), seatClass};
+//
+//            writer.writeNext(scheduledPassenger);
+//
+//            writer.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-            String[] scheduledPassenger = {passenger.getPassportNumber(), passenger.getName(), seatClass};
-
-            writer.writeNext(scheduledPassenger);
-
-            writer.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readWaitingList(){
-
-    }
+//    private void readWaitingList(String flightNumber){
+//        Queue<String>
+//        try {
+//            File myObj = new File("src/main/java/glos/S4008324/WaitingList"+flightNumber+".txt");
+//            Scanner myReader = new Scanner(myObj);
+//
+//            while (myReader.hasNextLine()) {
+//
+//                // read and assign flights.txt information
+//                String flightNo = myReader.nextLine();
+//                allFlightsMap.put(flightNo, f);
+//                if (myReader.hasNextLine()) {
+//                    myReader.nextLine();
+//                }
+//            }
+//            myReader.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Error" + e);
+//        }
+//    }
 }
 
 
