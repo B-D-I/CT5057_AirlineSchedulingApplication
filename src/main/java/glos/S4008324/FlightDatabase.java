@@ -102,8 +102,6 @@ public class FlightDatabase implements Database {
     }
 
     public void selectSeatClass(Passenger passenger, String flightNumber) {
-//        passengerDetailMap.entrySet().forEach(System.out::println);
-//        System.out.println("Passenger Passport Number: " + passenger.toString());
 
         System.out.println(passenger.toString());
         System.out.println("""
@@ -134,8 +132,7 @@ public class FlightDatabase implements Database {
         HashMap<String, String> seatingList = flight.getSeatingList();
 
         if (seatingList.containsValue(seatClass)) {
-
-            assignSeat(seatingList, seatClass);
+            assignSeat(seatingList, seatClass, flightNumber, passenger);
 
         } else {
             // view all seats with:       System.out.println(seatingList);
@@ -152,12 +149,12 @@ public class FlightDatabase implements Database {
             if (seatSelect.equals("S")) {
                 selectSeatClass(passenger, flightNumber);
             } else if (seatSelect.equals("W")) {
-//                assignWaitingList(seatClass, flightNumber, passenger);
+                assignWaitingList(seatClass, flightNumber, passenger);
             }
         }
     }
 
-    private void assignSeat(HashMap<String, String> seatingList, String seatClass) {
+    private void assignSeat(HashMap<String, String> seatingList, String seatClass, String flightNumber, Passenger passenger){
 
         for (Map.Entry<String, String> seats : seatingList.entrySet()) {
             if (seats.getValue().equals(seatClass)) {
@@ -177,48 +174,61 @@ public class FlightDatabase implements Database {
             }
         }
         if (Boolean.TRUE.equals(seatPresent)){
-            schedulePassenger(seatingList, seatNumber);
+            schedulePassenger(seatingList, seatNumber, flightNumber, seatClass, passenger);
         } else {
             System.out.println("\nThis seat is not available. Select an available seat: \n");
-            assignSeat(seatingList, seatClass);
+            assignSeat(seatingList, seatClass, flightNumber, passenger);
         }
     }
 
 
-    private void schedulePassenger(HashMap<String, String> seatList, String seatingNumber) {
+    private void schedulePassenger(HashMap<String, String> seatList, String seatingNumber, String flightNumber, String seatClass, Passenger passenger) {
 
         // remove seat number from seating hashmap, and update flights.txt hashmap
         seatList.remove(seatingNumber);
         System.out.println(seatList);
         seat.modifyFlightSeating(allFlightsMap);
+
+        // STORE IN CSV
+            File file = new File("src/main/java/glos/S4008324/ScheduledSeating.csv");
+            try {
+                FileWriter outputFile = new FileWriter(file, true);
+                CSVWriter writer = new CSVWriter(outputFile);
+
+                String[] scheduledPassenger = {flightNumber, seatingNumber, seatClass, passenger.getPassportNumber(), passenger.getName()};
+
+                writer.writeNext(scheduledPassenger);
+
+                writer.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
+
+    private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
+        // STORE IN CSV
+        File file = new File("src/main/java/glos/S4008324/WaitingList.csv");
+        try {
+            FileWriter outputFile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputFile);
+
+            String[] scheduledPassenger = {flightNumber, seatClass, passenger.getPassportNumber(), passenger.getName()};
+
+            writer.writeNext(scheduledPassenger);
+
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
 
-//            checkFlights();
-
-            // STORE IN CSV
-//            File file = new File("src/main/java/glos/S4008324/ScheduledSeating.csv");
-//            try {
-//                FileWriter outputFile = new FileWriter(file);
-//                CSVWriter writer = new CSVWriter(outputFile);
-//
-//                String[] scheduledPassenger = {flightNumber, seatingNumber, seatClass, passenger.getPassportNumber(), passenger.getName()};
-//
-//                writer.writeNext(scheduledPassenger);
-//
-//                writer.close();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
 
 
-//            public void checkFlights(){
-//                for (Flight flights: allFlightsMap.values()){
-//                    System.out.println(flights);
-//                }
-//            }
 
 //
 //        private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
@@ -238,26 +248,6 @@ public class FlightDatabase implements Database {
         // need waiting list functions etc....
 
 
-
-//    private void saveBooking() {
-//        // ^^^^ CREATE A PERMANENT CSV FILE OF BOOKED SEATS /// or waiting list
-//    }
-
-    // will write the flight seating list to a txt file .............
-//    public void updateFlightAllocationTxt(String departure, String destination, String dateDeparture, String flightNumber, HashMap<Integer, String> seatList){
-//        try {
-//            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/Flights.txt", true));
-//            out.write("\n" + flightNumber + "\n" + departure + "\n" + dateDeparture +
-//                    "\n" + destination + "\n" + seatList.toString()+ "\n");
-//            out.close();
-//
-//            System.out.println("\nFlight added");
-//            // REPLACE: .replace("{", " ").replace("},", " ")
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 
 
