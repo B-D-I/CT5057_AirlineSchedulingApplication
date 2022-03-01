@@ -50,7 +50,7 @@ MIA
 BHM
 2022-02-28
 MIA
-{11=Economy, 3=First, 4=Business, 5=Business, 6=Economy, 8=Economy, 9=Economy, 10=Economy}
+{11=Economy, 3=First, 4=Business, 5=Business, 6=Economy, 8=Economy, 10=Economy}
 
 501
 LTN

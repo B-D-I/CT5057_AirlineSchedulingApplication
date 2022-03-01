@@ -1,11 +1,8 @@
 package glos.S4008324;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 final class PassengerDatabase implements Database {
-
-    private final HashMap<String, Object> passengerDetailMap = new HashMap<>();
 
     FlightDatabase flightDatabase = new FlightDatabase();
 
@@ -25,10 +22,6 @@ final class PassengerDatabase implements Database {
             passenger.setPassportNumber(passengerPassportNumber);
             passenger.setAge(passengerAge);
 
-            // update passenger hashmap - this is used to store all passenger information
-            passengerDetailMap.put(passengerPassportNumber, passenger);
-
-            // call passenger route method
             passengerRoute(passenger);
         }
         else {

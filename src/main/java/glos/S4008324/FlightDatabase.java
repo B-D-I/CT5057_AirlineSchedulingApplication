@@ -204,17 +204,16 @@ public class FlightDatabase implements Database {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
     }
 
     private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
         // STORE IN CSV
-        File file = new File("src/main/java/glos/S4008324/WaitingList.csv");
+        File file = new File("src/main/java/glos/S4008324/WaitingList"+flightNumber+".csv");
         try {
             FileWriter outputFile = new FileWriter(file, true);
             CSVWriter writer = new CSVWriter(outputFile);
 
-            String[] scheduledPassenger = {flightNumber, seatClass, passenger.getPassportNumber(), passenger.getName()};
+            String[] scheduledPassenger = {passenger.getPassportNumber(), passenger.getName(), seatClass};
 
             writer.writeNext(scheduledPassenger);
 
@@ -223,6 +222,10 @@ public class FlightDatabase implements Database {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void readWaitingList(){
+
     }
 }
 
