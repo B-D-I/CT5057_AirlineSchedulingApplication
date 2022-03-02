@@ -1,5 +1,6 @@
 package glos.S4008324;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ class ApplicationMenu {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     PassengerDatabase passengerDatabase = new PassengerDatabase();
+    SeatDatabase seatDatabase = new SeatDatabase();
     Flight flight = new Flight();
 
     private static ApplicationMenu menu = null;
@@ -18,7 +20,7 @@ class ApplicationMenu {
     Scanner scanRead = new Scanner(System.in);
 
     public ApplicationMenu() {
-        adminMenu();
+        startApplication();
     }
 
     public static ApplicationMenu getMenu() {
@@ -26,6 +28,18 @@ class ApplicationMenu {
             menu = new ApplicationMenu();
         }
         return menu;
+    }
+
+    private void startApplication(){
+        System.out.println("""
+                
+                  **      WELCOME TO FLIGHT SCHEDULER         **
+                
+                  **     PRESS ENTER TO START APPLICATION    **
+                
+                """);
+        scanRead.nextLine();
+        adminMenu();
     }
 
     private void adminMenu() {
@@ -50,10 +64,10 @@ class ApplicationMenu {
             String adminSelect = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
             switch (adminSelect) {
                 case "S" -> passengerDatabase.schedulePassenger();
-                case "C" -> System.out.println("cancel");
-                case "P" -> System.out.println("passenger status");
-                case "F" -> System.out.println("showFlightInfo()");
-                case "Q" -> System.out.println("quit");
+                case "C" -> seatDatabase.cancelPassenger();
+                case "P" -> passengerDatabase.passengerStatus();
+                case "F" -> flightDatabase.flightStatus();
+                case "Q" -> startApplication();
                 case "N" -> restrictedMenuLogin();
                 default -> System.out.println("error");
             }

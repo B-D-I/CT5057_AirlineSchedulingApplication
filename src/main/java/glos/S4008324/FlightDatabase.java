@@ -8,11 +8,9 @@ public class FlightDatabase implements Database {
     // all flights in flights.txt
     HashMap<String, Flight> allFlightsMap = new HashMap<>();
 
-//    HashMap<String, ArrayList<String>> allocatedSeatList = new HashMap<>();
-
-
     Airports<String> airports = new Airports<>();
     WaitingList waitingList = new WaitingList();
+    SeatDatabase seatDatabase = new SeatDatabase();
     Seating seat = new Seating();
 
     ScheduledSeat scheduledSeat = new ScheduledSeat();
@@ -85,6 +83,34 @@ public class FlightDatabase implements Database {
         flightMap.entrySet().forEach(System.out::println);
     }
 
+    public void flightStatus(){
+        HashMap<String, Flight> flightMap = createFlightObjectsMap();
+        System.out.println("Enter flight number: ");
+        String flightNumber = scanner.nextLine().trim();
+        for(Flight flight: flightMap.values()){
+            if (flight.getFlightNumber().equals(flightNumber)){
+                String flightInfoDisplay = String.format("""
+                        
+                                    Flight %s information:
+                            
+                                    Departure Airport: %s
+                                    Departure Date: %s
+                                    Destination Airport: %s
+                            
+                                    Available Seats For This Flight:
+                                    (Seat Number | Seat Class)
+                                
+                         %s
+                        """, flightNumber, flight.getDeparture(), flight.getDepartureDate(), flight.getDestination(),
+                        flight.getSeatingList());
+
+                System.out.println(flightInfoDisplay);
+            }
+        } seatDatabase.printScheduledPassengers(flightNumber);
+        // print departure and destination airport, departure date and available seats (flights.txt)
+        // print list of taken seats and passengers (scheduledSeats)
+    }
+
     public void printAirports() {
         System.out.println("Airports:\n" + airports.toString());
     }
@@ -146,7 +172,7 @@ public class FlightDatabase implements Database {
                 selectSeatClass(passenger, flightNumber);
             } else if (seatSelect.equals("W")) {
                 // create waiting list object
-                waitingList.updateWaitListTxt(flightNumber, seatClass, passenger);
+                waitingList.addPassengerToWaitingList(flightNumber, seatClass, passenger);
             }
         }
     }
@@ -189,4 +215,5 @@ public class FlightDatabase implements Database {
         // save booked passenger onto schedule seating
         scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatingNumber, seatClass, passenger);
     }
+
 }

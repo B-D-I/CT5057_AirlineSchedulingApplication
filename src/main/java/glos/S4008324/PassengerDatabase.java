@@ -62,5 +62,12 @@ final class PassengerDatabase implements Database {
                 }
             }
         }
+
+        public void passengerStatus(){
+            System.out.println("Enter passport number of passenger: ");
+            String passportNumber = scanner.nextLine().trim();
+            // NEED TO FIND ALL FLIGHTS AND WAITING LISTS THEY ARE ON
+            // COULD CREATE A .TXT FOR PASSENGERS AND UPDATE WITH NEW FLIGHTS ETC..
+        }
     }
 

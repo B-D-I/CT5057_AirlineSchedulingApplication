@@ -1,28 +1,30 @@
 package glos.S4008324;
 
+import java.io.IOException;
+
 public class Main {
 
     public static void main(String[] args) {
 
-//        new ApplicationMenu();
-        SeatDatabase seatDatabase = new SeatDatabase();
-//        seatDatabase.printScheduledPassengers("102");
-        seatDatabase.printWaitList("202");
+        new ApplicationMenu();
+
 
     }
 
     // TO DO:
 
     // REMOVE PASSENGER FROM FLIGHT:
-    //  >> SELECT A PASSENGER FROM THE CORRECT FLIGHTS SCHEDULED-SEATING FILE AND REMOVE IT >>>>>> consider creating scheduled seating class etc... >> this may be easier for flight / passenger status
-    //  >> PLACE THE PASSENGERS FROM THE FLIGHTS WAITING-LIST INTO A QUEUE AND OFFER FIRST PERSON THE SEAT
-    //  >> IF NOT, ADD THE SEAT AND CLASS BACK INTO FLIGHTS.TXT
+    //  >> PLACE THE PASSENGERS FROM THE FLIGHTS WAITING-LIST INTO A QUEUE AND OFFER FIRST PERSON THE SEAT - ** DONE **
+    //      >> ERROR: WHEN DELETING THE QUEUE MEMBER FROM .TXT, 2 PASSENGERS ARE DELETED??
+    //      >> NEED TO DELETE THE PASSENGER FROM .TXT AND THEN ADD TO SCHEDULED SEATING
+    //      >> IF NO PASSENGER WANT SEAT, ADD THE SEAT AND CLASS BACK INTO FLIGHTS.TXT
 
     // VIEW PASSENGER STATUS:
     // >> CHOOSE PASSENGER AND PRINT ALL FLIGHTS THEY ARE BOOKED ON, AND ANY WAITING LISTS (WITH POSITION IN LIST)
 
     // VIEW FLIGHT INFORMATION:
     // >> ENTER FLIGHT NUMBER AND PRINT AIRPORTS, DATE, ALL SEATS AND PASSENGER OF SEAT
+    // >>> ^^^ DONE , EXCEPT NEED PASSENGERS TO PRINT ON SEPERATE LINES
 
     /// INCLUDE SORTING AND SEARCHING ALGORITHMS
 }
