@@ -1,7 +1,5 @@
 package glos.S4008324;
 
-import com.opencsv.CSVWriter;
-
 import java.io.*;
 import java.util.*;
 
@@ -10,13 +8,14 @@ public class FlightDatabase implements Database {
     // all flights in flights.txt
     HashMap<String, Flight> allFlightsMap = new HashMap<>();
 
-    HashMap<String, ArrayList<String>> allocatedSeatList = new HashMap<>();
+//    HashMap<String, ArrayList<String>> allocatedSeatList = new HashMap<>();
 
-//    Queue<HashMap<String, ArrayList<String>>> waitingList = new LinkedList<>();
 
     Airports<String> airports = new Airports<>();
-    WaitingListEntry waitingList = new WaitingListEntry();
+    WaitingList waitingList = new WaitingList();
     Seating seat = new Seating();
+
+    ScheduledSeat scheduledSeat = new ScheduledSeat();
 
     public FlightDatabase() {
         createFlightObjectsMap();
@@ -98,6 +97,7 @@ public class FlightDatabase implements Database {
         return airports.hasAirport(airport);
     }
 
+
     public void selectSeatClass(Passenger passenger, String flightNumber) {
 
         System.out.println(passenger.toString());
@@ -132,7 +132,6 @@ public class FlightDatabase implements Database {
             assignSeat(seatingList, seatClass, flightNumber, passenger);
 
         } else {
-            // view all seats with:       System.out.println(seatingList);
             System.out.println("\nThere are no " + seatClass + " seats available");
             System.out.println("""
                     Would you like to select an alternative seat class, or go onto the waiting list? 
@@ -146,10 +145,8 @@ public class FlightDatabase implements Database {
             if (seatSelect.equals("S")) {
                 selectSeatClass(passenger, flightNumber);
             } else if (seatSelect.equals("W")) {
-//                assignWaitingList(seatClass, flightNumber, passenger);
-
                 // create waiting list object
-                waitingList.updateFlightTxt(flightNumber, seatClass, passenger);
+                waitingList.updateWaitListTxt(flightNumber, seatClass, passenger);
             }
         }
     }
@@ -189,138 +186,7 @@ public class FlightDatabase implements Database {
         System.out.println(seatList);
         seat.modifyFlightSeating(allFlightsMap);
 
-        // STORE IN CSV
-            File file = new File("src/main/java/glos/S4008324/ScheduledSeating"+flightNumber+".csv");
-            try {
-                FileWriter outputFile = new FileWriter(file, true);
-                CSVWriter writer = new CSVWriter(outputFile);
-
-                String[] scheduledPassenger = {passenger.getPassportNumber(), passenger.getName(), seatingNumber, seatClass};
-
-                writer.writeNext(scheduledPassenger);
-
-                writer.close();
-
-                System.out.println("\nYou have purchased seat: " + seatingNumber + " : " + seatClass + " , on flight: " + flightNumber + "\n\n");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        // save booked passenger onto schedule seating
+        scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatingNumber, seatClass, passenger);
     }
-
-//    private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
-//        // STORE IN CSV
-//        File file = new File("src/main/java/glos/S4008324/WaitingList"+flightNumber+".csv");
-//        try {
-//            FileWriter outputFile = new FileWriter(file, true);
-//            CSVWriter writer = new CSVWriter(outputFile);
-//
-//            String[] scheduledPassenger = {passenger.getPassportNumber(), passenger.getName(), seatClass};
-//
-//            writer.writeNext(scheduledPassenger);
-//
-//            writer.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private void readWaitingList(String flightNumber){
-//        Queue<String>
-//        try {
-//            File myObj = new File("src/main/java/glos/S4008324/WaitingList"+flightNumber+".txt");
-//            Scanner myReader = new Scanner(myObj);
-//
-//            while (myReader.hasNextLine()) {
-//
-//                // read and assign flights.txt information
-//                String flightNo = myReader.nextLine();
-//                allFlightsMap.put(flightNo, f);
-//                if (myReader.hasNextLine()) {
-//                    myReader.nextLine();
-//                }
-//            }
-//            myReader.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Error" + e);
-//        }
-//    }
 }
-
-
-
-
-
-//
-//        private void assignWaitingList(String seatClass, String flightNumber, Passenger passenger){
-//
-//
-//        // CREATE A CSV FILE TO STORE INFO, THEN WHEN INITIALISED, PLACE INTO QUEUE
-//
-//            // creat an Array of chosen seat number and class and add it to hashmap with passenger
-//            ArrayList<String> flightInfo = new ArrayList<>();
-//            flightInfo.add("Flight number: " + flightNumber);
-//            flightInfo.add("Seat class: " + seatClass);
-//
-//            // check what can be included into queue....
-////            waitingList.add(passenger.getPassportNumber(), flightInfo);
-//        }
-
-        // need waiting list functions etc....
-
-
-
-
-
-
-
-
-
-// if (!seatNumber.equals("0")){
-//            else if (seatNumber.equals("0")) {
-//                // store hashmap as treemap so can be sorted high -> low
-//                TreeMap<String, String> sortedSeatList = new TreeMap<>(seatingList);
-//
-//                    System.out.println(seatNumber);
-//                    System.out.println(sortedSeatList.firstKey());
-//                    System.out.println(sortedSeatList.lastKey());
-//
-//                    for(Map.Entry<String, String> seat : seatingList.entrySet()){
-////                        int randomSeatNum = random.nextInt();
-//                        String value = seat.getKey();
-//                        int seatValue = Integer.valueOf(value);
-//
-//
-//
-//                    }
-//                }
-
-//            if (seatNumber.equals("0")) {
-//                for (int i = 0; i < flight.getSeatingList().size(); i++) {
-//                int randomSeatNum = random.nextInt(1, flight.getSeatingList().size() + 1);
-//                while (flight.getSeatingList().containsKey(randomSeatNum)) {
-//                    randomSeatNum = random.nextInt(1, flight.getSeatingList().size() + 1);
-//                    //Integer.toString(randomSeatNum);
-//                    String seatNumber = String.valueOf(randomSeatNum);
-//                    System.out.println(seatNumber);
-//                    schedulePassenger(seatingList, seatNumber, flightNumber, seatClass, passenger);
-//                }
-//            }
-//}
-
-
-//            schedulePassenger(seatingList, seatNumber, flightNumber, seatClass, passenger);
-
-// RANDOM SEAT ALLOCATION......................
-//        } else if (selectSeat.equals("N")) {
-//            for (int i = 0; i < flight.getSeatingList().size(); i++) {
-//                int randomSeatNum = random.nextInt(1, flight.getSeatingList().size() + 1);
-//                while (flight.getSeatingList().containsKey(randomSeatNum)) {
-//                    randomSeatNum = random.nextInt(1, flight.getSeatingList().size() + 1);
-//                    //Integer.toString(randomSeatNum);
-//                    String seatNumber = String.valueOf(randomSeatNum);
-//                    System.out.println(seatNumber);
-//                    schedulePassenger(seatingList, seatNumber, flightNumber, seatClass, passenger);
-//                }
-//            }

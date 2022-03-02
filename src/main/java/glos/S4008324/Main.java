@@ -6,9 +6,9 @@ public class Main {
 
 //        new ApplicationMenu();
         SeatDatabase seatDatabase = new SeatDatabase();
+//        seatDatabase.printScheduledPassengers("102");
         seatDatabase.printWaitList("202");
-        // THIS IS WRONG !!!!!!!!!! I NEED MULTIPLE HASHMAPS INSIDE ONE QUEUE, NOT A QUEUE FOR EACH HASHMAP!!!!!!!!!!!!
-        // CREATE-WAIT-LIST-OBJECT -->> THIS NEEDS TO CREATE HASHMAPS OF EACH WAITING --> THEN PLACE ALL HASHMAPS INTO A QUEUE
+
     }
 
     // TO DO:
