@@ -1,7 +1,5 @@
 package glos.S4008324;
 
-import java.io.IOException;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -22,6 +20,7 @@ public class Main {
     // VIEW PASSENGER STATUS:
     // >> CHOOSE PASSENGER AND PRINT ALL FLIGHTS THEY ARE BOOKED ON, AND ANY WAITING LISTS (WITH POSITION IN LIST)
 
-
     /// INCLUDE SORTING AND SEARCHING ALGORITHMS
+
+    /// UNIT TESTING + GO THROUGH AND CHECK ACCESS MODIFIERS, CODE REDUCTION, OOP
 }
