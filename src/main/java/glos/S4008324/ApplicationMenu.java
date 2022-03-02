@@ -45,6 +45,8 @@ class ApplicationMenu {
     private void adminMenu() {
         while (true) {
             System.out.println("""
+                    
+                    
                     Select Option:
                                     
                     S - schedule a passenger

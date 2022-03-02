@@ -112,16 +112,17 @@ public class SeatDatabase implements Database {
 
     public void printScheduledPassengers(String flightNumber){
         HashMap<String, ScheduledSeat> scheduledPassengers = createScheduledPassengers(flightNumber);
-        String bookedSeats = String.format("""
+        Set set = scheduledPassengers.entrySet();
+        Iterator iterator = set.iterator();
+        System.out.println(("""
                              Booked Seats For This Flight:
-                    |Passport Number | Passenger | SeatClass | Seat Number  
-                    
-                  %s
-                  
-                  
-                """, scheduledPassengers.values());
+                    |Passport Number | Passenger | SeatClass | Seat Number 
+                """));
         // THIS NEEDS TO PRINT EACH PASSENGER ON SEPARATE LINE
-        System.out.println(bookedSeats);
+        while(iterator.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) iterator.next();
+            System.out.println("     \t\t" + mapEntry.getValue() );
+        }
     }
 
     public void cancelPassenger(){
