@@ -3,10 +3,11 @@ package glos.S4008324;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Queue;
 
-public class WaitingList {
+public class WaitingListPassengers {
 
     private String waitingPassengerPassportNumber;
     private String waitingPassengerName;
@@ -52,17 +53,28 @@ public class WaitingList {
         }
     }
 
-    // THIS IS REMOVING 2 PASSENGERS ??
-        public void updateWaitingList(Queue<HashMap<String, WaitingList>> waitingQueue, String flightNumber){
+    // This is only updating the first passenger of the queue
+        public void updateWaitingList(Queue<HashMap<String, WaitingListPassengers>> waitingQueue, String flightNumber){
             try {
                 BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/WaitingList" + flightNumber + ".txt", false));
 
-                for (WaitingList waitingList: waitingQueue.element().values())
-                out.write(waitingList.getWaitingPassengerPassportNumber() + "\n" + waitingList.getWaitingPassengerName() +
-                        "\n" + waitingList.getSeatClass() + "\n\n");
 
-                out.close();
-                System.out.println("Passenger deleted from flight");
+                // ISSUE IS HERE: need to iterate and update all queue elements
+//                for (WaitingListPassengers waitingListPassengers : waitingQueue.element().values())
+//
+//                out.write(waitingListPassengers.getWaitingPassengerPassportNumber() + "\n" + waitingListPassengers.getWaitingPassengerName() +
+//                        "\n" + waitingListPassengers.getSeatClass() + "\n\n");
+//
+//                out.close();
+
+                // OR
+
+                //                waitingQueue.forEach(
+//                        out.write(getWaitingPassengerPassportNumber() + "\n" + getWaitingPassengerName() +
+//                                        "\n" + getSeatClass() + "\n\n");
+//                                out.close();
+
+                System.out.println("Waiting list updated");
 
             } catch (IOException e) {
                 e.printStackTrace();

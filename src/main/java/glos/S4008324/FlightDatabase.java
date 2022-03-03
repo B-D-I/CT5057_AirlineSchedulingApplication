@@ -9,7 +9,7 @@ public class FlightDatabase implements Database {
     HashMap<String, Flight> allFlightsMap = new HashMap<>();
 
     Airports<String> airports = new Airports<>();
-    WaitingList waitingList = new WaitingList();
+    WaitingListPassengers waitingListPassengers = new WaitingListPassengers();
     SeatDatabase seatDatabase = new SeatDatabase();
     Seating seat = new Seating();
 
@@ -172,7 +172,7 @@ public class FlightDatabase implements Database {
                 selectSeatClass(passenger, flightNumber);
             } else if (seatSelect.equals("W")) {
                 // create waiting list object
-                waitingList.addPassengerToWaitingList(flightNumber, seatClass, passenger);
+                waitingListPassengers.addPassengerToWaitingList(flightNumber, seatClass, passenger);
             }
         }
     }
