@@ -39,10 +39,10 @@ public class ScheduledSeat extends Seat{
             out.close();
 
             // add to generic passenger bookings
-            HashMap<String, String> bookedPassengers = new HashMap<>();
-            bookedPassengers.put(passenger.getPassportNumber(), flightNumber);
+//            HashMap<String, String> bookedPassengers = new HashMap<>();
+//            bookedPassengers.put(passenger.getPassportNumber(), flightNumber);
             BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/BookedFlights.txt", true));
-            out2.write("\n" + bookedPassengers + "\n");
+            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
             out2.close();
 
             System.out.println("\nPassenger added");

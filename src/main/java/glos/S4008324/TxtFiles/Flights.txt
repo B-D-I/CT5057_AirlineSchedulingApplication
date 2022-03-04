@@ -44,7 +44,7 @@ FRA
 LTN
 2022-02-28
 MIA
-{11=First, 22=First, 12=First, 23=First, 13=First, 14=First, 17=First, 19=First, 3=First, 4=First, 5=First, 6=Economy, 20=First, 21=First}
+{11=First, 22=First, 12=First, 23=First, 13=First, 14=First, 17=First, 19=First, 3=First, 4=First, 5=First, 6=Economy}
 
 566
 BHM

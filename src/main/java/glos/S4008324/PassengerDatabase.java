@@ -78,19 +78,10 @@ final class PassengerDatabase implements Database {
 
             while (myReader.hasNextLine()) {
 
-                String passengerPassportAndFlight = myReader.nextLine();
+                String passengerPassport = myReader.nextLine();
+                String flightNumber = myReader.nextLine();
+                passengerDetailMap.put(passengerPassport, flightNumber);
 
-                Properties prop = new Properties();
-                prop.load(new StringReader(passengerPassportAndFlight.substring(1, passengerPassportAndFlight.length() - 1).replace(", ", "\n")));
-                HashMap<String, String> passengerFlightMap = new HashMap<>();
-                for (Map.Entry<Object, Object> e : prop.entrySet()) {
-                    passengerFlightMap.put((String) e.getKey(), (String) e.getValue());
-                }
-
-                Set<String> passportNumber = passengerFlightMap.keySet();
-                Collection<String> flightNumber = passengerFlightMap.values();
-
-//                passengerDetailMap.put(passportNumber, flightNumber);
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
                 }
@@ -99,17 +90,37 @@ final class PassengerDatabase implements Database {
         } catch(
                 FileNotFoundException e){
             System.out.println("Error" + e);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return passengerDetailMap;
     }
 
 
         public void passengerStatus(){
-//            HashMap<String, Passenger> passengerBookingsMap = createPassengerBookingsObject();
             System.out.println("Enter passport number of passenger: ");
             String passportNumber = scanner.nextLine().trim();
+
+            HashMap<String, String> passengerBookingsMap = createPassengerBookingsObject("BookedFlights");
+            HashMap<String, String> passengerWaitingMap = createPassengerBookingsObject("WaitingLists");
+
+            String bookings = null;
+            String waiting = null;
+            for (String passengers : passengerBookingsMap.keySet()){
+                if (passengers.equals(passportNumber)){
+                    bookings =  passengerBookingsMap.get(passengers);
+                }
+            }
+            for (String passengers : passengerWaitingMap.keySet()){
+                if (passengers.equals(passportNumber)){
+                    waiting = passengerWaitingMap.get(passengers);
+                }
+            }
+            System.out.println("Bookings: " + bookings);
+            System.out.println("Waiting: " + waiting);
+
+
+
+
+
             // NEED TO FIND ALL FLIGHTS AND WAITING LISTS THEY ARE ON
             // COULD CREATE A .TXT FOR PASSENGERS AND UPDATE WITH NEW FLIGHTS ETC..
         }

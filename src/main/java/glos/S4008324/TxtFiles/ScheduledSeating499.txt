@@ -3,8 +3,8 @@ BILL GATES
 First
 1
 
-4444
-JIMMY
+444444
+JIMMY JOE
 Economy
 8
 
@@ -22,3 +22,8 @@ Economy
 BETTY WHITE
 First
 16
+
+123123
+PADDINGTON BEAR
+First
+20

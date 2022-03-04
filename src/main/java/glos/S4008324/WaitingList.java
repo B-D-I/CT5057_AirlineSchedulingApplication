@@ -13,10 +13,10 @@ public class WaitingList extends Seat{
             out.write("\n" + passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n");
             out.close();
 
-            HashMap<String, String> waitingPassengers = new HashMap<>();
-            waitingPassengers.put(passenger.getPassportNumber(), flightNumber);
+//            HashMap<String, String> waitingPassengers = new HashMap<>();
+//            waitingPassengers.put(passenger.getPassportNumber(), flightNumber);
             BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", true));
-            out2.write("\n" + waitingPassengers + "\n");
+            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
             out2.close();
 
             System.out.println("\nPassenger added to waiting list");
