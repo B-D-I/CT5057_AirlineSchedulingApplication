@@ -3,18 +3,21 @@ package glos.S4008324;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class WaitingList extends Seat{
 
+    @Override
+    public String toString()
+    {return "Passenger Name: "+getSeatPassengerName()+"\t\tPassport Number: "+getSeatPassengerPassportNumber()+"\t\tSeat Class: " + getSeatClass();}
+
+
     public void addPassengerToWaitingList(String flightNumber, String seatClass, Passenger passenger) {
         try {
+            // add to specific flight form
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", true));
             out.write("\n" + passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n");
             out.close();
-
-//            HashMap<String, String> waitingPassengers = new HashMap<>();
-//            waitingPassengers.put(passenger.getPassportNumber(), flightNumber);
+            // add to generic passenger form
             BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", true));
             out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
             out2.close();

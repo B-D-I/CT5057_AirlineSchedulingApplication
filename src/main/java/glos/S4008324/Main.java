@@ -4,9 +4,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new ApplicationMenu();
-//    WaitingListSeatDatabase waitingListSeatDatabase = new WaitingListSeatDatabase();
-//    ScheduledSeatDatabase scheduledSeatDatabase = new ScheduledSeatDatabase();
+//        new ApplicationMenu();
+        WaitingListSeatDatabase waitingListSeatDatabase = new WaitingListSeatDatabase();
+//        waitingListSeatDatabase.printWaitListPassenger("102", "202020");
+        PassengerDatabase passengerDatabase = new PassengerDatabase();
+        passengerDatabase.passengerStatus();
     }
 
     // TO DO:
@@ -19,8 +21,9 @@ public class Main {
 
     // VIEW PASSENGER STATUS:
     // >> CHOOSE PASSENGER AND PRINT ALL FLIGHTS THEY ARE BOOKED ON, AND ANY WAITING LISTS (WITH POSITION IN LIST)
+    // >> --> This only prints passportNumber and a booked/waiting flight
 
-    /// INCLUDE SORTING AND SEARCHING ALGORITHMS *** IMPORTANT
+    /// *** INCLUDE SORTING AND SEARCHING ALGORITHMS *** IMPORTANT
 
     /// UNIT TESTING + GO THROUGH AND CHECK ACCESS MODIFIERS, CODE REDUCTION, OOP
 }

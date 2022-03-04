@@ -207,19 +207,6 @@ public class FlightDatabase implements Database {
 
         // save booked passenger onto schedule seating
         scheduledSeating.addPassengerToScheduledSeat(flightNumber, seatingNumber, seatClass, passenger);
-
-        // UPDATE PASSENGER INFORMATION .TXT
-        // import the passenger booked flights and waiting list arrays and add to argument>>
-//        ArrayList<ScheduledSeating> scheduledSeatingList = createScheduledPassengers(flightNumber);
-//
-//        Passenger selectedPassenger = passengerBookingsMap.getPassenger();
-//
-//        ArrayList<String> bookedFlightNumbers = new ArrayList<>();
-//        ArrayList<String> waitingFlightNumbers = new ArrayList<>();
-
-//        bookedFlightNumbers.add(selectedPassenger.getBookedFlights());
-//        waitingFlightNumbers.add(selectedPassenger.getFlightWaitingLists());
-//        passenger.addPassengerToPassengerStatus(passenger, bookedFlightNumbers, waitingFlightNumbers);
     }
 
 }

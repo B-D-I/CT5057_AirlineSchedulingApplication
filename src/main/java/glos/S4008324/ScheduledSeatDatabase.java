@@ -33,6 +33,7 @@ public class ScheduledSeatDatabase implements Database {
                 scheduledSeat.setSeatClass(seatClass);
                 scheduledSeat.setSeatNumber(seatNumber);
 
+                // Passport : Seat
                 scheduledPassengers.put(scheduledSeat.getSeatPassengerPassportNumber(), scheduledSeat);
 
                 if (myReader.hasNextLine()) {

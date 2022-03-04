@@ -2,17 +2,16 @@ package glos.S4008324;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.*;
 
 final class PassengerDatabase implements Database {
 
-
     FlightDatabase flightDatabase = new FlightDatabase();
     Passenger passenger = new Passenger();
+    WaitingListSeatDatabase waitingListSeatDatabase = new WaitingListSeatDatabase();
 
-    HashMap<String, String> passengerDetailMap = new HashMap<>();
+
+    HashMap<String, String> passengerSchedulingMap = new HashMap<>();
 
     public void schedulePassenger() {
         System.out.println("Enter passenger's full name: ");
@@ -70,6 +69,7 @@ final class PassengerDatabase implements Database {
         }
     }
 
+    // Retrieve FlightBookings / Waiting Lists
     // PASSPORT NUMBER : FLIGHT NUMBER (BookedFlights or WaitingList)
     public HashMap<String, String> createPassengerBookingsObject(String listType) {
         try{
@@ -80,7 +80,8 @@ final class PassengerDatabase implements Database {
 
                 String passengerPassport = myReader.nextLine();
                 String flightNumber = myReader.nextLine();
-                passengerDetailMap.put(passengerPassport, flightNumber);
+
+                passengerSchedulingMap.put(passengerPassport, flightNumber);
 
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
@@ -91,38 +92,50 @@ final class PassengerDatabase implements Database {
                 FileNotFoundException e){
             System.out.println("Error" + e);
         }
-        return passengerDetailMap;
+        return passengerSchedulingMap;
     }
 
-
-        public void passengerStatus(){
+        public void passengerStatus() {
             System.out.println("Enter passport number of passenger: ");
             String passportNumber = scanner.nextLine().trim();
-
+            // passport : flight number
             HashMap<String, String> passengerBookingsMap = createPassengerBookingsObject("BookedFlights");
             HashMap<String, String> passengerWaitingMap = createPassengerBookingsObject("WaitingLists");
 
-            String bookings = null;
-            String waiting = null;
-            for (String passengers : passengerBookingsMap.keySet()){
-                if (passengers.equals(passportNumber)){
-                    bookings =  passengerBookingsMap.get(passengers);
-                }
+            System.out.println("Passenger: " + passportNumber);
+
+            String passengerFlight = passengerBookingsMap.get(passportNumber);
+            String passengerWaitList = passengerWaitingMap.get(passportNumber);
+
+
+            System.out.println("Flight: "+passengerFlight);
+            System.out.println("Waiting List For Flight: "+passengerWaitList);
+
+            if (passengerFlight == null || passengerWaitList == null){
+                System.out.println("Passenger not associated to any booked flights");
+            } else {
+                waitingListSeatDatabase.printWaitListPassenger(passengerWaitList, passportNumber);
             }
-            for (String passengers : passengerWaitingMap.keySet()){
-                if (passengers.equals(passportNumber)){
-                    waiting = passengerWaitingMap.get(passengers);
-                }
-            }
-            System.out.println("Bookings: " + bookings);
-            System.out.println("Waiting: " + waiting);
 
 
+            //try {
 
+        }}
 
+//            String passport = null;
+//            String flight = null;
+//            for (Map.Entry<String, String> bookings: passengerBookingsMap.entrySet()){
+//                if (passengerBookingsMap.containsKey(passportNumber)) {
+//                    passport = bookings.getKey();
+//                    flight = bookings.getValue();
 
-            // NEED TO FIND ALL FLIGHTS AND WAITING LISTS THEY ARE ON
-            // COULD CREATE A .TXT FOR PASSENGERS AND UPDATE WITH NEW FLIGHTS ETC..
-        }
-    }
+//                }
+//        } System.out.println("Passport: " + passport + "\t\tFlight: " + flight);
+//    }
+//
+//    // ^^^ GET WORKING, THEN SAME AGAIN FOR WAITING MAP >>
+//    // >> THEN PASS THE PASSPORT AND FLIGHT NUMBER TO WaitingListSeatDatabase printWaitListPassenger(p, f)
+//    // this will print queue position..
+//
+//    }
 

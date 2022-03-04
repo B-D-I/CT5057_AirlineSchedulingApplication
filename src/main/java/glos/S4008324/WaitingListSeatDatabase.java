@@ -1,22 +1,23 @@
 package glos.S4008324;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class WaitingListSeatDatabase implements Database{
-    WaitingList waitingList = new WaitingList();
-    //    Queue<HashMap<String, WaitingList>> waitingQueue = new LinkedList<>();
 
-    Queue<HashMap<Passenger, String>> waitingQueue = new LinkedList<>();
+//    WaitingList waitingList = new WaitingList();
+
+    Queue<HashMap<String, WaitingList>> waitingQueue = new LinkedList<>();
 
     /**
      * This method creates a queue (FIFO) of all waiting passengers (contained in HashMap)
      * @param flightNumber: This is associated flight number for the correct .txt file
      * @return waitingQueue: an updated queue of all waiting passengers
      */
-    // Queue<HashMap<String, WaitingList>>
-    public Queue<HashMap<Passenger, String>> createWaitingListObject(String flightNumber){
+    public Queue<HashMap<String, WaitingList>> createWaitingListObject(String flightNumber){
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/WaitingList"+flightNumber+".txt");
             Scanner myReader = new Scanner(myObj);
@@ -27,26 +28,14 @@ public class WaitingListSeatDatabase implements Database{
                 String passengerName = myReader.nextLine();
                 String seatClass = myReader.nextLine();
 
-                // create a waiting list object
-                WaitingList waitingList = new WaitingList();
+                WaitingList waitingList =  new WaitingList();
+                waitingList.setSeatPassengerPassportNumber(passportNumber);
+                waitingList.setSeatPassengerName(passengerName);
                 waitingList.setSeatClass(seatClass);
-//                waitingList.setWaitingPassengerPassportNumber(passportNumber);
-//                waitingList.setWaitingPassengerName(passengerName);
-//                waitingList.setWaitingPassengerName();
 
-                Passenger waitingPassenger = new Passenger();
-                waitingPassenger.setPassportNumber(passportNumber);
-                waitingPassenger.setName(passengerName);
+                HashMap<String, WaitingList> waitingPassengerMap = new HashMap<>();
+                waitingPassengerMap.put(waitingList.getSeatPassengerPassportNumber(), waitingList);
 
-                HashMap<Passenger, String> waitingPassengerMap = new HashMap<>();
-                waitingPassengerMap.put(waitingPassenger, waitingList.getSeatClass());
-
-                // HashMap with passenger passport number and required seat class
-//                HashMap<String, WaitingList> waitingPassengerPassportAndWaitingList= new HashMap<>();
-//                waitingPassengerPassportAndWaitingList.put(waitingList.getWaitingPassengerPassportNumber(), waitingList);
-
-                // add HashMaps to Queue
-//                waitingQueue.add(waitingPassengerPassportAndWaitingList);
                 waitingQueue.add(waitingPassengerMap);
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
@@ -58,18 +47,30 @@ public class WaitingListSeatDatabase implements Database{
         } return waitingQueue;
     }
 
-    public void printWaitList(String flightNumber) {
-        Queue<HashMap<Passenger, String>> waitingQueue = createWaitingListObject(flightNumber);
+    public void printFullWaitList(String flightNumber) {
+        Queue<HashMap<String, WaitingList>> waitingQueue = createWaitingListObject(flightNumber);
         System.out.println("\nPassengers in waiting list for flight: " + flightNumber + "\n");
-        for (HashMap<Passenger, String> passengers : waitingQueue) {
-            System.out.println(passengers);
+        for (HashMap<String, WaitingList> passengers : waitingQueue) {
+            System.out.println(passengers.values());
         }
     }
 
+    public void printWaitListPassenger(String flightNumber, String passportNumber){
+        Queue<HashMap<String, WaitingList>> waitingQueue = createWaitingListObject(flightNumber);
+        int counter = 1;
+        String passenger;
+        for (HashMap<String, WaitingList> passengers : waitingQueue){
+            if (passengers.containsKey(passportNumber)){
+            passenger = passengers.values() + "\t\tposition: " +counter;
+            System.out.println(passenger);
+        } counter++;
+    }
+}
+
 
     public void offerFreeSeat(String flightNumber, String seatNumber, String seatClass){
-        Queue<HashMap<Passenger, String>> waitingQueue = createWaitingListObject(flightNumber);
-        HashMap<Passenger, String> waitingPassenger = waitingQueue.peek();
+        Queue<HashMap<String, WaitingList>> waitingQueue = createWaitingListObject(flightNumber);
+        HashMap<String, WaitingList> waitingPassenger = waitingQueue.peek();
 
         assert waitingPassenger != null;
         System.out.println("Next Passenger:" +waitingPassenger.keySet());
@@ -97,7 +98,7 @@ public class WaitingListSeatDatabase implements Database{
         // hashmap of the next in line passenger (passport number : waitList object)
 
 
-        HashMap<Passenger, String> removedPassenger = waitingQueue.poll();
+        HashMap<String, WaitingList> removedPassenger = waitingQueue.poll();
         System.out.println(removedPassenger.keySet());
         System.out.println("Removed: " +removedPassenger);
         System.out.println("\nWaiting List: " +waitingQueue);

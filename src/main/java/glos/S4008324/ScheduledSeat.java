@@ -7,25 +7,6 @@ import java.util.HashMap;
 
 public class ScheduledSeat extends Seat{
 
-    public String getSeatPassengerPassportNumber() {
-        return seatPassengerPassportNumber;
-    }
-    public void setSeatPassengerPassportNumber(String seatPassengerPassportNumber) {
-        this.seatPassengerPassportNumber = seatPassengerPassportNumber;
-    }
-    public String getSeatPassengerName() {
-        return seatPassengerName;
-    }
-    public void setSeatPassengerName(String seatPassengerName) {
-        this.seatPassengerName = seatPassengerName;
-    }
-    public String getSeatNumber() {
-        return seatNumber;
-    }
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
     @Override
     public String toString()
     {return "Passenger Name: "+getSeatPassengerName()+"\tPassport Number: "+getSeatPassengerPassportNumber()+"\tSeat Class: " + getSeatClass() + " \tSeat Number: " + getSeatNumber();}
@@ -38,9 +19,7 @@ public class ScheduledSeat extends Seat{
             out.write("\n" + passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n" + seatNumber + "\n");
             out.close();
 
-            // add to generic passenger bookings
-//            HashMap<String, String> bookedPassengers = new HashMap<>();
-//            bookedPassengers.put(passenger.getPassportNumber(), flightNumber);
+            // add to generic passenger form
             BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/BookedFlights.txt", true));
             out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
             out2.close();
