@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Airports<T> {
-
     // Hash Map stores graph edges
     private final Map<T, List<T>> airportMap = new HashMap<>();
 
@@ -29,7 +28,6 @@ public class Airports<T> {
             airportMap.get(destination).add(source);
         }
     }
-
     // method to count vertices
     public void getAirportCount(){
         System.out.println("Graph has " + airportMap.keySet().size() + " airports");
@@ -46,7 +44,6 @@ public class Airports<T> {
         }
         System.out.println("Graph has " + count + " routes");
     }
-
     // method to confirm is vertex is present
     public boolean hasAirport(T s){
         boolean hasAirport;
@@ -58,7 +55,6 @@ public class Airports<T> {
             hasAirport = false;
         } return hasAirport;
     }
-
     // method to confirm if edge is present
     public boolean hasRoute(T s, T d){
         boolean hasRoute;
@@ -71,7 +67,6 @@ public class Airports<T> {
             hasRoute = false;
         } return hasRoute;
     }
-
     // print adjacency list of each vertex
     @Override
     public String toString()

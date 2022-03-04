@@ -11,9 +11,7 @@ import java.util.Scanner;
 public class Seating {
 
     Scanner scanner = new Scanner(System.in);
-
     protected int seatCount;
-
     private int economySeatAmount, firstSeatAmount, businessSeatAmount;
 
     // for the flights.txt
@@ -89,7 +87,7 @@ public class Seating {
 
     public void updateFlightTxt(String departure, String destination, String dateDeparture, String flightNumber, HashMap<Integer, String> seatList) {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/Flights.txt", true));
+            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/Flights.txt", true));
             out.write("\n" + flightNumber + "\n" + departure + "\n" + dateDeparture +
                     "\n" + destination + "\n" + seatList.toString() + "\n");
             out.close();
@@ -103,7 +101,7 @@ public class Seating {
     public void modifyFlightSeating(HashMap<String, Flight> flightMap){
 
         try {
-                BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/Flights.txt", false));
+                BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/Flights.txt", false));
                 for(Flight flight: flightMap.values())
                 out.write(flight.getFlightNumber() + "\n" + flight.getDeparture() + "\n" + flight.getDepartureDate() +
                         "\n" + flight.getDestination() + "\n" + flight.getSeatingList().toString()+ "\n\n");

@@ -14,7 +14,7 @@ ATH
 LHR
 2022-02-19
 MIA
-{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 6=Business, 9=Business, 10=Business}
+{11=Economy, 13=Economy, 14=Economy, 16=Economy, 6=Business, 10=Business}
 
 333
 EDI
@@ -44,13 +44,13 @@ FRA
 LTN
 2022-02-28
 MIA
-{11=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
+{11=First, 22=First, 12=First, 23=First, 13=First, 14=First, 17=First, 19=First, 3=First, 4=First, 5=First, 6=Economy, 20=First, 21=First}
 
 566
 BHM
 2022-02-28
 MIA
-{3=First, 6=Economy, 8=Economy, 10=Economy}
+{3=First, 4=Business, 6=Economy, 8=Economy, 10=Economy}
 
 501
 LTN

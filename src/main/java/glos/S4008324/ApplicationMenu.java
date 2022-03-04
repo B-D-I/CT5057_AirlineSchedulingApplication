@@ -1,9 +1,5 @@
 package glos.S4008324;
 
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -12,7 +8,7 @@ class ApplicationMenu {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     PassengerDatabase passengerDatabase = new PassengerDatabase();
-    SeatDatabase seatDatabase = new SeatDatabase();
+    ScheduledSeatDatabase scheduledSeatDatabase = new ScheduledSeatDatabase();
     Flight flight = new Flight();
 
     private static ApplicationMenu menu = null;
@@ -29,7 +25,6 @@ class ApplicationMenu {
         }
         return menu;
     }
-
     private void startApplication(){
         System.out.println("""
                 
@@ -41,7 +36,6 @@ class ApplicationMenu {
         scanRead.nextLine();
         adminMenu();
     }
-
     private void adminMenu() {
         while (true) {
             System.out.println("""
@@ -66,7 +60,7 @@ class ApplicationMenu {
             String adminSelect = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
             switch (adminSelect) {
                 case "S" -> passengerDatabase.schedulePassenger();
-                case "C" -> seatDatabase.cancelPassenger();
+                case "C" -> scheduledSeatDatabase.cancelPassenger();
                 case "P" -> passengerDatabase.passengerStatus();
                 case "F" -> flightDatabase.flightStatus();
                 case "Q" -> startApplication();
@@ -75,7 +69,6 @@ class ApplicationMenu {
             }
         }
     }
-
     private void restrictedMenuLogin() {
         System.out.println("Enter username: ");
         String username = scanRead.nextLine();
@@ -87,8 +80,4 @@ class ApplicationMenu {
             adminMenu();
         }
     }
-
-
-
-
 }

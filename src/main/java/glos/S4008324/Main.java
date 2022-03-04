@@ -5,16 +5,16 @@ public class Main {
     public static void main(String[] args) {
 
         new ApplicationMenu();
-
-
+//    WaitingListSeatDatabase waitingListSeatDatabase = new WaitingListSeatDatabase();
+//    ScheduledSeatDatabase scheduledSeatDatabase = new ScheduledSeatDatabase();
     }
 
     // TO DO:
 
-    //  >> PLACE THE PASSENGERS FROM THE FLIGHTS WAITING-LIST INTO A QUEUE AND OFFER FIRST PERSON THE SEAT - ** DONE **
+    //  >> PLACE THE PASSENGERS FROM THE FLIGHTS WAITING-LIST INTO A QUEUE AND OFFER FIRST PERSON THE SEAT
     //      >> ERROR: WHEN DELETING THE QUEUE MEMBER FROM .TXT, ONLY HEAD PASSENGER IS WRITTEN
-    //      >> NEED TO DELETE THE PASSENGER FROM QUEUE .TXT (DONE)
-    //      >> AND THEN ADD TO SCHEDULED SEATING --  ******
+    //      >> NEED TO DELETE THE PASSENGER FROM QUEUE .TXT
+    //      >> AND THEN ADD TO SCHEDULED SEATING
     //      >> IF NO PASSENGER WANTS SEAT, ADD THE SEAT AND CLASS BACK INTO FLIGHTS.TXT
 
     // VIEW PASSENGER STATUS:

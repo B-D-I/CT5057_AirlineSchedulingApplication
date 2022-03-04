@@ -49,7 +49,6 @@ public class Flight {
     public void setSeatingList(HashMap<String, String> seatingList){
         this.SeatingList = seatingList;
     }
-
     public HashMap<String, String> getSeatingList() {
         return SeatingList;
     }
