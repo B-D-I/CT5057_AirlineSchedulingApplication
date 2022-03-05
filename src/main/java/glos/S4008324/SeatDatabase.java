@@ -8,7 +8,7 @@ public class SeatDatabase implements Database {
 
     private WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
     private UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
-    private HashMap<String, ScheduledSeat> scheduledPassengers = new HashMap<>();
+    public HashMap<String, ScheduledSeat> scheduledPassengers = new HashMap<>();
 
     // for the flights.txt
     public final HashMap<Integer, String> aircraftSeatAllocation = new HashMap<>();
@@ -90,7 +90,7 @@ public class SeatDatabase implements Database {
      * @param flightNumber: This is associated flight number for the correct .txt file
      * @return: An update HashMap of all booked passengers and their seat
      */
-    private HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber){
+    public HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber){
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating"+flightNumber+".txt");
             Scanner myReader = new Scanner(myObj);

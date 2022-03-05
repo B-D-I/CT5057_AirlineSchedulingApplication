@@ -73,26 +73,31 @@ public class WaitingListDatabase implements Database {
         // passport number : waitList
         HashMap<String, WaitingListSeat> waitingPassenger = waitingQueue.peek();
 
-
         if (waitingPassenger != null) {
             System.out.println("\nNext Passenger: " + waitingPassenger.values());
-
             System.out.println("\nDo you wish to book this passenger onto the plane? (Y|N) ");
             String bookWaitingPassenger = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
 
             if (bookWaitingPassenger.equals("Y")) {
                 HashMap<String, WaitingListSeat> passenger = waitingQueue.poll();
-                String passportNumber = String.valueOf(passenger.keySet());
-                passportNumber.replace("[", "");
-                System.out.println(passportNumber);
-//                WaitingListSeat passengerInfo = (WaitingListSeat).getSeatPassengerName();
-                WaitingListSeat passenger1 = passenger.get(passportNumber);
-                System.out.println(passenger1);
 
-
-//                System.out.println(passenger.values());
-                // FUNCTION TO PUT HEAD PASSENGER ON SCHEDULED SEAT
-                // REMOVE FROM QUEUE
+                for (WaitingListSeat waitingListSeat : passenger.values()) {
+                    // get head passenger information
+                    String name = waitingListSeat.seatPassengerName;
+                    String passport = waitingListSeat.seatPassengerPassportNumber;
+                    String seatingClass = waitingListSeat.seatClass;
+                    // create passenger object with information
+                    Passenger upgradePassenger = new Passenger();
+                    upgradePassenger.setName(name);
+                    upgradePassenger.setPassportNumber(passport);
+                    // add passenger to scheduled flight
+                    ScheduledSeat scheduledSeat = new ScheduledSeat();
+                    scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatNumber, seatClass, upgradePassenger);
+                    // remove passenger
+                    waitingQueue.poll();
+                    // rewrite .txt
+                    waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
+                }
             } else if (bookWaitingPassenger.equals("N")) {
                 // remove passenger
                 waitingQueue.poll();
