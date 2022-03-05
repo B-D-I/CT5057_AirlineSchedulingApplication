@@ -9,10 +9,10 @@ public class FlightDatabase implements Database {
     HashMap<String, Flight> allFlightsMap = new HashMap<>();
 
     Airports<String> airports = new Airports<>();
-    WaitingList waitingList = new WaitingList();
-    Seating seat = new Seating();
+    WaitingListSeat waitingListSeat = new WaitingListSeat();
+    UnallocatedSeat seat = new UnallocatedSeat();
     ScheduledSeat scheduledSeating = new ScheduledSeat();
-    ScheduledSeatDatabase seatingDatabase = new ScheduledSeatDatabase();
+    SeatDatabase seatingDatabase = new SeatDatabase();
 
     public FlightDatabase() {
         createFlightObjectsMap();
@@ -163,7 +163,7 @@ public class FlightDatabase implements Database {
                 selectSeatClass(passenger, flightNumber);
             } else if (seatSelect.equals("W")) {
                 // create waiting list object
-                waitingList.addPassengerToWaitingList(flightNumber, seatClass, passenger);
+                waitingListSeat.addPassengerToWaitingList(flightNumber, seatClass, passenger);
             }
         }
     }

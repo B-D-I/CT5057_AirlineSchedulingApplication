@@ -14,7 +14,8 @@ public class Flight {
     private String departureDate;
 
     Scanner scanRead = new Scanner(System.in);
-    Seating seating = new Seating();
+    UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
+    SeatDatabase seatDatabase = new SeatDatabase();
 
     public HashMap<String, String> SeatingList;
 
@@ -54,13 +55,11 @@ public class Flight {
     }
 
 
-
     @Override
     public String toString()
     {
         return flightNumber+", "+departure+", "+destination+", "+departureDate+", "+ SeatingList;
     }
-
 
     // FLIGHT OPERATOR METHOD TO CREATE NEW FLIGHT TO TXT
     public void createFlight() {
@@ -87,7 +86,7 @@ public class Flight {
         String flightNumber = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
 
         // SEATING HASHMAP
-        HashMap<Integer, String> flightSeatingClass = seating.allocateAircraftSeatClass();
+        HashMap<Integer, String> flightSeatingClass = seatDatabase.allocateAircraftSeatClass();
 
         System.out.println("\nSeating List: \n");
         flightSeatingClass.entrySet().forEach(System.out::println);
@@ -96,9 +95,9 @@ public class Flight {
         System.out.println("\nWould you like to edit this seating list? (Y|N)");
         String editSeating = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
         if (editSeating.equals("Y")) {
-            seating.editAircraftSeatClassAllocation(departure, destination, dateDeparture, flightNumber, flightSeatingClass);
+            seatDatabase.editAircraftSeatClassAllocation(departure, destination, dateDeparture, flightNumber, flightSeatingClass);
         } else if (editSeating.equals("N")) {
-            seating.updateFlightTxt(departure, destination, dateDeparture, flightNumber, flightSeatingClass);
+            unallocatedSeat.updateFlightTxt(departure, destination, dateDeparture, flightNumber, flightSeatingClass);
         }
     }
 }

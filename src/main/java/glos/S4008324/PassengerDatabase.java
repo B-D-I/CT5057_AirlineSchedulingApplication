@@ -8,9 +8,7 @@ final class PassengerDatabase implements Database {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     Passenger passenger = new Passenger();
-    WaitingListSeatDatabase waitingListSeatDatabase = new WaitingListSeatDatabase();
-
-
+    WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
     HashMap<String, String> passengerSchedulingMap = new HashMap<>();
 
     public void schedulePassenger() {
@@ -107,35 +105,15 @@ final class PassengerDatabase implements Database {
             String passengerFlight = passengerBookingsMap.get(passportNumber);
             String passengerWaitList = passengerWaitingMap.get(passportNumber);
 
-
             System.out.println("Flight: "+passengerFlight);
             System.out.println("Waiting List For Flight: "+passengerWaitList);
 
             if (passengerFlight == null || passengerWaitList == null){
                 System.out.println("Passenger not associated to any booked flights");
             } else {
-                waitingListSeatDatabase.printWaitListPassenger(passengerWaitList, passportNumber);
+                // check waiting list database for passenger info and position
+                waitingListDatabase.printWaitListPassenger(passengerWaitList, passportNumber);
             }
-
-
-            //try {
-
         }}
 
-//            String passport = null;
-//            String flight = null;
-//            for (Map.Entry<String, String> bookings: passengerBookingsMap.entrySet()){
-//                if (passengerBookingsMap.containsKey(passportNumber)) {
-//                    passport = bookings.getKey();
-//                    flight = bookings.getValue();
-
-//                }
-//        } System.out.println("Passport: " + passport + "\t\tFlight: " + flight);
-//    }
-//
-//    // ^^^ GET WORKING, THEN SAME AGAIN FOR WAITING MAP >>
-//    // >> THEN PASS THE PASSPORT AND FLIGHT NUMBER TO WaitingListSeatDatabase printWaitListPassenger(p, f)
-//    // this will print queue position..
-//
-//    }
 

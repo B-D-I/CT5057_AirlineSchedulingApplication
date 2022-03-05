@@ -8,7 +8,7 @@ class ApplicationMenu {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     PassengerDatabase passengerDatabase = new PassengerDatabase();
-    ScheduledSeatDatabase scheduledSeatDatabase = new ScheduledSeatDatabase();
+    SeatDatabase seatDatabase = new SeatDatabase();
     Flight flight = new Flight();
 
     private static ApplicationMenu menu = null;
@@ -60,7 +60,7 @@ class ApplicationMenu {
             String adminSelect = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
             switch (adminSelect) {
                 case "S" -> passengerDatabase.schedulePassenger();
-                case "C" -> scheduledSeatDatabase.cancelPassenger();
+                case "C" -> seatDatabase.cancelPassenger();
                 case "P" -> passengerDatabase.passengerStatus();
                 case "F" -> flightDatabase.flightStatus();
                 case "Q" -> startApplication();
