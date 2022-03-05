@@ -87,12 +87,13 @@ public class SeatDatabase implements Database {
     /**
      * This method returns a HashMap containing a booked passenger HashMap (passport number and name) along with a
      * booked seat HashMap (seat number and class)
+     *
      * @param flightNumber: This is associated flight number for the correct .txt file
      * @return: An update HashMap of all booked passengers and their seat
      */
-    private HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber){
+    private HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
         try {
-            File myObj = new File("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating"+flightNumber+".txt");
+            File myObj = new File("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
@@ -118,10 +119,11 @@ public class SeatDatabase implements Database {
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error" + e);
-        } return scheduledPassengers;
+        }
+        return scheduledPassengers;
     }
 
-    public void printScheduledPassengers(String flightNumber){
+    public void printScheduledPassengers(String flightNumber) {
         HashMap<String, ScheduledSeat> scheduledPassengers = createScheduledPassengers(flightNumber);
         Set set = scheduledPassengers.entrySet();
         Iterator iterator = set.iterator();
@@ -129,13 +131,13 @@ public class SeatDatabase implements Database {
                              Booked Seats For This Flight:
                 """));
         // THIS NEEDS TO PRINT EACH PASSENGER ON SEPARATE LINE
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Map.Entry mapEntry = (Map.Entry) iterator.next();
-            System.out.println("     \t\t" + mapEntry.getValue() );
+            System.out.println("     \t\t" + mapEntry.getValue());
         }
     }
 
-    public void cancelPassenger(){
+    public void cancelPassenger() {
         System.out.println("Enter passenger passport number: ");
         String passportNumber = scanner.nextLine().trim();
         System.out.println("Enter flight number: ");
@@ -143,32 +145,38 @@ public class SeatDatabase implements Database {
         deletePassengerFromFlight(flightNumber, passportNumber);
     }
 
-    private void deletePassengerFromFlight(String flightNumber, String passengerPassportNumber){
+    private void deletePassengerFromFlight(String flightNumber, String passengerPassportNumber) {
         // put the scheduled passengers from .txt into hashmap (passport number : scheduledSeat object)
         HashMap<String, ScheduledSeat> scheduledPassengers = createScheduledPassengers(flightNumber);
 
         String deletedSeatNumber;
         String deletedSeatClass;
         // check if passport number matches a scheduled passenger's
-        for (ScheduledSeat scheduledSeat: scheduledPassengers.values()) {
-            if(scheduledSeat.getSeatPassengerPassportNumber().equals(passengerPassportNumber)){
-                System.out.println("\nPassenger: " +scheduledSeat.getSeatPassengerName());
+        try{
+        for (ScheduledSeat scheduledSeat : scheduledPassengers.values()) {
+            if (scheduledSeat.getSeatPassengerPassportNumber().equals(passengerPassportNumber)) {
+                System.out.println("\nPassenger: " + scheduledSeat.getSeatPassengerName());
                 deletedSeatNumber = scheduledSeat.getSeatNumber();
                 deletedSeatClass = scheduledSeat.getSeatClass();
-                System.out.println("\nPassenger has been removed from flight: " + flightNumber );
-                System.out.println("Seat: " + deletedSeatNumber + " : " + deletedSeatClass+ "\n");
-
+                System.out.println("\nPassenger has been removed from flight: " + flightNumber);
+                System.out.println("Seat: " + deletedSeatNumber + " : " + deletedSeatClass + "\n");
+//                try {
                 // remove from hashmap
                 scheduledPassengers.remove(passengerPassportNumber);
-//                System.out.println(scheduledPassengers);
                 // to refresh the .txt file with amendment
                 scheduledSeat.modifyScheduledSeating(scheduledPassengers, flightNumber);
-
                 // offer the seat to waiting list queue
-                waitingListDatabase.offerFreeSeat(flightNumber, deletedSeatNumber, deletedSeatClass);
+                waitingListDatabase.checkWaitingListPassengers(flightNumber, deletedSeatNumber, deletedSeatClass);
+            }
         }
+        } catch (ConcurrentModificationException ex){
+            System.out.println(ex);
         }
     }
 }
+
+
+
+
 
 

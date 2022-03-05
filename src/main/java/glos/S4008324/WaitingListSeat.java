@@ -33,11 +33,9 @@ public class WaitingListSeat extends Seat{
         } scanner.nextLine();
     }
 
+
     public void modifyScheduledSeating(Queue<HashMap<String, WaitingListSeat>> waitingQueue , String flightNumber){
         try {
-//            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", false));
-//            out.write("");
-//            out.close();
             BufferedWriter outAgain = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", false));
             for (HashMap<String, WaitingListSeat> passengers : waitingQueue) {
                 for (WaitingListSeat waitingListSeat : passengers.values()) {

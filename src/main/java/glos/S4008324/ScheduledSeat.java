@@ -16,7 +16,7 @@ public class ScheduledSeat extends Seat{
         try{
             // add to specific flight seating
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt", true));
-            out.write("\n" + passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n" + seatNumber + "\n");
+            out.write(passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n" + seatNumber + "\n");
             out.close();
 
             // add to generic passenger form

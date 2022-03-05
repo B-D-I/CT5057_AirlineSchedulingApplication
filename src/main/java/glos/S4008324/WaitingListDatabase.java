@@ -66,55 +66,76 @@ public class WaitingListDatabase implements Database {
         }
     }
 
-    public void offerFreeSeat(String flightNumber, String seatNumber, String seatClass) {
+    public void checkWaitingListPassengers(String flightNumber, String seatNumber, String seatClass){
         Queue<HashMap<String, WaitingListSeat>> waitingQueue = createWaitingListObject(flightNumber);
         // passport number : waitList
+        offerFreeSeat(waitingQueue, flightNumber, seatNumber, seatClass);
+    }
+    private void offerFreeSeat(Queue<HashMap<String, WaitingListSeat>> waitingQueue, String flightNumber, String seatNumber, String seatClass) {
         HashMap<String, WaitingListSeat> waitingPassenger = waitingQueue.peek();
-
         if (waitingPassenger == null) {
-                System.out.println("There is no waiting list for this flight");
-                // create a flight object from flights.txt
-                FlightDatabase flightDatabase = new FlightDatabase();
-                HashMap<String, Flight> flightMap = flightDatabase.createFlightObjectsMap();
-                // get specific flight
-                Flight flight = flightMap.get(flightNumber);
-                // get seating list of flight
-                HashMap<String, String> seatingList = flight.getSeatingList();
-                // add the seat back to flight
-                seatingList.put(seatNumber, seatClass);
+            emptyQueueUpdateFlight(flightNumber, seatNumber, seatClass);
+        } else {
+            offerWaitingListPassenger(waitingQueue, waitingPassenger, flightNumber, seatClass, seatNumber);
         }
-        else
+    }
+        private void emptyQueueUpdateFlight(String flightNumber, String seatNumber, String seatClass){
+            System.out.println("There is no waiting list for this flight");
+            // create a flight object from flights.txt
+            FlightDatabase flightDatabase = new FlightDatabase();
+            HashMap<String, Flight> flightMap = flightDatabase.createFlightObjectsMap();
+            // get specific flight
+            Flight flight = flightMap.get(flightNumber);
+            // get seating list of flight
+            HashMap<String, String> seatingList = flight.getSeatingList();
+            // add the seat back to flight
+            seatingList.put(seatNumber, seatClass);
+
+            // update flights.txt
+            UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
+            unallocatedSeat.modifyFlightSeating(flightMap);
+        }
+
+        private void offerWaitingListPassenger(Queue<HashMap<String, WaitingListSeat>> waitingQueue, HashMap<String, WaitingListSeat> waitingPassenger, String flightNumber, String seatNumber, String seatClass ){
             System.out.println("\nNext Passenger: " + waitingPassenger.values());
             System.out.println("\nDo you wish to book this passenger onto the plane? (Y|N) ");
             String bookWaitingPassenger = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-
             if (bookWaitingPassenger.equals("Y")) {
-                HashMap<String, WaitingListSeat> passenger = waitingQueue.poll();
-
-                for (WaitingListSeat waitingListSeat : passenger.values()) {
-                    // get head passenger information
-                    String name = waitingListSeat.seatPassengerName;
-                    String passport = waitingListSeat.seatPassengerPassportNumber;
-                    String seatingClass = waitingListSeat.seatClass;
-                    // create passenger object with information
-                    Passenger upgradePassenger = new Passenger();
-                    upgradePassenger.setName(name);
-                    upgradePassenger.setPassportNumber(passport);
-                    // add passenger to scheduled flight
-                    ScheduledSeat scheduledSeat = new ScheduledSeat();
-                    scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatNumber, seatClass, upgradePassenger);
-                    // remove passenger
-                    waitingQueue.poll();
-                    // rewrite .txt
-                    waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
-                }
+                scheduleWaitingPassenger(waitingQueue, waitingPassenger, flightNumber, seatClass, seatNumber);
             } else if (bookWaitingPassenger.equals("N")) {
-                // remove passenger
-                waitingQueue.poll();
+                offerNextPassenger(waitingQueue, flightNumber, seatClass, seatNumber);
+            } else {
+                System.out.println("Not a valid response");
+            }
+        }
+        private void offerNextPassenger(Queue<HashMap<String, WaitingListSeat>> waitingQueue, String flightNumber, String seatNumber, String seatClass){
+            // remove passenger
+            waitingQueue.poll();
+            try {
                 // rewrite .txt
                 waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
                 // offer next passenger
-                offerFreeSeat(flightNumber, seatNumber, seatClass);
+                offerFreeSeat(waitingQueue, flightNumber, seatNumber, seatClass);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-    }
+        private void scheduleWaitingPassenger(Queue<HashMap<String, WaitingListSeat>> waitingQueue, HashMap<String, WaitingListSeat> waitingPassenger, String flightNumber, String seatNumber, String seatClass ){
+        waitingQueue.poll();
+            for (WaitingListSeat waitingListSeat : waitingPassenger.values()) {
+                // get head passenger information
+                String name = waitingListSeat.seatPassengerName;
+                String passport = waitingListSeat.seatPassengerPassportNumber;
+                String seatingClass = waitingListSeat.seatClass;
+                // create passenger object with information
+                Passenger upgradePassenger = new Passenger();
+                upgradePassenger.setName(name);
+                upgradePassenger.setPassportNumber(passport);
+                // add passenger to scheduled flight
+                ScheduledSeat scheduledSeat = new ScheduledSeat();
+                scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatNumber, seatClass, upgradePassenger);
+                // update .txt
+                waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
+            }
+        }
+}
