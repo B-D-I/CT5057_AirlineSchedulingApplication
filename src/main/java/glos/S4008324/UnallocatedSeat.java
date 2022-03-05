@@ -20,7 +20,6 @@ public class UnallocatedSeat extends Seat {
         }
     }
     public void modifyFlightSeating(HashMap<String, Flight> flightMap){
-
         try {
                 BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/Flights.txt", false));
                 for(Flight flight: flightMap.values())

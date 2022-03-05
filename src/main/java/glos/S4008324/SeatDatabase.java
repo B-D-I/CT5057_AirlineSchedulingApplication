@@ -90,7 +90,7 @@ public class SeatDatabase implements Database {
      * @param flightNumber: This is associated flight number for the correct .txt file
      * @return: An update HashMap of all booked passengers and their seat
      */
-    public HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber){
+    private HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber){
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating"+flightNumber+".txt");
             Scanner myReader = new Scanner(myObj);
@@ -142,8 +142,8 @@ public class SeatDatabase implements Database {
         String flightNumber = scanner.nextLine().trim();
         deletePassengerFromFlight(flightNumber, passportNumber);
     }
-    // private >>
-    public void deletePassengerFromFlight(String flightNumber, String passengerPassportNumber){
+
+    private void deletePassengerFromFlight(String flightNumber, String passengerPassportNumber){
         // put the scheduled passengers from .txt into hashmap (passport number : scheduledSeat object)
         HashMap<String, ScheduledSeat> scheduledPassengers = createScheduledPassengers(flightNumber);
 
@@ -158,13 +158,11 @@ public class SeatDatabase implements Database {
                 System.out.println("\nPassenger has been removed from flight: " + flightNumber );
                 System.out.println("Seat: " + deletedSeatNumber + " : " + deletedSeatClass+ "\n");
 
-    // THIS WORKS FINE >>
-//                // remove from hashmap
-//                scheduledPassengers.remove(passengerPassportNumber);
+                // remove from hashmap
+                scheduledPassengers.remove(passengerPassportNumber);
 //                System.out.println(scheduledPassengers);
-//                // to refresh the .txt file with amendment
-//                scheduledSeat.modifyScheduledSeating(scheduledPassengers, flightNumber);
-
+                // to refresh the .txt file with amendment
+                scheduledSeat.modifyScheduledSeating(scheduledPassengers, flightNumber);
 
                 // offer the seat to waiting list queue
                 waitingListDatabase.offerFreeSeat(flightNumber, deletedSeatNumber, deletedSeatClass);

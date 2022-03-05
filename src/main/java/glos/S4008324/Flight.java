@@ -17,6 +17,7 @@ public class Flight {
     UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
     SeatDatabase seatDatabase = new SeatDatabase();
 
+    // Seat Number : Seat class
     public HashMap<String, String> SeatingList;
 
     public void setFlightNumber(String flightNumber) {
@@ -54,13 +55,11 @@ public class Flight {
         return SeatingList;
     }
 
-
     @Override
     public String toString()
     {
         return flightNumber+", "+departure+", "+destination+", "+departureDate+", "+ SeatingList;
     }
-
     // FLIGHT OPERATOR METHOD TO CREATE NEW FLIGHT TO TXT
     public void createFlight() {
         System.out.println("Enter departure airport: ");

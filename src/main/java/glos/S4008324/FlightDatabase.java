@@ -26,7 +26,7 @@ public class FlightDatabase implements Database {
         return "password";
     }
 
-    private HashMap<String, Flight> createFlightObjectsMap() {
+    public HashMap<String, Flight> createFlightObjectsMap() {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Flights.txt");
             Scanner myReader = new Scanner(myObj);

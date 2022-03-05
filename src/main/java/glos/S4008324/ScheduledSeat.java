@@ -38,7 +38,6 @@ public class ScheduledSeat extends Seat{
                 out.write(scheduledSeat.getSeatPassengerPassportNumber() + "\n" + scheduledSeat.getSeatPassengerName() +
                         "\n" + scheduledSeat.getSeatClass() + "\n" + scheduledSeat.getSeatNumber() + "\n\n");
             out.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

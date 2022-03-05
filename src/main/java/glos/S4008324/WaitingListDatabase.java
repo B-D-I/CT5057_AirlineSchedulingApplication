@@ -12,8 +12,8 @@ public class WaitingListDatabase implements Database {
     /**
      * This method creates a queue (FIFO) of all waiting passengers (contained in HashMap)
      *
-     * @param flightNumber: This is associated flight number for the correct .txt file
-     * @return waitingQueue: an updated queue of all waiting passengers
+     * @param flightNumber:
+     * @return
      */
     public Queue<HashMap<String, WaitingListSeat>> createWaitingListObject(String flightNumber) {
         try {
@@ -53,7 +53,6 @@ public class WaitingListDatabase implements Database {
             System.out.println(passengers.values());
         }
     }
-
     public void printWaitListPassenger(String flightNumber, String passportNumber) {
         Queue<HashMap<String, WaitingListSeat>> waitingQueue = createWaitingListObject(flightNumber);
         int counter = 1;
@@ -67,13 +66,24 @@ public class WaitingListDatabase implements Database {
         }
     }
 
-
     public void offerFreeSeat(String flightNumber, String seatNumber, String seatClass) {
         Queue<HashMap<String, WaitingListSeat>> waitingQueue = createWaitingListObject(flightNumber);
         // passport number : waitList
         HashMap<String, WaitingListSeat> waitingPassenger = waitingQueue.peek();
 
-        if (waitingPassenger != null) {
+        if (waitingPassenger == null) {
+                System.out.println("There is no waiting list for this flight");
+                // create a flight object from flights.txt
+                FlightDatabase flightDatabase = new FlightDatabase();
+                HashMap<String, Flight> flightMap = flightDatabase.createFlightObjectsMap();
+                // get specific flight
+                Flight flight = flightMap.get(flightNumber);
+                // get seating list of flight
+                HashMap<String, String> seatingList = flight.getSeatingList();
+                // add the seat back to flight
+                seatingList.put(seatNumber, seatClass);
+        }
+        else
             System.out.println("\nNext Passenger: " + waitingPassenger.values());
             System.out.println("\nDo you wish to book this passenger onto the plane? (Y|N) ");
             String bookWaitingPassenger = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
@@ -106,113 +116,5 @@ public class WaitingListDatabase implements Database {
                 // offer next passenger
                 offerFreeSeat(flightNumber, seatNumber, seatClass);
             }
-        } else {
-            System.out.println("There is no waiting list fo this flight");
-            // FUNCTION TO PUT SEAT BACK IN FLIGHTS.TXT **************************
         }
     }
-}
-
-
-
-        // if no, then the that passenger is removed from the waiting list and next passenger is offered the seat
-//        if (bookWaitingPassenger.equals("N")) {
-//            while(!waitingQueue.isEmpty()){
-//                waitingList.updateWaitingList(waitingQueue, flightNumber);
-                // Function to remove poll passenger and ask next passenger until queue empty
-                // once queue empty update flights.txt with cancelled seat class and number
-
-//            }
-//        }
-
-//        else if (bookWaitingPassenger.equals("Y")){
-//            // NEED THE PASSENGER OBJECT >>>
-////            scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatNumber, seatClass, );
-//            // Function to add queue passenger to scheduled seat list
-//        }
-//        // passenger next in line must be removed from the queue and then .txt must be refreshed
-//        // hashmap of the next in line passenger (passport number : waitList object)
-//
-//
-//        HashMap<String, WaitingListSeat> removedPassenger = waitingQueue.poll();
-//        System.out.println(removedPassenger.keySet());
-//        System.out.println("Removed: " +removedPassenger);
-//        System.out.println("\nWaiting List: " +waitingQueue);
-//
-//        // This is sending the updated list (NOT WORKING)
-////            waitingListPassengers.updateWaitingList(waitingQueue, flightNumber);
-//
-//        // ONCE PASSENGER IS DELETED FROM .TXT AND IS REFRESHED...
-//        // Waiting passenger needs adding to scheduled flight
-//
-////            scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatNumber, seatClass, );
-//
-//        // update with a waiting list function
-//    }
-//
-//
-////    public void offerFreeSeat(String flightNumber, String seatNumber, String seatClass) {
-////
-////        // queue containing hashmaps of all queue passengers (passport number : waitingList object)
-////        Queue<HashMap<String, WaitingList>> waitingQueue = createWaitingListObject(flightNumber);
-////        // hashmap of head passenger (passport number: object)
-////        HashMap<String, WaitingList> nextPassenger = waitingQueue.peek();
-////
-////
-//////                    for (WaitingListPassengers waitingListPassengers: waitingQueue) {
-//////                if(waitingListPassengers.getSeatClass().equals(seatClass) {
-//////
-//////                }}
-////
-////        // passenger object values
-////        assert nextPassenger != null;
-////        Collection<WaitingList> passengerName = nextPassenger.values();
-////
-////        // display passenger next in queue and offer the seat
-////        System.out.println("""
-////
-////
-////                    The passenger next on the waiting list is:
-////
-////                PassportNo | Name | Seat Class
-////                """);
-////        System.out.println(passengerName);
-////        System.out.println("\n\n");
-////        System.out.println("Do you wish to book this passenger onto the plane? (Y|N) ");
-////        String bookWaitingPassenger = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-////        // if no, then the that passenger is removed from the waiting list and next passenger is offered the seat
-////        if (bookWaitingPassenger.equals("N")) {
-////            // Function to remove poll passenger and ask next passenger until queue empty
-////            // once queue empty update flights.txt with cancelled seat class and number
-////        }
-////        else if (bookWaitingPassenger.equals("Y")){
-////            // Function to add queue passenger to scheduled seat list
-////        }
-////            // passenger next in line must be removed from the queue and then .txt must be refreshed
-////            // hashmap of the next in line passenger (passport number : waitList object)
-////
-////            HashMap<String, WaitingList> removedPassenger = waitingQueue.poll();
-////            System.out.println(removedPassenger.values());
-////            System.out.println("Removed: " +removedPassenger);
-////            System.out.println("\nWaiting List: " +waitingQueue);
-////
-////            // This is sending the updated list (NOT WORKING)
-//////            waitingListPassengers.updateWaitingList(waitingQueue, flightNumber);
-////
-////            // ONCE PASSENGER IS DELETED FROM .TXT AND IS REFRESHED...
-////            // Waiting passenger needs adding to scheduled flight
-////
-//////            scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatNumber, seatClass, );
-////
-////            // update with a waiting list function
-////
-////            // ADD PASSENGER TO SCHEDULED LIST (CONFIRM SEAT CLASS)
-//////        } else {
-//////            // remove passenger and check next passenger etc..
-//////            // if no new passenger then seat needs updating in flights.txt
-//////        }
-////        }
-//
-//
-//
-//}
