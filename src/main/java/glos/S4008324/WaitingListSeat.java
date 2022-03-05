@@ -1,11 +1,10 @@
 package glos.S4008324;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Queue;
 
 public class WaitingListSeat extends Seat{
@@ -13,7 +12,6 @@ public class WaitingListSeat extends Seat{
     @Override
     public String toString()
     {return "Passenger Name: "+getSeatPassengerName()+"\t\tPassport Number: "+getSeatPassengerPassportNumber()+"\t\tSeat Class: " + getSeatClass();}
-
 
     public void addPassengerToWaitingList(String flightNumber, String seatClass, Passenger passenger) {
         try {
@@ -33,7 +31,6 @@ public class WaitingListSeat extends Seat{
         } scanner.nextLine();
     }
 
-
     public void modifyScheduledSeating(Queue<HashMap<String, WaitingListSeat>> waitingQueue , String flightNumber){
         try {
             BufferedWriter outAgain = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", false));
@@ -43,6 +40,19 @@ public class WaitingListSeat extends Seat{
                             "\n" + waitingListSeat.getSeatClass() + "\n\n");
                 }
             } outAgain.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void modifyWaitingList(HashMap<String, String> bookedFlights){
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", false));
+            for(Map.Entry<String, String> flights: bookedFlights.entrySet()){
+                String passport = flights.getKey();
+                String flight = flights.getValue();
+                out.write(passport + "\n" + flight +"\n\n");
+            } out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

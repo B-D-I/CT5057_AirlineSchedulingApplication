@@ -1,8 +1,3 @@
-999999
-JOHN WAYNE
-First
-16
-
 101010
 BILL GATES
 First
@@ -27,3 +22,13 @@ First
 LEWIS HAMILTON
 Economy
 7
+
+999111
+JOHN Smith
+First
+26
+
+999999
+JOHN WAYNE
+First
+16

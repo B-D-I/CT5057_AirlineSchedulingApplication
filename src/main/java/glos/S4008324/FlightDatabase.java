@@ -5,15 +5,6 @@ import java.util.*;
 
 public class FlightDatabase implements Database {
 
-    // all flights in flights.txt
-    HashMap<String, Flight> allFlightsMap = new HashMap<>();
-
-    Airports<String> airports = new Airports<>();
-    WaitingListSeat waitingListSeat = new WaitingListSeat();
-    UnallocatedSeat seat = new UnallocatedSeat();
-    ScheduledSeat scheduledSeating = new ScheduledSeat();
-    SeatDatabase seatingDatabase = new SeatDatabase();
-
     public FlightDatabase() {
         createFlightObjectsMap();
     }
@@ -78,6 +69,7 @@ public class FlightDatabase implements Database {
     }
 
     public void flightStatus(){
+        SeatDatabase seatingDatabase = new SeatDatabase();
         HashMap<String, Flight> flightMap = createFlightObjectsMap();
         System.out.println("Enter flight number: ");
         String flightNumber = scanner.nextLine().trim();
@@ -115,6 +107,8 @@ public class FlightDatabase implements Database {
     }
 
     public void selectSeatClass(Passenger passenger, String flightNumber) {
+        WaitingListSeat waitingListSeat = new WaitingListSeat();
+
         System.out.println(passenger.toString());
         System.out.println("""
                 Select seat class:
@@ -200,6 +194,9 @@ public class FlightDatabase implements Database {
         }
 
     private void schedulePassenger(HashMap<String, String> seatList, String seatingNumber, String flightNumber, String seatClass, Passenger passenger) {
+        UnallocatedSeat seat = new UnallocatedSeat();
+        ScheduledSeat scheduledSeating = new ScheduledSeat();
+
         // remove seat number from seating hashmap, and update flights.txt hashmap
         seatList.remove(seatingNumber);
         System.out.println(seatList);
@@ -208,5 +205,4 @@ public class FlightDatabase implements Database {
         // save booked passenger onto schedule seating
         scheduledSeating.addPassengerToScheduledSeat(flightNumber, seatingNumber, seatClass, passenger);
     }
-
 }

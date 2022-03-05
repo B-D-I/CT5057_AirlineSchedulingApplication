@@ -6,19 +6,10 @@ import java.util.*;
 
 public class SeatDatabase implements Database {
 
-    private WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
-    private UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
-    public HashMap<String, ScheduledSeat> scheduledPassengers = new HashMap<>();
-
-    // for the flights.txt
-    public final HashMap<Integer, String> aircraftSeatAllocation = new HashMap<>();
-
-    private int seatCount;
     private int economySeatAmount, firstSeatAmount, businessSeatAmount;
 
-    // allocate seats for aircraft (not with passengers)
+    // Unallocated seats for aircraft
     public HashMap<Integer, String> allocateAircraftSeatClass() {
-
         try {
             System.out.println("First seat amount: ");
             firstSeatAmount = scanner.nextByte();
@@ -31,7 +22,7 @@ public class SeatDatabase implements Database {
         } catch (InputMismatchException e) {
             System.out.println(e);
         }
-        seatCount = economySeatAmount + firstSeatAmount + businessSeatAmount;
+        int seatCount = economySeatAmount + firstSeatAmount + businessSeatAmount;
 
         // auto-fill the hashmap from the ranges given
         for (int i = 1; i < firstSeatAmount + 1; i++) {
@@ -78,6 +69,7 @@ public class SeatDatabase implements Database {
         System.out.println("\nWould you like to edit this seating list further? (Y|N)");
         String editSeating = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
         if (editSeating.equals("N")) {
+            UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
             unallocatedSeat.updateFlightTxt(departure, destination, dateDeparture, flightNumber, seatList);
         } else if (editSeating.equals("Y")) {
             editAircraftSeatClassAllocation(departure, destination, dateDeparture, flightNumber, seatList);
@@ -111,7 +103,6 @@ public class SeatDatabase implements Database {
 
                 // Passport : Seat
                 scheduledPassengers.put(scheduledSeat.getSeatPassengerPassportNumber(), scheduledSeat);
-
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
                 }
@@ -130,7 +121,6 @@ public class SeatDatabase implements Database {
         System.out.println(("""
                              Booked Seats For This Flight:
                 """));
-        // THIS NEEDS TO PRINT EACH PASSENGER ON SEPARATE LINE
         while (iterator.hasNext()) {
             Map.Entry mapEntry = (Map.Entry) iterator.next();
             System.out.println("     \t\t" + mapEntry.getValue());
@@ -146,6 +136,9 @@ public class SeatDatabase implements Database {
     }
 
     private void deletePassengerFromFlight(String flightNumber, String passengerPassportNumber) {
+        WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
+        PassengerDatabase passengerDatabase = new PassengerDatabase();
+
         // put the scheduled passengers from .txt into hashmap (passport number : scheduledSeat object)
         HashMap<String, ScheduledSeat> scheduledPassengers = createScheduledPassengers(flightNumber);
 
@@ -160,11 +153,13 @@ public class SeatDatabase implements Database {
                 deletedSeatClass = scheduledSeat.getSeatClass();
                 System.out.println("\nPassenger has been removed from flight: " + flightNumber);
                 System.out.println("Seat: " + deletedSeatNumber + " : " + deletedSeatClass + "\n");
-//                try {
+
                 // remove from hashmap
                 scheduledPassengers.remove(passengerPassportNumber);
                 // to refresh the .txt file with amendment
                 scheduledSeat.modifyScheduledSeating(scheduledPassengers, flightNumber);
+                // delete from BookedFLights.txt
+                passengerDatabase.removePassengerFromList("BookedFlights", passengerPassportNumber);
                 // offer the seat to waiting list queue
                 waitingListDatabase.checkWaitingListPassengers(flightNumber, deletedSeatNumber, deletedSeatClass);
             }

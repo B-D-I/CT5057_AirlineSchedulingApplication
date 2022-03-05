@@ -6,18 +6,13 @@ import java.util.*;
 
 final class PassengerDatabase implements Database {
 
-    FlightDatabase flightDatabase = new FlightDatabase();
-    Passenger passenger = new Passenger();
-    WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
-    HashMap<String, String> passengerSchedulingMap = new HashMap<>();
-
     public void schedulePassenger() {
+        Passenger passenger = new Passenger();
         System.out.println("Enter passenger's full name: ");
         String passengerName = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
 
         System.out.println("Enter passenger passport number: ");
         String passengerPassportNumber = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-
             try {
                 System.out.println("Enter passenger age: ");
                 byte passengerAge = scanner.nextByte();
@@ -35,6 +30,7 @@ final class PassengerDatabase implements Database {
     }
 
     private void passengerRoute(Passenger passenger) {
+        FlightDatabase flightDatabase = new FlightDatabase();
         scanner.nextLine();
         System.out.println("Enter departure airport: ");
         String departureAirport = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
@@ -44,7 +40,6 @@ final class PassengerDatabase implements Database {
             System.out.println("\n --- We do not fly from this airport, please select another ---\n");
             schedulePassenger();
         } else {
-
             System.out.println("Enter destination airport: ");
             String destinationAirport = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
 
@@ -80,7 +75,6 @@ final class PassengerDatabase implements Database {
                 String flightNumber = myReader.nextLine();
 
                 passengerSchedulingMap.put(passengerPassport, flightNumber);
-
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
                 }
@@ -94,17 +88,17 @@ final class PassengerDatabase implements Database {
     }
 
         public void passengerStatus() {
+            WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
+
             System.out.println("Enter passport number of passenger: ");
             String passportNumber = scanner.nextLine().trim();
             // passport : flight number
             HashMap<String, String> passengerBookingsMap = createPassengerBookingsObject("BookedFlights");
             HashMap<String, String> passengerWaitingMap = createPassengerBookingsObject("WaitingLists");
-
-            System.out.println("Passenger: " + passportNumber);
-
             String passengerFlight = passengerBookingsMap.get(passportNumber);
             String passengerWaitList = passengerWaitingMap.get(passportNumber);
 
+            System.out.println("Passenger: " + passportNumber);
             System.out.println("Flight: "+passengerFlight);
             System.out.println("Waiting List For Flight: "+passengerWaitList);
 
@@ -114,6 +108,25 @@ final class PassengerDatabase implements Database {
                 // check waiting list database for passenger info and position
                 waitingListDatabase.printWaitListPassenger(passengerWaitList, passportNumber);
             }
-        }}
+        }
+
+        public void removePassengerFromList(String listType, String passportNumber){
+
+        if (listType.equals("BookedFlights")){
+            HashMap<String, String> passengerBookingsMap = createPassengerBookingsObject("BookedFlights");
+            passengerBookingsMap.remove(passportNumber);
+
+            ScheduledSeat scheduledSeat = new ScheduledSeat();
+            scheduledSeat.modifyBookedFlights(passengerBookingsMap);
+            System.out.println("Passenger Deleted");
+        }
+        else if (listType.equals("WaitingLists")){
+            HashMap<String, String> passengerWaitingMap = createPassengerBookingsObject("WaitingLists");
+            passengerWaitingMap.remove(passportNumber);
+            WaitingListSeat waitingListSeat = new WaitingListSeat();
+            waitingListSeat.modifyWaitingList(passengerWaitingMap);
+        }
+    }
+}
 
 

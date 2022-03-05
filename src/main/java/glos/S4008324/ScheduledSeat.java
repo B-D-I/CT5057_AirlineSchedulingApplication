@@ -4,13 +4,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ScheduledSeat extends Seat{
 
     @Override
     public String toString()
     {return "Passenger Name: "+getSeatPassengerName()+"\tPassport Number: "+getSeatPassengerPassportNumber()+"\tSeat Class: " + getSeatClass() + " \tSeat Number: " + getSeatNumber();}
-
 
     public void addPassengerToScheduledSeat(String flightNumber, String seatNumber, String seatClass, Passenger passenger) {
         try{
@@ -29,7 +29,6 @@ public class ScheduledSeat extends Seat{
             e.printStackTrace();
         }
     }
-
     // Hashmap (passport number : seat object)
     public void modifyScheduledSeating(HashMap<String, ScheduledSeat> scheduledPassengers, String flightNumber){
         try {
@@ -38,6 +37,18 @@ public class ScheduledSeat extends Seat{
                 out.write(scheduledSeat.getSeatPassengerPassportNumber() + "\n" + scheduledSeat.getSeatPassengerName() +
                         "\n" + scheduledSeat.getSeatClass() + "\n" + scheduledSeat.getSeatNumber() + "\n\n");
             out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void modifyBookedFlights(HashMap<String, String> bookedFlights){
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/BookedFlights.txt", false));
+            for(Map.Entry<String, String> flights: bookedFlights.entrySet()){
+                String passport = flights.getKey();
+                String flight = flights.getValue();
+                out.write(passport + "\n" + flight +"\n\n");
+            } out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

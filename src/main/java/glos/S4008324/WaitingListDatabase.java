@@ -6,9 +6,6 @@ import java.util.*;
 
 public class WaitingListDatabase implements Database {
 
-    WaitingListSeat waitingListSeat = new WaitingListSeat();
-    Queue<HashMap<String, WaitingListSeat>> waitingQueue = new LinkedList<>();
-
     /**
      * This method creates a queue (FIFO) of all waiting passengers (contained in HashMap)
      *
@@ -103,16 +100,26 @@ public class WaitingListDatabase implements Database {
             if (bookWaitingPassenger.equals("Y")) {
                 scheduleWaitingPassenger(waitingQueue, waitingPassenger, flightNumber, seatClass, seatNumber);
             } else if (bookWaitingPassenger.equals("N")) {
-                offerNextPassenger(waitingQueue, flightNumber, seatClass, seatNumber);
+                offerNextPassenger(waitingQueue, waitingPassenger, flightNumber, seatClass, seatNumber);
             } else {
                 System.out.println("Not a valid response");
             }
         }
-        private void offerNextPassenger(Queue<HashMap<String, WaitingListSeat>> waitingQueue, String flightNumber, String seatNumber, String seatClass){
+        private void offerNextPassenger(Queue<HashMap<String, WaitingListSeat>> waitingQueue, HashMap<String, WaitingListSeat> waitingPassenger, String flightNumber, String seatNumber, String seatClass){
+            WaitingListSeat waitingListSeat = new WaitingListSeat();
+            PassengerDatabase passengerDatabase = new PassengerDatabase();
+
             // remove passenger
             waitingQueue.poll();
             try {
-                // rewrite .txt
+                // remove from WaitingLists.txt
+                for(WaitingListSeat waitingListSeating: waitingPassenger.values()){
+                    String passportNumber = waitingListSeating.seatPassengerPassportNumber;
+                    passengerDatabase.removePassengerFromList("WaitingLists", passportNumber);
+                }
+                // I NEED TO GET THE PASSPORT NUMBER FROM HASHMAP KEY:
+
+                // rewrite specific WaitingList.txt
                 waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
                 // offer next passenger
                 offerFreeSeat(waitingQueue, flightNumber, seatNumber, seatClass);
@@ -121,7 +128,8 @@ public class WaitingListDatabase implements Database {
             }
         }
         private void scheduleWaitingPassenger(Queue<HashMap<String, WaitingListSeat>> waitingQueue, HashMap<String, WaitingListSeat> waitingPassenger, String flightNumber, String seatNumber, String seatClass ){
-        waitingQueue.poll();
+            PassengerDatabase passengerDatabase = new PassengerDatabase();
+            waitingQueue.poll();
             for (WaitingListSeat waitingListSeat : waitingPassenger.values()) {
                 // get head passenger information
                 String name = waitingListSeat.seatPassengerName;
@@ -136,6 +144,7 @@ public class WaitingListDatabase implements Database {
                 scheduledSeat.addPassengerToScheduledSeat(flightNumber, seatNumber, seatClass, upgradePassenger);
                 // update .txt
                 waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
+                passengerDatabase.removePassengerFromList("WaitingLists", passport);
             }
         }
 }
