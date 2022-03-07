@@ -21,4 +21,7 @@ interface Database {
     // WaitingLists"".txt (passportNumber : WaitingLists(queue))
     Queue<HashMap<String, WaitingListSeat>> waitingQueue = new LinkedList<>();
 
+
+    // public void CreateObjectFromTxt
+
 }

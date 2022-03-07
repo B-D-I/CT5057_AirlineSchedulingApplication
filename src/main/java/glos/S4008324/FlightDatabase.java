@@ -68,30 +68,39 @@ public class FlightDatabase implements Database {
         flightMap.entrySet().forEach(System.out::println);
     }
 
-    public void flightStatus(){
+    public void showAirportCount() {
+        airports.getAirportCount();
+    }
+
+    public void getRouteCount() {
+        airports.getRouteCount(true);
+    }
+
+    public void flightStatus() {
         SeatDatabase seatingDatabase = new SeatDatabase();
         HashMap<String, Flight> flightMap = createFlightObjectsMap();
         System.out.println("Enter flight number: ");
         String flightNumber = scanner.nextLine().trim();
-        for(Flight flight: flightMap.values()){
-            if (flight.getFlightNumber().equals(flightNumber)){
+        for (Flight flight : flightMap.values()) {
+            if (flight.getFlightNumber().equals(flightNumber)) {
                 String flightInfoDisplay = String.format("""
-                        
-                                    Flight %s Information:
-                            
-                                    Departure Airport: %s
-                                    Departure Date: %s
-                                    Destination Airport: %s
-                            
-                                    Available Seats For This Flight:
-                                    (Seat Number | Seat Class)
-                                
-                         %s
-                        """, flightNumber, flight.getDeparture(), flight.getDepartureDate(), flight.getDestination(),
+                                                        
+                                            Flight %s Information:
+                                    
+                                            Departure Airport: %s
+                                            Departure Date: %s
+                                            Destination Airport: %s
+                                    
+                                            Available Seats For This Flight:
+                                            (Seat Number | Seat Class)
+                                        
+                                 %s
+                                """, flightNumber, flight.getDeparture(), flight.getDepartureDate(), flight.getDestination(),
                         flight.getSeatingList());
                 System.out.println(flightInfoDisplay);
             }
-        } seatingDatabase.printScheduledPassengers(flightNumber);
+        }
+        seatingDatabase.printScheduledPassengers(flightNumber);
     }
 
     public void printAirports() {
@@ -136,11 +145,12 @@ public class FlightDatabase implements Database {
         // get the flight object from required flight number
         Flight flight = allFlightsMap.get(flightNumber);
 
-        // get the seating list from chosen flight
+        // get the seating list and date from chosen flight
+        String flightDate = flight.getDepartureDate();
         HashMap<String, String> seatingList = flight.getSeatingList();
 
         if (seatingList.containsValue(seatClass)) {
-            assignSeat(seatingList, seatClass, flightNumber, passenger);
+            assignSeat(seatingList, seatClass, flightNumber, flightDate, passenger);
 
         } else {
             System.out.println("\nThere are no " + seatClass + " seats available");
@@ -161,7 +171,7 @@ public class FlightDatabase implements Database {
             }
         }
     }
-    private void assignSeat(HashMap<String, String> seatingList, String seatClass, String flightNumber, Passenger passenger) {
+    private void assignSeat(HashMap<String, String> seatingList, String seatClass, String flightNumber, String flightDate, Passenger passenger) {
 
         for (Map.Entry<String, String> seats : seatingList.entrySet()) {
             if (seats.getValue().equals(seatClass)) {
@@ -175,25 +185,33 @@ public class FlightDatabase implements Database {
                 """);
         String seatSelect = scanner.nextLine();
 
-            String seatNumber = null;
-            Boolean seatPresent = null;
+        boolean luggage = false;
+        String seatNumber = null;
+        Boolean seatPresent = null;
 
-            for (Map.Entry<String, String> seat : seatingList.entrySet()) {
-                if (seatSelect.equals(seat.getKey())) {
-                    System.out.println("\nYou have selected seat: " + seatSelect);
-                    seatNumber = seatSelect;
-                    seatPresent = true;
-                }
-            }
-            if (Boolean.TRUE.equals(seatPresent)) {
-                schedulePassenger(seatingList, seatNumber, flightNumber, seatClass, passenger);
-            } else {
-                System.out.println("\nThis seat is not available. Select an available seat: \n");
-                assignSeat(seatingList, seatClass, flightNumber, passenger);
+        for (Map.Entry<String, String> seat : seatingList.entrySet()) {
+            if (seatSelect.equals(seat.getKey())) {
+                System.out.println("\nYou have selected seat: " + seatSelect);
+                seatNumber = seatSelect;
+                seatPresent = true;
             }
         }
+        if (Boolean.TRUE.equals(seatPresent)) {
+            System.out.println("Do you wish to include luggage? (Y|N)");
+            String confirmLuggage = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
+            if (confirmLuggage.equals("Y")){
+                luggage = true;
+            } else if (confirmLuggage.equals("N")){
+                luggage = false;
+            }
+            schedulePassenger(seatingList, seatNumber, flightNumber, seatClass, flightDate, passenger, luggage);
+        } else {
+            System.out.println("\nThis seat is not available. Select an available seat: \n");
+            assignSeat(seatingList, seatClass, flightNumber, flightDate, passenger);
+        }
+    }
 
-    private void schedulePassenger(HashMap<String, String> seatList, String seatingNumber, String flightNumber, String seatClass, Passenger passenger) {
+    private void schedulePassenger(HashMap<String, String> seatList, String seatingNumber, String flightNumber, String seatClass, String flightDate, Passenger passenger, boolean luggage) {
         UnallocatedSeat seat = new UnallocatedSeat();
         ScheduledSeat scheduledSeating = new ScheduledSeat();
 
@@ -204,5 +222,48 @@ public class FlightDatabase implements Database {
 
         // save booked passenger onto schedule seating
         scheduledSeating.addPassengerToScheduledSeat(flightNumber, seatingNumber, seatClass, passenger);
+
+        // create invoice
+        FlightInvoice flightInvoice = new FlightInvoice();
+        flightInvoice.setInvoiceDate(flightDate);
+        // charge of the flight is based on the flight number
+        flightInvoice.setInvoiceCharge(setCharge(flightNumber, seatClass, luggage));
+        flightInvoice.setInvoiceID(flightNumber + passenger.getPassportNumber());
+        flightInvoice.addInvoiceToTxt(flightInvoice);
+
+    }
+
+    private int setCharge(String flightNumber, String seatClass, boolean luggage) {
+        int businessFee = 1000;
+        int firstFee = 800;
+        int economyFee = 400;
+        int totalCharge = 0;
+
+        switch (seatClass) {
+            case "First" -> {
+                int flightChargeOne = Integer.parseInt(flightNumber);
+                totalCharge = flightChargeOne + firstFee;
+                if (luggage){
+                    totalCharge += 100;
+                }
+            }
+            case "Business" -> {
+                int flightChargeOne = Integer.parseInt(flightNumber);
+                totalCharge = flightChargeOne + businessFee;
+                if (luggage){
+                    totalCharge += 100;
+                }
+            }
+            case "Economy" -> {
+                int flightChargeOne = Integer.parseInt(flightNumber);
+                totalCharge = flightChargeOne + economyFee;
+                if (luggage){
+                    totalCharge += 100;
+                }
+            }
+
+        } return totalCharge;
     }
 }
+
+

@@ -11,12 +11,12 @@ First
 367890
 EDDIE MURPHY
 First
-3
+4
 
 210202
 BRITNEY SPEARS
-First
-4
+Business
+6
 
 631203
 ANGELA MERKEL
@@ -25,15 +25,20 @@ First
 
 444123
 VIN DIESEL
-Economy
-12
+First
+3
 
 789321
 ADAM SANDLER
 Economy
-14
+9
 
 222001
 BRUCE LEE
 Economy
-15
+13
+
+200500
+CHRIS ROCK
+Business
+7

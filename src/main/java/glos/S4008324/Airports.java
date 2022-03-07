@@ -23,7 +23,6 @@ public class Airports<T> {
         if (!airportMap.containsKey(destination))
             addAirport(destination);
         airportMap.get(source).add(destination);
-
         if (bidirectional) {
             airportMap.get(destination).add(source);
         }
