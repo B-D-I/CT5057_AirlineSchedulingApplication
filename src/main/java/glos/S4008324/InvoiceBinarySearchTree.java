@@ -1,15 +1,15 @@
 package glos.S4008324;
 
-public class InvoiceBinarySearchTree implements Database {
+public class InvoiceBinarySearchTree{
 
-    private int invoiceID;
+    private int invoiceInfo;
     private InvoiceBinarySearchTree leftNode;
     private InvoiceBinarySearchTree rightNode;
 
-    public InvoiceBinarySearchTree(int invoiceID) {
+    public InvoiceBinarySearchTree(int invoiceInfo) {
         this.rightNode = null;
         this.leftNode = null;
-        this.invoiceID = invoiceID;
+        this.invoiceInfo = invoiceInfo;
     }
 
     // tree root node
@@ -21,19 +21,19 @@ public class InvoiceBinarySearchTree implements Database {
     }
 
     // delete node from BS tree
-    void deleteInvoiceID(int invoiceID) {
-        root = delete_Recursive(root, invoiceID);
+    void deleteInvoiceCharge(int invoiceInfo) {
+        root = delete_Recursive(root, invoiceInfo);
     }
 
     // recursive delete method
-    InvoiceBinarySearchTree delete_Recursive(InvoiceBinarySearchTree root, int invoiceID) {
+    InvoiceBinarySearchTree delete_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
         // empty tree
         if (root == null) return root;
         // traverse tree
-        if (invoiceID < root.invoiceID) {
-            root.leftNode = delete_Recursive(root.leftNode, invoiceID);
-        } else if (invoiceID > root.invoiceID) {
-            root.rightNode = delete_Recursive(root.rightNode, invoiceID);
+        if (invoiceInfo < root.invoiceInfo) {
+            root.leftNode = delete_Recursive(root.leftNode, invoiceInfo);
+        } else if (invoiceInfo > root.invoiceInfo) {
+            root.rightNode = delete_Recursive(root.rightNode, invoiceInfo);
         } else {
             // node only has one child
             if (root.leftNode == null) {
@@ -42,44 +42,44 @@ public class InvoiceBinarySearchTree implements Database {
                 return root.leftNode;
             }
             // node has two children: get in-order child (min-value on right subtree)
-            root.invoiceID = minValue(root.rightNode);
+            root.invoiceInfo = minValue(root.rightNode);
 
             // delete the in-order child
-            root.rightNode = delete_Recursive(root.rightNode, root.invoiceID);
+            root.rightNode = delete_Recursive(root.rightNode, root.invoiceInfo);
         }
         return root;
     }
 
     int minValue(InvoiceBinarySearchTree root) {
         // initially minVal = root
-        int minval = root.invoiceID;
+        int minval = root.invoiceInfo;
         // find minval
         while (root.leftNode != null) {
-            minval = root.leftNode.invoiceID;
+            minval = root.leftNode.invoiceInfo;
             root = root.leftNode;
         }
         return minval;
     }
 
     // insert node in BS tree
-    void insert(int invoiceID) {
-        root = insert_Recursive(root, invoiceID);
+    void insert(int invoiceInfo) {
+        root = insert_Recursive(root, invoiceInfo);
     }
 
     // recursive insert method
-    InvoiceBinarySearchTree insert_Recursive(InvoiceBinarySearchTree root, int invoiceID) {
+    InvoiceBinarySearchTree insert_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
         // tree is empty
         if (root == null) {
-            root = new InvoiceBinarySearchTree(invoiceID);
+            root = new InvoiceBinarySearchTree(invoiceInfo);
             return root;
         }
         // traverse the tree
-        if (invoiceID < root.invoiceID) {
+        if (invoiceInfo < root.invoiceInfo) {
             // insert in left subtree
-            root.leftNode = insert_Recursive(root.leftNode, invoiceID);
-        } else if (invoiceID > root.invoiceID) {
+            root.leftNode = insert_Recursive(root.leftNode, invoiceInfo);
+        } else if (invoiceInfo > root.invoiceInfo) {
             // insert in right subtree
-            root.rightNode = insert_Recursive(root.rightNode, invoiceID);
+            root.rightNode = insert_Recursive(root.rightNode, invoiceInfo);
         }
         return root;
     }
@@ -92,13 +92,13 @@ public class InvoiceBinarySearchTree implements Database {
     void inorder_Recursive(InvoiceBinarySearchTree root) {
         if (root != null) {
             inorder_Recursive(root.leftNode);
-            System.out.println(root.invoiceID + " ");
+            System.out.println(root.invoiceInfo + " ");
             inorder_Recursive(root.rightNode);
         }
     }
 
-    boolean search(int invoiceID) {
-        root = search_Recursive(root, invoiceID);
+    boolean search(int invoiceInfo) {
+        root = search_Recursive(root, invoiceInfo);
         if (root != null) {
             return true;
         } else {
@@ -107,18 +107,19 @@ public class InvoiceBinarySearchTree implements Database {
     }
 
     // recursive insert method
-    InvoiceBinarySearchTree search_Recursive(InvoiceBinarySearchTree root, int invoiceID) {
-        // base cases: root is null or invoiceID is present at root
-        if (root == null || root.invoiceID == invoiceID) {
+    InvoiceBinarySearchTree search_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
+        // base cases: root is null or invoiceInfo is present at root
+        if (root == null || root.invoiceInfo == invoiceInfo) {
             return root;
         }
-        if (root.invoiceID > invoiceID) {
-            // value is greater than root invoiceID
-            return search_Recursive(root.leftNode, invoiceID);
-            // value is less than root invoiceID
+        if (root.invoiceInfo > invoiceInfo) {
+            // value is greater than root invoiceInfo
+            return search_Recursive(root.leftNode, invoiceInfo);
+            // value is less than root invoiceInfo
         }
-        return search_Recursive(root.rightNode, invoiceID);
+        return search_Recursive(root.rightNode, invoiceInfo);
     }
+
 }
 
 

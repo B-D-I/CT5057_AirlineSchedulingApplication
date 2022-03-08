@@ -8,7 +8,7 @@ public class InvoiceDatabase implements Database{
 
     private InvoiceBinarySearchTree invoiceBinarySearchTree = new InvoiceBinarySearchTree();
 
-    public InvoiceBinarySearchTree createInvoiceObject() {
+    public InvoiceBinarySearchTree createInvoiceInformation(String invoiceDetail) {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Invoices.txt");
             Scanner myReader = new Scanner(myObj);
@@ -19,20 +19,14 @@ public class InvoiceDatabase implements Database{
                 String invoiceCharge = myReader.nextLine();
                 String invoiceDate = myReader.nextLine();
 
-                InvoiceBinarySearchTree invoiceBinarySearchTree = new InvoiceBinarySearchTree();
-                invoiceBinarySearchTree.insert(Integer.parseInt(invoiceID));
+                int invoiceRequirement = 0;
 
-                System.out.println(invoiceCharge);
-//                System.out.println(Integer.parseInt(invoiceID) + Integer.parseInt(invoiceID));
-
-                // could create a separate reader to store all invoice objects
-//                String invoiceCharge = myReader.nextLine();
-//                String invoiceDate = myReader.nextLine();
-//                FlightInvoice flightInvoice = new FlightInvoice();
-//                flightInvoice.setInvoiceID(invoiceID);
-//                flightInvoice.setInvoiceCharge(Integer.parseInt(invoiceCharge));
-//                flightInvoice.setInvoiceDate(invoiceDate);
-
+                if (invoiceDetail.equals("charge")){
+                    invoiceRequirement = Integer.parseInt(invoiceCharge);
+                } else if (invoiceDetail.equals("id")){
+                    invoiceRequirement = Integer.parseInt(invoiceID);
+                }
+                invoiceBinarySearchTree.insert(invoiceRequirement);
 
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
@@ -44,9 +38,20 @@ public class InvoiceDatabase implements Database{
         } return invoiceBinarySearchTree;
     }
 
-    public void printInvoiceIDs(){
-        InvoiceBinarySearchTree invoiceBinarySearchTree = createInvoiceObject();
+    public void printInvoiceIDs(String invoiceDetail){
+        InvoiceBinarySearchTree invoiceBinarySearchTree = createInvoiceInformation(invoiceDetail);
         invoiceBinarySearchTree.inorder();
+    }
+
+    public void searchInvoiceID(int id){
+        InvoiceBinarySearchTree invoiceBinarySearchTree = createInvoiceInformation("id");
+        boolean returnValue = invoiceBinarySearchTree.search(id);
+        if (returnValue){
+            System.out.println("Invoice ID: " + id + " is located in Invoice Record");
+        } else {
+            System.out.println("There is no record of Invoice: " + id);
+        }
+
     }
 }
 
