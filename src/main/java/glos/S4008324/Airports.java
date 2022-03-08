@@ -58,7 +58,6 @@ public class Airports<T> {
     public boolean hasRoute(T s, T d){
         boolean hasRoute;
         if (airportMap.get(s).contains(d)){
-            // ALSO NEED TO PRINT THE WEIGHT OF EDGE (DISTANCE)
             System.out.println("This airline has a route between " + s + " and " + d);
             hasRoute = true;
         } else {

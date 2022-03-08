@@ -11,7 +11,6 @@ public class InvoiceBinarySearchTree{
         this.leftNode = null;
         this.invoiceInfo = invoiceInfo;
     }
-
     // tree root node
     InvoiceBinarySearchTree root;
 
@@ -49,7 +48,6 @@ public class InvoiceBinarySearchTree{
         }
         return root;
     }
-
     int minValue(InvoiceBinarySearchTree root) {
         // initially minVal = root
         int minval = root.invoiceInfo;
@@ -60,7 +58,6 @@ public class InvoiceBinarySearchTree{
         }
         return minval;
     }
-
     // insert node in BS tree
     void insert(int invoiceInfo) {
         root = insert_Recursive(root, invoiceInfo);
@@ -96,7 +93,6 @@ public class InvoiceBinarySearchTree{
             inorder_Recursive(root.rightNode);
         }
     }
-
     boolean search(int invoiceInfo) {
         root = search_Recursive(root, invoiceInfo);
         if (root != null) {
@@ -105,7 +101,6 @@ public class InvoiceBinarySearchTree{
             return false;
         }
     }
-
     // recursive insert method
     InvoiceBinarySearchTree search_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
         // base cases: root is null or invoiceInfo is present at root
@@ -119,7 +114,6 @@ public class InvoiceBinarySearchTree{
         }
         return search_Recursive(root.rightNode, invoiceInfo);
     }
-
 }
 
 

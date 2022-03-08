@@ -34,4 +34,5 @@ abstract class Seat {
     protected void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
+
 }

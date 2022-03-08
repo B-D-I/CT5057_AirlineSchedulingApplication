@@ -4,15 +4,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // NEED TO FILL BST FROM INVOICE DATABASE + FURTHER FUNCTIONS
+        // extract all flight dates into a linked list -> radix sort -> binary search
+        // see phone notes
 
-//        new ApplicationMenu();
+        new ApplicationMenu();
 
-        InvoiceDatabase invoiceDatabase = new InvoiceDatabase();
-//        invoiceDatabase.printInvoiceIDs("charge");
-        invoiceDatabase.searchInvoiceID(101334);
-
-
+//        InvoiceDatabase invoiceDatabase = new InvoiceDatabase();
+////        invoiceDatabase.printInvoiceIDs("charge");
+//        invoiceDatabase.searchInvoiceID(101334);
 
     }
 

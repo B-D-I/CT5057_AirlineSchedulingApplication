@@ -20,8 +20,4 @@ interface Database {
     HashMap<String, ScheduledSeat> scheduledPassengers = new HashMap<>();
     // WaitingLists"".txt (passportNumber : WaitingLists(queue))
     Queue<HashMap<String, WaitingListSeat>> waitingQueue = new LinkedList<>();
-
-
-    // public void CreateObjectFromTxt
-
 }
