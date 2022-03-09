@@ -51,7 +51,6 @@ public class InvoiceDatabase implements Database{
         } else {
             System.out.println("There is no record of Invoice: " + id);
         }
-
     }
 }
 

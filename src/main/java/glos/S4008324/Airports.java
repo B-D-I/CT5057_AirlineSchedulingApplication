@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/***
+ * This class provides the data structures and methods for the creation of a graph, to hold all airports.
+ * Each graph vertex will hold an airport, and each edge will be the associated route. This class contains
+ * methods for adding departure and destination vertices, along with counting and confirming the vertices and edges
+ * @param <T>: The graph contains one generic type.
+ */
 public class Airports<T> {
     // Hash Map stores graph edges
     private final Map<T, List<T>> airportMap = new HashMap<>();
@@ -13,8 +19,12 @@ public class Airports<T> {
     public void addAirport(T s){
         airportMap.put(s, new LinkedList<T>());
     }
-
-    // add edge between source and destination
+    /**
+     * addEdge method creates an edge between the source & destination
+     * @param source: Departure Airport
+     * @param destination: Destination Airport
+     * @param bidirectional: Is the route bidirectional
+     */
     public void addEdge(T source,
                         T destination,
                         boolean bidirectional){
@@ -31,8 +41,10 @@ public class Airports<T> {
     public void getAirportCount(){
         System.out.println("Graph has " + airportMap.keySet().size() + " airports");
     }
-
-    // method to count edges
+    /**
+     * method to count the edges in the graph
+     * @param bidirection: whether to count only bidirectional edges
+     */
     public void getRouteCount(boolean bidirection){
         int count = 0;
         for (T v : airportMap.keySet()){
@@ -54,7 +66,12 @@ public class Airports<T> {
             hasAirport = false;
         } return hasAirport;
     }
-    // method to confirm if edge is present
+    /**
+     * hasRoute method is used to confirm if there is a route between two airports
+     * @param s: Departure Airport
+     * @param d: Destination Airport
+     * @return: boolean value
+     */
     public boolean hasRoute(T s, T d){
         boolean hasRoute;
         if (airportMap.get(s).contains(d)){
@@ -65,7 +82,7 @@ public class Airports<T> {
             hasRoute = false;
         } return hasRoute;
     }
-    // print adjacency list of each vertex
+    // print adjacency list of each vertex in String format
     @Override
     public String toString()
     {

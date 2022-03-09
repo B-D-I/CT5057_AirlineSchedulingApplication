@@ -83,7 +83,7 @@ public class SeatDatabase implements Database {
      * @param flightNumber: This is associated flight number for the correct .txt file
      * @return: An update HashMap of all booked passengers and their seat
      */
-    private HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
+    public HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt");
             Scanner myReader = new Scanner(myObj);

@@ -17,6 +17,26 @@ public class FlightDatabase implements Database {
         return "password";
     }
 
+    ArrayList<Integer> flightDates = new ArrayList<>();
+
+    int arr[] = new int[0];
+
+
+    public static int[] addX(int n, int arr[], int x) {
+        int i;
+        // create a new array of size n+1
+        int newarr[] = new int[n + 1];
+        // insert the elements from
+        // the old array into the new array
+        // insert all elements till n
+        // then insert x at n+1
+        for (i = 0; i < n; i++)
+            newarr[i] = arr[i];
+
+        newarr[n] = x;
+        return newarr;
+    }
+
     public HashMap<String, Flight> createFlightObjectsMap() {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Flights.txt");
@@ -26,7 +46,7 @@ public class FlightDatabase implements Database {
                 // read and assign flights.txt information
                 String flightNo = myReader.nextLine();
                 String departingAirport = myReader.nextLine();
-                String date = myReader.nextLine();
+                String departureDate = myReader.nextLine();
                 String destinationAirport = myReader.nextLine();
                 String seatingList = myReader.nextLine();
 
@@ -41,7 +61,7 @@ public class FlightDatabase implements Database {
                 Flight f = new Flight();
                 f.setFlightNumber(flightNo);
                 f.setDeparture(departingAirport);
-                f.setDepartureDate(date);
+                f.setDepartureDate(departureDate);
                 f.setDestination(destinationAirport);
                 f.setSeatingList((HashMap<String, String>) seatingMap);
 
@@ -50,10 +70,24 @@ public class FlightDatabase implements Database {
 
                 // add all flight objects created from flights.txt to arrayList
                 allFlightsMap.put(flightNo, f);
+
+                String updated = departureDate.replace("-", "");
+                int dates = Integer.parseInt(updated);
+                flightDates.add(dates);
+                // add all departure dates to a linked list
+//                String updated = departureDate.replace("-", "");
+//                int dates = Integer.parseInt(updated);
+//                int n = 0;
+//                int x = dates;
+//                arr = addX(n, arr, x);
+//                System.out.println(Arrays.toString(arr));
+
+
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
                 }
             }
+
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error" + e);
@@ -66,6 +100,19 @@ public class FlightDatabase implements Database {
     public void showAllFlights() {
         HashMap<String, Flight> flightMap = createFlightObjectsMap();
         flightMap.entrySet().forEach(System.out::println);
+    }
+
+    public void showDates(){
+        HashMap<String, Flight> flightMap = createFlightObjectsMap();
+        DepartureDatesRadixSort departureDatesRadixSort = new DepartureDatesRadixSort();
+        int arr[] = flightDates.stream().mapToInt(i -> i).toArray();
+
+        int arr_len = arr.length;
+        System.out.println("The array after performing radix sort is ");
+        departureDatesRadixSort.radix_sort(arr, arr.length);
+        for (int i=0; i<arr_len; i++)
+            System.out.print(arr[i]+" ");
+//        System.out.println(flightDates);
     }
 
     public void showAirportCount() {

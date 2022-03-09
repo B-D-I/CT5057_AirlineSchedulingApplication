@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-final class PassengerDatabase implements Database {
+public class PassengerDatabase implements Database {
 
     public void schedulePassenger() {
         Passenger passenger = new Passenger();
@@ -29,7 +29,7 @@ final class PassengerDatabase implements Database {
             } scanner.nextLine();
     }
 
-    private void passengerRoute(Passenger passenger) {
+    public void passengerRoute(Passenger passenger) {
         FlightDatabase flightDatabase = new FlightDatabase();
         scanner.nextLine();
         System.out.println("Enter departure airport: ");

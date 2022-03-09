@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * The Flight class contains all attributes associated to a flight, accessible via getter and setter methods.
+ */
 public class Flight {
 
     private String flightNumber;

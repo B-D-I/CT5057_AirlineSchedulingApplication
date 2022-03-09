@@ -3,17 +3,19 @@ package glos.S4008324;
 import java.util.Locale;
 import java.util.Scanner;
 
-// THIS CLASS HAS BEEN CREATED USING THE SINGLETON DESIGN PATTERN TO ENSURE ONLY ONE INSTANCE OF THIS CLASS CAN BE CREATED
+/**
+ * This class contains the application's menu options. The class has been created using the Singleton design pattern to
+ * ensure only one instance of this class can be created.
+ */
 class ApplicationMenu {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     PassengerDatabase passengerDatabase = new PassengerDatabase();
     SeatDatabase seatDatabase = new SeatDatabase();
     Flight flight = new Flight();
+    Scanner scanRead = new Scanner(System.in);
 
     private static ApplicationMenu menu = null;
-
-    Scanner scanRead = new Scanner(System.in);
 
     public ApplicationMenu() {
         startApplication();
@@ -53,10 +55,9 @@ class ApplicationMenu {
                                     
                     Q - quit
                                         
-                    N - create new flight (restricted)
+                    A - advanced 
                                     
                     """);
-
             String adminSelect = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
             switch (adminSelect) {
                 case "S" -> passengerDatabase.schedulePassenger();
@@ -64,18 +65,36 @@ class ApplicationMenu {
                 case "P" -> passengerDatabase.passengerStatus();
                 case "F" -> flightDatabase.flightStatus();
                 case "Q" -> startApplication();
-                case "N" -> restrictedMenuLogin();
+                case "A" -> restrictedMenuLogin();
                 default -> System.out.println("error");
             }
         }
     }
+    // Menu for further options
     private void restrictedMenuLogin() {
         System.out.println("Enter username: ");
         String username = scanRead.nextLine();
         System.out.println("Enter password: ");
         String password = scanRead.nextLine();
         if (username.equals(flightDatabase.getDbUsername()) && password.equals(flightDatabase.getDbPassword())) {
-            flight.createFlight();
+            System.out.println("""
+                    Select Option:
+                    
+                    C: create a new flight
+                    
+                    I: check an invoice
+                    
+                    """);
+            String option = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
+            if (option.equals("C")) {
+                flight.createFlight();
+            } else if (option.equals("I")){
+                System.out.println("Enter Invoice ID: ");
+                int id = scanRead.nextInt();
+                scanRead.nextLine();
+                InvoiceDatabase invoiceDatabase = new InvoiceDatabase();
+                invoiceDatabase.searchInvoiceID(id);
+            }
         } else {
             adminMenu();
         }

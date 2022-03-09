@@ -7,16 +7,18 @@ public class Main {
         // extract all flight dates into a linked list -> radix sort -> binary search
         // see phone notes
 
-        new ApplicationMenu();
+//        new ApplicationMenu();
 
-//        InvoiceDatabase invoiceDatabase = new InvoiceDatabase();
-////        invoiceDatabase.printInvoiceIDs("charge");
-//        invoiceDatabase.searchInvoiceID(101334);
+        FlightDatabase flightDatabase = new FlightDatabase();
+        flightDatabase.showDates();
+
+//      DepartureDatesRadixSort departureDatesRadixSort = new DepartureDatesRadixSort();
+//      departureDatesRadixSort.getDates();
 
     }
 
     // TO DO:
 
-    /// *** INCLUDE SORTING AND SEARCHING ALGORITHMS *** IMPORTANT
+    /// *** INCLUDE RADIX SORT ON DEPARTURE DATES, THEN PERFORM A BINARY SEARCH
     /// UNIT TESTING + GO THROUGH AND CHECK ACCESS MODIFIERS, CODE REDUCTION, OOP + update docstrings
 }
