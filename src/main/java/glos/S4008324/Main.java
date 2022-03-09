@@ -7,13 +7,11 @@ public class Main {
         // extract all flight dates into a linked list -> radix sort -> binary search
         // see phone notes
 
-//        new ApplicationMenu();
+        new ApplicationMenu();
 
-        FlightDatabase flightDatabase = new FlightDatabase();
-        flightDatabase.showDates();
+//        FlightDatabase flightDatabase = new FlightDatabase();
+//        flightDatabase.radixSortArray("search", 20220225);
 
-//      DepartureDatesRadixSort departureDatesRadixSort = new DepartureDatesRadixSort();
-//      departureDatesRadixSort.getDates();
 
     }
 

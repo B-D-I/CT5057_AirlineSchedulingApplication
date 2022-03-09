@@ -20,4 +20,23 @@ interface Database {
     HashMap<String, ScheduledSeat> scheduledPassengers = new HashMap<>();
     // WaitingLists"".txt (passportNumber : WaitingLists(queue))
     Queue<HashMap<String, WaitingListSeat>> waitingQueue = new LinkedList<>();
+
+
+    // static method to perform binary search of an array
+    static int search(int[] numberArray, int targetNumber) {
+        int start = 0;
+        int end = numberArray.length - 1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (numberArray[mid] > targetNumber)
+                end = mid - 1;
+            else if (numberArray[mid] < targetNumber)
+                start = mid + 1;
+            else
+                return mid;
+        }
+        return -1;
+    }
 }

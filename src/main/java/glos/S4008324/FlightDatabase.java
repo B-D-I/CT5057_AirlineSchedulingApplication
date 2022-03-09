@@ -12,30 +12,12 @@ public class FlightDatabase implements Database {
     public String getDbUsername() {
         return "nathan";
     }
-
     public String getDbPassword() {
         return "password";
     }
 
     ArrayList<Integer> flightDates = new ArrayList<>();
 
-    int arr[] = new int[0];
-
-
-    public static int[] addX(int n, int arr[], int x) {
-        int i;
-        // create a new array of size n+1
-        int newarr[] = new int[n + 1];
-        // insert the elements from
-        // the old array into the new array
-        // insert all elements till n
-        // then insert x at n+1
-        for (i = 0; i < n; i++)
-            newarr[i] = arr[i];
-
-        newarr[n] = x;
-        return newarr;
-    }
 
     public HashMap<String, Flight> createFlightObjectsMap() {
         try {
@@ -71,23 +53,16 @@ public class FlightDatabase implements Database {
                 // add all flight objects created from flights.txt to arrayList
                 allFlightsMap.put(flightNo, f);
 
+                // remove hyphen and set date as integer
                 String updated = departureDate.replace("-", "");
                 int dates = Integer.parseInt(updated);
+                // add dates to arrayList
                 flightDates.add(dates);
-                // add all departure dates to a linked list
-//                String updated = departureDate.replace("-", "");
-//                int dates = Integer.parseInt(updated);
-//                int n = 0;
-//                int x = dates;
-//                arr = addX(n, arr, x);
-//                System.out.println(Arrays.toString(arr));
-
 
                 if (myReader.hasNextLine()) {
                     myReader.nextLine();
                 }
             }
-
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error" + e);
@@ -102,23 +77,25 @@ public class FlightDatabase implements Database {
         flightMap.entrySet().forEach(System.out::println);
     }
 
-    public void showDates(){
+    public void radixSortArray(String option, int date){
         HashMap<String, Flight> flightMap = createFlightObjectsMap();
-        DepartureDatesRadixSort departureDatesRadixSort = new DepartureDatesRadixSort();
-        int arr[] = flightDates.stream().mapToInt(i -> i).toArray();
+        // convert the ArrayList to array and get length
+        int[] arr = flightDates.stream().mapToInt(i -> i).toArray();
+        // Radix sort the array
+        DepartureDatesRadixSort.radix_sort(arr, arr.length);
 
-        int arr_len = arr.length;
-        System.out.println("The array after performing radix sort is ");
-        departureDatesRadixSort.radix_sort(arr, arr.length);
-        for (int i=0; i<arr_len; i++)
-            System.out.print(arr[i]+" ");
-//        System.out.println(flightDates);
+        if (option.equals("print")) {
+            // print sorted array
+            System.out.println("Sorted departure dates");
+            for (int j : arr) System.out.print(j + " ");
+        } else if (option.equals("search")){
+            System.out.println("\n\t\tTHIS FLIGHT IS IN " + Database.search(arr, date) + " FLIGHTS TIME!\n\n");
+        }
     }
 
     public void showAirportCount() {
         airports.getAirportCount();
     }
-
     public void getRouteCount() {
         airports.getRouteCount(true);
     }
@@ -145,6 +122,14 @@ public class FlightDatabase implements Database {
                                 """, flightNumber, flight.getDeparture(), flight.getDepartureDate(), flight.getDestination(),
                         flight.getSeatingList());
                 System.out.println(flightInfoDisplay);
+
+                // get the departure date timing
+                // remove hyphen and convert to int
+                String date = flight.getDepartureDate();
+                String updated = date.replace("-", "");
+                int dates = Integer.parseInt(updated);
+                // sort using radix sort and search using binary search
+                radixSortArray("search", dates);
             }
         }
         seatingDatabase.printScheduledPassengers(flightNumber);
