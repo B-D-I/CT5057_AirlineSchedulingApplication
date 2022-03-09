@@ -4,21 +4,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class InvoiceDatabase implements Database{
+/**
+ * Invoice Database provides all functionality for Invoicing
+ */
+final class InvoiceDatabase implements Database{
 
     private InvoiceBinarySearchTree invoiceBinarySearchTree = new InvoiceBinarySearchTree();
-
-    public InvoiceBinarySearchTree createInvoiceInformation(String invoiceDetail) {
+    /**
+     * This method reads the invoicing txt file and inserts the selected invoice values into a Binary Search Tree
+     * @param invoiceDetail: The invoicing value to be inserted
+     * @return: A Binary Search Tree of specified data
+     */
+    private InvoiceBinarySearchTree createInvoiceInformation(String invoiceDetail) {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Invoices.txt");
             Scanner myReader = new Scanner(myObj);
-
             while (myReader.hasNextLine()) {
                 // read and assign flights.txt information
                 String invoiceID = myReader.nextLine();
                 String invoiceCharge = myReader.nextLine();
                 String invoiceDate = myReader.nextLine();
-
                 int invoiceRequirement = 0;
 
                 if (invoiceDetail.equals("charge")){
@@ -38,11 +43,11 @@ public class InvoiceDatabase implements Database{
         } return invoiceBinarySearchTree;
     }
 
-    public void printInvoiceIDs(String invoiceDetail){
+    private void printInvoiceIDs(String invoiceDetail){
         InvoiceBinarySearchTree invoiceBinarySearchTree = createInvoiceInformation(invoiceDetail);
         invoiceBinarySearchTree.inorder();
     }
-
+    // search Binary Search Tree
     public void searchInvoiceID(int id){
         InvoiceBinarySearchTree invoiceBinarySearchTree = createInvoiceInformation("id");
         boolean returnValue = invoiceBinarySearchTree.search(id);

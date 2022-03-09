@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * The Flight class contains all attributes associated to a flight, accessible via getter and setter methods.
  */
-public class Flight {
+final class Flight {
 
     private String flightNumber;
     private String departure ;
@@ -23,6 +23,7 @@ public class Flight {
     // Seat Number : Seat class
     public HashMap<String, String> SeatingList;
 
+    // Getter and Setter methods
     public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
     }
@@ -63,7 +64,9 @@ public class Flight {
     {
         return flightNumber+", "+departure+", "+destination+", "+departureDate+", "+ SeatingList;
     }
-    // FLIGHT OPERATOR METHOD TO CREATE NEW FLIGHT TO TXT
+    /**
+     * This method is required to receive new flight information to be written to Flights.txt
+     */
     public void createFlight() {
         System.out.println("Enter departure airport: ");
         String departure = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
@@ -86,10 +89,8 @@ public class Flight {
 
         System.out.println("Enter flight number: ");
         String flightNumber = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
-
         // SEATING HASHMAP
         HashMap<Integer, String> flightSeatingClass = seatDatabase.allocateAircraftSeatClass();
-
         System.out.println("\nSeating List: \n");
         flightSeatingClass.entrySet().forEach(System.out::println);
 

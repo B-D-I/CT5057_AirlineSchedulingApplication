@@ -1,6 +1,9 @@
 package glos.S4008324;
 
-public class Passenger {
+/**
+ * Passenger class for all passenger attributes.
+ */
+final class Passenger {
 
     private String name;
     private String passportNumber;
@@ -11,7 +14,6 @@ public class Passenger {
     public void setName(String name) {
         this.name = name;
     }
-
     public String getPassportNumber() {
         return passportNumber;
     }

@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class SeatDatabase implements Database {
+/**
+ * Seat Database provides all functionality for seating requirements
+ */
+final class SeatDatabase implements Database {
 
     private int economySeatAmount, firstSeatAmount, businessSeatAmount;
 
-    // Unallocated seats for aircraft
+    // Define unallocated seats for aircraft
     public HashMap<Integer, String> allocateAircraftSeatClass() {
         try {
             System.out.println("First seat amount: ");
@@ -33,7 +36,6 @@ public class SeatDatabase implements Database {
         }
         for (int k = firstSeatAmount + businessSeatAmount + 1; k < firstSeatAmount + businessSeatAmount + economySeatAmount + 1; k++)
             aircraftSeatAllocation.put(k, "Economy");
-
         return aircraftSeatAllocation;
     }
 
@@ -61,7 +63,6 @@ public class SeatDatabase implements Database {
         } else if (seatClass.equals("E")) {
             seatClass = "Economy";
         }
-
         seatList.put(seatNo, seatClass);
         System.out.println("\nSeating List: \n");
         seatList.entrySet().forEach(System.out::println);
@@ -70,26 +71,25 @@ public class SeatDatabase implements Database {
         String editSeating = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
         if (editSeating.equals("N")) {
             UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
+            // write to text file
             unallocatedSeat.updateFlightTxt(departure, destination, dateDeparture, flightNumber, seatList);
         } else if (editSeating.equals("Y")) {
+            // to further edit seat allocation
             editAircraftSeatClassAllocation(departure, destination, dateDeparture, flightNumber, seatList);
         }
     }
-
     /**
-     * This method returns a HashMap containing a booked passenger HashMap (passport number and name) along with a
-     * booked seat HashMap (seat number and class)
-     *
+     * This method reads the scheduled seating text file for a specified flight. Then
+     * returns a HashMap containing a key: passenger passport number && value: Scheduled Seat object
      * @param flightNumber: This is associated flight number for the correct .txt file
-     * @return: An update HashMap of all booked passengers and their seat
+     * @return: An updated HashMap of key: passenger passport number && value: Scheduled Seat object
      */
-    public HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
+    private HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
-
                 String passportNumber = myReader.nextLine();
                 String passengerName = myReader.nextLine();
                 String seatClass = myReader.nextLine();
@@ -114,10 +114,14 @@ public class SeatDatabase implements Database {
         return scheduledPassengers;
     }
 
+    /**
+     * Method to iterate though the scheduled passengers hash map and print all booked seats
+     * @param flightNumber: The requested flight
+     */
     public void printScheduledPassengers(String flightNumber) {
         HashMap<String, ScheduledSeat> scheduledPassengers = createScheduledPassengers(flightNumber);
-        Set set = scheduledPassengers.entrySet();
-        Iterator iterator = set.iterator();
+        Set<Map.Entry<String, ScheduledSeat>> set = scheduledPassengers.entrySet();
+        Iterator<Map.Entry<String, ScheduledSeat>> iterator = set.iterator();
         System.out.println(("""
                              Booked Seats For This Flight:
                 """));
@@ -135,13 +139,18 @@ public class SeatDatabase implements Database {
         deletePassengerFromFlight(flightNumber, passportNumber);
     }
 
+    /**
+     * Method to delete a passenger from a flight. Passenger is removed from associated scheduled seating and booked
+     * flights text files. Then the WaitingList method is called to check for any waiting passengers to be scheduled.
+     * @param flightNumber: Specified flight
+     * @param passengerPassportNumber: Passport number of passenger to be removed
+     */
     private void deletePassengerFromFlight(String flightNumber, String passengerPassportNumber) {
         WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
         PassengerDatabase passengerDatabase = new PassengerDatabase();
 
         // put the scheduled passengers from .txt into hashmap (passport number : scheduledSeat object)
         HashMap<String, ScheduledSeat> scheduledPassengers = createScheduledPassengers(flightNumber);
-
         String deletedSeatNumber;
         String deletedSeatClass;
         // check if passport number matches a scheduled passenger's

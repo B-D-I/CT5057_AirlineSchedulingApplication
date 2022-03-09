@@ -9,9 +9,9 @@ import java.util.Map;
  * This class provides the data structures and methods for the creation of a graph, to hold all airports.
  * Each graph vertex will hold an airport, and each edge will be the associated route. This class contains
  * methods for adding departure and destination vertices, along with counting and confirming the vertices and edges
- * @param <T>: The graph contains one generic type.
+ * @param <T>: The graph contains one generic type, of which can be any data-type.
  */
-public class Airports<T> {
+final class Airports<T> {
     // Hash Map stores graph edges
     private final Map<T, List<T>> airportMap = new HashMap<>();
 

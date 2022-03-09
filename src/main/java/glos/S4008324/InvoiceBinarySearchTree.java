@@ -1,31 +1,39 @@
 package glos.S4008324;
 
-public class InvoiceBinarySearchTree{
+/**
+ * Binary Search Tree: This provides the aforementioned data structure, to be utilised for containing invoice data.
+ * This removes the requirement to later sort the data, as the tree sorts the integers when inserted.
+ * This class also contains deletion, and searching methods.
+ */
+final class InvoiceBinarySearchTree{
 
     private int invoiceInfo;
     private InvoiceBinarySearchTree leftNode;
     private InvoiceBinarySearchTree rightNode;
 
+    /**
+     * Constructor of Binary Search Tree
+     * @param invoiceInfo: The determined invoice information to be inserted into the tree
+     */
     public InvoiceBinarySearchTree(int invoiceInfo) {
         this.rightNode = null;
         this.leftNode = null;
         this.invoiceInfo = invoiceInfo;
     }
     // tree root node
-    InvoiceBinarySearchTree root;
+    private InvoiceBinarySearchTree root;
 
     // constructor for BST (initial empty tree)
-    InvoiceBinarySearchTree() {
+    public InvoiceBinarySearchTree() {
         root = null;
     }
 
     // delete node from BS tree
-    void deleteInvoiceCharge(int invoiceInfo) {
+    public void deleteInvoiceCharge(int invoiceInfo) {
         root = delete_Recursive(root, invoiceInfo);
     }
-
     // recursive delete method
-    InvoiceBinarySearchTree delete_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
+    private InvoiceBinarySearchTree delete_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
         // empty tree
         if (root == null) return root;
         // traverse tree
@@ -48,7 +56,7 @@ public class InvoiceBinarySearchTree{
         }
         return root;
     }
-    int minValue(InvoiceBinarySearchTree root) {
+    private int minValue(InvoiceBinarySearchTree root) {
         // initially minVal = root
         int minval = root.invoiceInfo;
         // find minval
@@ -59,12 +67,11 @@ public class InvoiceBinarySearchTree{
         return minval;
     }
     // insert node in BS tree
-    void insert(int invoiceInfo) {
+    public void insert(int invoiceInfo) {
         root = insert_Recursive(root, invoiceInfo);
     }
-
     // recursive insert method
-    InvoiceBinarySearchTree insert_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
+    private InvoiceBinarySearchTree insert_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
         // tree is empty
         if (root == null) {
             root = new InvoiceBinarySearchTree(invoiceInfo);
@@ -81,28 +88,36 @@ public class InvoiceBinarySearchTree{
         return root;
     }
     // inorder traversal of BS tree
-    void inorder() {
+    public void inorder() {
         inorder_Recursive(root);
     }
-
     // recursively traverse the tree
-    void inorder_Recursive(InvoiceBinarySearchTree root) {
+    private void inorder_Recursive(InvoiceBinarySearchTree root) {
         if (root != null) {
             inorder_Recursive(root.leftNode);
             System.out.println(root.invoiceInfo + " ");
             inorder_Recursive(root.rightNode);
         }
     }
-    boolean search(int invoiceInfo) {
+    /**
+     * This search method is utilised to assess whether an invoice number is contained in the tree
+     * @param invoiceInfo: The invoice data (integer), to be searched
+     * @return: Boolean value; is the data contained
+     */
+    public boolean search(int invoiceInfo) {
         root = search_Recursive(root, invoiceInfo);
-        if (root != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return root != null;
     }
-    // recursive insert method
-    InvoiceBinarySearchTree search_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
+    /**
+     * This method recursively searches the Binary Search Tree. If value is not null or root, then the tree traverses
+     * down to each subtree until value is found; right child has a value greater than or equal, left child has
+     * value less than or equal.
+     * @param root: Root node value
+     * @param invoiceInfo: The invoice data (integer), to be searched
+     * @return: Searched value
+     */
+    // recursive search method
+    private InvoiceBinarySearchTree search_Recursive(InvoiceBinarySearchTree root, int invoiceInfo) {
         // base cases: root is null or invoiceInfo is present at root
         if (root == null || root.invoiceInfo == invoiceInfo) {
             return root;

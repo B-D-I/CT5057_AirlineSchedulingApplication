@@ -6,8 +6,7 @@ import java.util.Arrays;
  * This class has been created to enable Radix sorting of an array. This is used for ordering the flight
  * departure dates
  */
-public class DepartureDatesRadixSort {
-
+final class DepartureDatesRadixSort {
     // get the maximum value in array
     static int get_max_val(int my_arr[], int arr_len) {
         int max_val = my_arr[0];
@@ -38,7 +37,6 @@ public class DepartureDatesRadixSort {
         for (i = 0; i < arr_len; i++)
             my_arr[i] = result[i];
     }
-
     /**
      * This method sorts an array using Radix sort
      * @param my_arr: array to be sorted
@@ -49,16 +47,5 @@ public class DepartureDatesRadixSort {
         for (int exp = 1; m/exp > 0; exp *= 10)
             countSort(my_arr, arr_len, exp);
     }
-
-
-
-//    public static void main (String[] args) {
-//        int my_arr[] = {56, 78, 102, 345, 67, 90, 102, 45, 78};
-//        int arr_len = my_arr.length;
-//        System.out.println("The array after performing radix sort is ");
-//        radix_sort(my_arr, arr_len);
-//        for (int i=0; i<arr_len; i++)
-//            System.out.print(my_arr[i]+" ");
-//    }
 }
 

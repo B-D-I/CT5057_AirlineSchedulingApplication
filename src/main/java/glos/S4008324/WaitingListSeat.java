@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-public class WaitingListSeat extends Seat{
+final class WaitingListSeat extends Seat{
 
     @Override
     public String toString()
@@ -30,7 +30,6 @@ public class WaitingListSeat extends Seat{
             e.printStackTrace();
         } scanner.nextLine();
     }
-
     public void modifyScheduledSeating(Queue<HashMap<String, WaitingListSeat>> waitingQueue , String flightNumber){
         try {
             BufferedWriter outAgain = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", false));
@@ -44,7 +43,6 @@ public class WaitingListSeat extends Seat{
             e.printStackTrace();
         }
     }
-
     public void modifyWaitingList(HashMap<String, String> bookedFlights){
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", false));

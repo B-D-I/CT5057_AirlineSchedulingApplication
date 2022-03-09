@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ScheduledSeat extends Seat{
+/**
+ * ScheduledSeat class enables booked seating information to be written to text file, and modified
+ */
+final class ScheduledSeat extends Seat{
 
     @Override
     public String toString()

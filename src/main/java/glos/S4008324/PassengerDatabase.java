@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class PassengerDatabase implements Database {
-
+/**
+ * Passenger Database contains all functionality for passenger related requirements
+ */
+final class PassengerDatabase implements Database {
+    // request passenger information
     public void schedulePassenger() {
         Passenger passenger = new Passenger();
         System.out.println("Enter passenger's full name: ");
         String passengerName = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-
         System.out.println("Enter passenger passport number: ");
         String passengerPassportNumber = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
             try {
@@ -29,12 +31,17 @@ public class PassengerDatabase implements Database {
             } scanner.nextLine();
     }
 
-    public void passengerRoute(Passenger passenger) {
+    /**
+     * passengerRoute method utilises the Airports Graph to ensure only known airports and routes can be selected.
+     * If a route is available, the flight information will be requested from flightDatabase.
+     * @param passenger: Passenger (object) being scheduled
+     */
+    private void passengerRoute(Passenger passenger) {
         FlightDatabase flightDatabase = new FlightDatabase();
         scanner.nextLine();
         System.out.println("Enter departure airport: ");
         String departureAirport = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
-
+        // check airport is available
         if (!flightDatabase.checkAirport(departureAirport)) {
             flightDatabase.printAirports();
             System.out.println("\n --- We do not fly from this airport, please select another ---\n");
@@ -44,7 +51,6 @@ public class PassengerDatabase implements Database {
             String destinationAirport = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
 
             if (flightDatabase.checkRoute(departureAirport, destinationAirport)) {
-
                 // find the flight number for the route, then call schedule-seat function
                 String flightNumber = null;
                 for (Flight flight : flightDatabase.allFlightsMap.values()) {
@@ -63,15 +69,17 @@ public class PassengerDatabase implements Database {
         }
     }
 
-    // Retrieve FlightBookings / Waiting Lists
-    // PASSPORT NUMBER : FLIGHT NUMBER (BookedFlights or WaitingList)
-    public HashMap<String, String> createPassengerBookingsObject(String listType) {
+    /**
+     * This method retrieves general flight bookings and waiting list information. This data is then stored in a HashMap
+     * @param listType: Either "BookedFlights" or "WaitingLists"
+     * @return: HashMap of requested information
+     */
+    private HashMap<String, String> createPassengerBookingsObject(String listType) {
         try{
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/"+listType+".txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
-
                 String passengerPassport = myReader.nextLine();
                 String flightNumber = myReader.nextLine();
 
@@ -88,7 +96,10 @@ public class PassengerDatabase implements Database {
         return passengerSchedulingMap;
     }
 
-        public void passengerStatus() {
+    /**
+     * passengerStatus method provides a passengers booked flights and waiting lists
+     */
+    public void passengerStatus() {
             WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
 
             System.out.println("Enter passport number of passenger: ");
@@ -110,9 +121,8 @@ public class PassengerDatabase implements Database {
                 waitingListDatabase.printWaitListPassenger(passengerWaitList, passportNumber);
             }
         }
-
+        // Method to remove a passenger from a flight
         public void removePassengerFromList(String listType, String passportNumber){
-
         if (listType.equals("BookedFlights")){
             HashMap<String, String> passengerBookingsMap = createPassengerBookingsObject("BookedFlights");
             passengerBookingsMap.remove(passportNumber);

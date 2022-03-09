@@ -2,6 +2,9 @@ package glos.S4008324;
 
 import java.util.Scanner;
 
+/**
+ * Seat abstract class provides variables and Getter & Setter methods for Seating subclasses
+ */
 abstract class Seat {
     protected Scanner scanner = new Scanner(System.in);
     protected String seatPassengerPassportNumber = null;
@@ -34,5 +37,4 @@ abstract class Seat {
     protected void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
-
 }

@@ -5,17 +5,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class FlightInvoice {
+/**
+ * The flightInvoice class provides all attributes for an invoice. Along with a method to write Invoices to text files.
+ */
+final class FlightInvoice {
     Scanner scanner = new Scanner(System.in);
-
     private String invoiceID;
     private int invoiceCharge;
     private String invoiceDate;
     private Boolean luggageIncluded;
 
-    public FlightInvoice() {
-    }
-
+    // Getter and Setter methods
     public void setInvoiceID(String invoiceID) {
         this.invoiceID = invoiceID;
     }
@@ -47,7 +47,6 @@ public class FlightInvoice {
     @Override
     public String toString()
     {return "InvoiceID: "+getInvoiceID()+"\nInvoice Charge: "+getInvoiceCharge()+"\nDate: " + getInvoiceDate();}
-
 
     public void addInvoiceToTxt(FlightInvoice flightInvoice) {
         try{

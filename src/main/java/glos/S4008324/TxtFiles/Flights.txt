@@ -2,7 +2,13 @@
 LHR
 2022-02-19
 MIA
-{11=Economy, 13=Economy, 15=Economy, 16=Economy, 17=Economy, 6=Business, 9=Business, 10=Business}
+{11=Economy, 13=Economy, 15=Economy, 16=Economy, 17=Economy, 6=Business, 10=Business}
+
+222
+LTN
+2022-03-10
+VIA
+{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
 
 201
 LTN
@@ -16,6 +22,12 @@ LHR
 DUB
 {11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=First, 5=First, 6=Business, 7=Business, 8=Business, 9=Business, 10=Business}
 
+333
+VIA
+2022-03-11
+LCA
+{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
+
 301
 LTN
 2022-02-23
@@ -27,6 +39,12 @@ NAP
 2022-03-03
 LIS
 {11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=First, 5=First, 6=Business, 7=Business, 8=Business, 9=Business, 10=Business}
+
+444
+LCA
+2022-03-25
+LHR
+{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
 
 401
 EDI
@@ -40,6 +58,12 @@ EDI
 MIA
 {11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=First, 16=First, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Business, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
 
+555
+LCA
+2022-03-19
+PFO
+{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
+
 501
 LHR
 2022-02-25
@@ -51,6 +75,12 @@ MIA
 2022-02-29
 NAP
 {11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=First, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Business, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
+
+666
+PFO
+2022-03-23
+VIA
+{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
 
 601
 BHM
@@ -82,32 +112,3 @@ LTN
 MIA
 {11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
 
-222
-LTN
-2022-03-10
-VIA
-{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
-
-333
-VIA
-2022-03-11
-LCA
-{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
-
-444
-LCA
-2022-03-25
-LHR
-{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
-
-555
-LCA
-2022-03-19
-PFO
-{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}
-
-666
-PFO
-2022-03-23
-VIA
-{11=Economy, 12=Economy, 13=Economy, 14=Economy, 15=Economy, 16=Economy, 17=Economy, 1=First, 2=First, 3=First, 4=Business, 5=Business, 6=Economy, 7=Economy, 8=Economy, 9=Economy, 10=Economy}

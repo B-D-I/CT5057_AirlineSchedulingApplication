@@ -1,13 +1,13 @@
 package glos.S4008324;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
+/**
+ * Database Interface contains common data structure instances used within the application, along
+ * with a Static method that provides Binary Searching of an array
+ */
 interface Database {
     Scanner scanner = new Scanner(System.in);
-
     //Flights.txt (flightNumber : Flight)
     HashMap<String, Flight> allFlightsMap = new HashMap<>();
     // Flights.txt, unallocated seats (SeatNumber : SeatClass)
@@ -20,7 +20,8 @@ interface Database {
     HashMap<String, ScheduledSeat> scheduledPassengers = new HashMap<>();
     // WaitingLists"".txt (passportNumber : WaitingLists(queue))
     Queue<HashMap<String, WaitingListSeat>> waitingQueue = new LinkedList<>();
-
+    // FlightDatabase array list of all departure dates
+    ArrayList<Integer> flightDates = new ArrayList<>();
 
     // static method to perform binary search of an array
     static int search(int[] numberArray, int targetNumber) {
