@@ -7,7 +7,7 @@ import java.util.Scanner;
  * This class contains the application's menu options. The class has been created using the Singleton design pattern to
  * ensure only one instance of this class can be created.
  */
-class ApplicationMenu {
+final class ApplicationMenu {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     PassengerDatabase passengerDatabase = new PassengerDatabase();

@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 final class DepartureDatesRadixSort {
     // get the maximum value in array
-    static int get_max_val(int my_arr[], int arr_len) {
+    static int get_max_val(int[] my_arr, int arr_len) {
         int max_val = my_arr[0];
         for (int i = 1; i < arr_len; i++)
             if (my_arr[i] > max_val)
@@ -16,11 +16,11 @@ final class DepartureDatesRadixSort {
         return max_val;
     }
     // method to count sort array according to the digits
-    static void countSort(int my_arr[], int arr_len, int exp) {
-        int result[] = new int[arr_len];
+    static void countSort(int[] my_arr, int arr_len, int exp) {
+        int[] result = new int[arr_len];
         int i;
         //output array
-        int count[] = new int[10];
+        int[] count = new int[10];
         Arrays.fill(count,0);
         // store the count occurrences in count array
         for (i = 0; i < arr_len; i++)
@@ -42,7 +42,7 @@ final class DepartureDatesRadixSort {
      * @param my_arr: array to be sorted
      * @param arr_len: the array length
      */
-    static void radix_sort(int my_arr[], int arr_len) {
+    static void radix_sort(int[] my_arr, int arr_len) {
         int m = get_max_val(my_arr, arr_len);
         for (int exp = 1; m/exp > 0; exp *= 10)
             countSort(my_arr, arr_len, exp);
