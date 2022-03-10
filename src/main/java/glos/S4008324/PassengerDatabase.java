@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Passenger Database contains all functionality for passenger related requirements
  */
-final class PassengerDatabase implements Database {
+public class PassengerDatabase implements Database {
     // request passenger information
     public void schedulePassenger() {
         Passenger passenger = new Passenger();
@@ -18,7 +18,7 @@ final class PassengerDatabase implements Database {
             try {
                 System.out.println("Enter passenger age: ");
                 byte passengerAge = scanner.nextByte();
-                if (passengerAge > 18) {
+                if (checkAge(passengerAge)) {
                     passenger.setName(passengerName);
                     passenger.setPassportNumber(passengerPassportNumber);
                     passengerRoute(passenger);
@@ -29,6 +29,11 @@ final class PassengerDatabase implements Database {
                 System.out.println(e);
                 System.out.println("Please enter correct data type");
             } scanner.nextLine();
+    }
+    public boolean checkAge(byte age){
+        boolean isOfAge;
+        isOfAge = age >= 18;
+        return isOfAge;
     }
 
     /**
@@ -74,7 +79,7 @@ final class PassengerDatabase implements Database {
      * @param listType: Either "BookedFlights" or "WaitingLists"
      * @return: HashMap of requested information
      */
-    private HashMap<String, String> createPassengerBookingsObject(String listType) {
+    public HashMap<String, String> createPassengerBookingsObject(String listType) {
         try{
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/"+listType+".txt");
             Scanner myReader = new Scanner(myObj);
@@ -99,11 +104,11 @@ final class PassengerDatabase implements Database {
     /**
      * passengerStatus method provides a passengers booked flights and waiting lists
      */
-    public void passengerStatus() {
-            WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
-
-            System.out.println("Enter passport number of passenger: ");
-            String passportNumber = scanner.nextLine().trim();
+    public String passengerStatus() {
+        System.out.println("Enter passport number of passenger: ");
+        return scanner.nextLine().trim();}
+    public void retrieveStatus(){
+        String passportNumber = passengerStatus();
             // passport : flight number
             HashMap<String, String> passengerBookingsMap = createPassengerBookingsObject("BookedFlights");
             HashMap<String, String> passengerWaitingMap = createPassengerBookingsObject("WaitingLists");
@@ -113,14 +118,15 @@ final class PassengerDatabase implements Database {
             System.out.println("Passenger: " + passportNumber);
             System.out.println("Flight: "+passengerFlight);
             System.out.println("Waiting List For Flight: "+passengerWaitList);
-
             if (passengerFlight == null || passengerWaitList == null){
                 System.out.println("Passenger not associated to any booked flights");
             } else {
+                WaitingListDatabase waitingListDatabase = new WaitingListDatabase();
                 // check waiting list database for passenger info and position
                 waitingListDatabase.printWaitListPassenger(passengerWaitList, passportNumber);
             }
         }
+
         // Method to remove a passenger from a flight
         public void removePassengerFromList(String listType, String passportNumber){
         if (listType.equals("BookedFlights")){

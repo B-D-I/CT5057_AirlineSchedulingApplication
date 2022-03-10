@@ -11,7 +11,7 @@ import java.util.Map;
  * methods for adding departure and destination vertices, along with counting and confirming the vertices and edges
  * @param <T>: The graph contains one generic type, of which can be any data-type.
  */
-final class Airports<T> {
+public class Airports<T> {
     // Hash Map stores graph edges
     private final Map<T, List<T>> airportMap = new HashMap<>();
 
@@ -38,9 +38,12 @@ final class Airports<T> {
         }
     }
     // method to count vertices
-    public void getAirportCount(){
-        System.out.println("Graph has " + airportMap.keySet().size() + " airports");
+    public String getAirportCount(){
+        return String.format("""
+                        Graph has %s airports
+                        """, airportMap.keySet().size());
     }
+
     /**
      * method to count the edges in the graph
      * @param bidirection: whether to count only bidirectional edges

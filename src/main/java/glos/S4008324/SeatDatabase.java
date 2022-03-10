@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Seat Database provides all functionality for seating requirements
  */
-final class SeatDatabase implements Database {
+public final class SeatDatabase implements Database {
 
     private int economySeatAmount, firstSeatAmount, businessSeatAmount;
 
@@ -84,7 +84,7 @@ final class SeatDatabase implements Database {
      * @param flightNumber: This is associated flight number for the correct .txt file
      * @return: An updated HashMap of key: passenger passport number && value: Scheduled Seat object
      */
-    private HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
+    public HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt");
             Scanner myReader = new Scanner(myObj);

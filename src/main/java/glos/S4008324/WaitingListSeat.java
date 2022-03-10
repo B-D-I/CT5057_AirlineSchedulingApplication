@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-final class WaitingListSeat extends Seat{
+public class WaitingListSeat extends Seat{
 
     @Override
     public String toString()

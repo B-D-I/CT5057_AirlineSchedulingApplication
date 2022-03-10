@@ -6,18 +6,12 @@ import java.util.*;
 /**
  * Flight Database provides all functionality to Flight related requirements
  */
-final class FlightDatabase implements Database {
+public class FlightDatabase implements Database {
 
     public FlightDatabase() {
         createFlightObjectsMap();
     }
-    // credentials for advanced options
-    public String getDbUsername() {
-        return "nathan";
-    }
-    public String getDbPassword() {
-        return "password";
-    }
+
     /**
      * This method reads Flights.txt data and creates a Flight object. Each Flight object is stored in a HashMap
      * This method also creates the Airports Graph from the Flights.txt departure and destination airports,
@@ -77,11 +71,6 @@ final class FlightDatabase implements Database {
         return allFlightsMap;
     }
 
-    private void showAllFlights() {
-        HashMap<String, Flight> flightMap = createFlightObjectsMap();
-        flightMap.entrySet().forEach(System.out::println);
-    }
-
     /**
      * This method is used to receive a Radix sorted array of departure dates, and provide a sorted list of dates,
      * along with the option to check the position of a flight, using Binary Search
@@ -93,7 +82,7 @@ final class FlightDatabase implements Database {
         // convert the ArrayList to array and get length
         int[] arr = flightDates.stream().mapToInt(i -> i).toArray();
         // Radix sort the array
-        DepartureDatesRadixSort.radix_sort(arr, arr.length);
+        DepartureDatesRadixSort.radixSort(arr, arr.length);
         if (option.equals("print")) {
             // print sorted array
             System.out.println("Sorted departure dates");
@@ -101,12 +90,6 @@ final class FlightDatabase implements Database {
         } else if (option.equals("search")){
             System.out.println("\n\t\tTHIS FLIGHT IS IN " + Database.search(arr, date) + " FLIGHTS TIME!\n\n");
         }
-    }
-    private void showAirportCount() {
-        airports.getAirportCount();
-    }
-    private void getRouteCount() {
-        airports.getRouteCount(true);
     }
 
     /**
@@ -146,7 +129,7 @@ final class FlightDatabase implements Database {
         seatingDatabase.printScheduledPassengers(flightNumber);
     }
     public void printAirports() {
-        System.out.println("Airports:\n" + airports.toString());
+        System.out.println("\nAirports:\n" + airports);
     }
 
     /**
@@ -333,6 +316,12 @@ final class FlightDatabase implements Database {
                 }
             }
         } return totalCharge;
+    }
+    // check credentials for advanced options
+    public boolean restrictedMenuLogin(String username, String password) {
+        String adminUsername = "nathan";
+        String adminPassword = "password";
+        return username.equals(adminUsername) && password.equals(adminPassword);
     }
 }
 

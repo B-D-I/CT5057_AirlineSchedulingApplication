@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * ScheduledSeat class enables booked seating information to be written to text file, and modified
  */
-final class ScheduledSeat extends Seat{
+public final class ScheduledSeat extends Seat{
 
     @Override
     public String toString()

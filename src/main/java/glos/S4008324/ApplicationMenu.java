@@ -7,7 +7,7 @@ import java.util.Scanner;
  * This class contains the application's menu options. The class has been created using the Singleton design pattern to
  * ensure only one instance of this class can be created.
  */
-final class ApplicationMenu {
+public class ApplicationMenu {
 
     FlightDatabase flightDatabase = new FlightDatabase();
     PassengerDatabase passengerDatabase = new PassengerDatabase();
@@ -27,22 +27,24 @@ final class ApplicationMenu {
         }
         return menu;
     }
-    private void startApplication(){
+
+    private void startApplication() {
         System.out.println("""
-                
+                                
                   **      WELCOME TO FLIGHT SCHEDULER         **
-                
+                                
                   **     PRESS ENTER TO START APPLICATION    **
-                
+                                
                 """);
         scanRead.nextLine();
         adminMenu();
     }
+
     private void adminMenu() {
         while (true) {
             System.out.println("""
-                    
-                    
+                                        
+                                        
                     Select Option:
                                     
                     S - schedule a passenger
@@ -62,41 +64,42 @@ final class ApplicationMenu {
             switch (adminSelect) {
                 case "S" -> passengerDatabase.schedulePassenger();
                 case "C" -> seatDatabase.cancelPassenger();
-                case "P" -> passengerDatabase.passengerStatus();
+                case "P" -> passengerDatabase.retrieveStatus();
                 case "F" -> flightDatabase.flightStatus();
                 case "Q" -> startApplication();
-                case "A" -> restrictedMenuLogin();
+                case "A" -> restrictedMenu();
                 default -> System.out.println("error");
             }
         }
     }
+
     // Menu for further options
-    private void restrictedMenuLogin() {
+    private void restrictedMenu() {
         System.out.println("Enter username: ");
         String username = scanRead.nextLine();
         System.out.println("Enter password: ");
         String password = scanRead.nextLine();
-        if (username.equals(flightDatabase.getDbUsername()) && password.equals(flightDatabase.getDbPassword())) {
+        if (flightDatabase.restrictedMenuLogin(username, password)) {
             System.out.println("""
                     Select Option:
-                    
+                                        
                     C: create a new flight
-                    
+                                        
                     I: check an invoice
-                    
+                                        
                     """);
             String option = scanRead.nextLine().trim().toUpperCase(Locale.ROOT);
             if (option.equals("C")) {
                 flight.createFlight();
-            } else if (option.equals("I")){
+            } else if (option.equals("I")) {
                 System.out.println("Enter Invoice ID: ");
                 int id = scanRead.nextInt();
                 scanRead.nextLine();
                 InvoiceDatabase invoiceDatabase = new InvoiceDatabase();
                 invoiceDatabase.searchInvoiceID(id);
+            } else {
+                adminMenu();
             }
-        } else {
-            adminMenu();
         }
     }
 }

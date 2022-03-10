@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Invoice Database provides all functionality for Invoicing
  */
-final class InvoiceDatabase implements Database{
+public class InvoiceDatabase implements Database{
 
     private InvoiceBinarySearchTree invoiceBinarySearchTree = new InvoiceBinarySearchTree();
     /**
@@ -15,7 +15,7 @@ final class InvoiceDatabase implements Database{
      * @param invoiceDetail: The invoicing value to be inserted
      * @return: A Binary Search Tree of specified data
      */
-    private InvoiceBinarySearchTree createInvoiceInformation(String invoiceDetail) {
+    public InvoiceBinarySearchTree createInvoiceInformation(String invoiceDetail) {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Invoices.txt");
             Scanner myReader = new Scanner(myObj);

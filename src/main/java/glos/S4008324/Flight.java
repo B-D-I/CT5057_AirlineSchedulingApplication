@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * The Flight class contains all attributes associated to a flight, accessible via getter and setter methods.
  */
-final class Flight {
+public class Flight {
 
     private String flightNumber;
     private String departure ;

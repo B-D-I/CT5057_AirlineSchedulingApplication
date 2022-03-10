@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Unallocated Seat class provides text file writing and modification
  */
-final class UnallocatedSeat extends Seat {
+public class UnallocatedSeat extends Seat {
     public void updateFlightTxt(String departure, String destination, String dateDeparture, String flightNumber, HashMap<Integer, String> seatList) {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/Flights.txt", true));

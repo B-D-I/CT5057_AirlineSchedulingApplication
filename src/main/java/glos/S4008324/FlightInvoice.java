@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * The flightInvoice class provides all attributes for an invoice. Along with a method to write Invoices to text files.
  */
-final class FlightInvoice {
+public class FlightInvoice {
     Scanner scanner = new Scanner(System.in);
     private String invoiceID;
     private int invoiceCharge;

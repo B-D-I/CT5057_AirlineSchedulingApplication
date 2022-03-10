@@ -7,14 +7,14 @@ import java.util.*;
 /**
  * WaitingList Database provides all functionality for waiting list requirements
  */
-final class WaitingListDatabase implements Database {
+public class WaitingListDatabase implements Database {
     /**
      * This method creates a queue (FIFO) of all waiting passengers. Each passenger is contained within a HashMap, which
      * uses a passport number as the key, the Passenger object as value.
      * @param flightNumber: Number for specified flight
      * @return: Queue of HashMaps, for waiting list passengers
      */
-    private Queue<HashMap<String, WaitingListSeat>> createWaitingListObject(String flightNumber) {
+    public Queue<HashMap<String, WaitingListSeat>> createWaitingListObject(String flightNumber) {
         try {
             File myObj = new File("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt");
             Scanner myReader = new Scanner(myObj);

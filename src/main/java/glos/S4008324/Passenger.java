@@ -3,7 +3,7 @@ package glos.S4008324;
 /**
  * Passenger class for all passenger attributes.
  */
-final class Passenger {
+public class Passenger {
 
     private String name;
     private String passportNumber;

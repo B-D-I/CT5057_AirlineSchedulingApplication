@@ -6,9 +6,9 @@ import java.util.Arrays;
  * This class has been created to enable Radix sorting of an array. This is used for ordering the flight
  * departure dates
  */
-final class DepartureDatesRadixSort {
+public class DepartureDatesRadixSort {
     // get the maximum value in array
-    static int get_max_val(int[] my_arr, int arr_len) {
+    public static int getMaxVal(int[] my_arr, int arr_len) {
         int max_val = my_arr[0];
         for (int i = 1; i < arr_len; i++)
             if (my_arr[i] > max_val)
@@ -16,7 +16,7 @@ final class DepartureDatesRadixSort {
         return max_val;
     }
     // method to count sort array according to the digits
-    static void countSort(int[] my_arr, int arr_len, int exp) {
+    private static void countSort(int[] my_arr, int arr_len, int exp) {
         int[] result = new int[arr_len];
         int i;
         //output array
@@ -42,10 +42,18 @@ final class DepartureDatesRadixSort {
      * @param my_arr: array to be sorted
      * @param arr_len: the array length
      */
-    static void radix_sort(int[] my_arr, int arr_len) {
-        int m = get_max_val(my_arr, arr_len);
+    public static void radixSort(int[] my_arr, int arr_len) {
+        int m = getMaxVal(my_arr, arr_len);
         for (int exp = 1; m/exp > 0; exp *= 10)
             countSort(my_arr, arr_len, exp);
     }
+    // This version of the above method is used for Junit testing
+    public static int[] returnRadixSort(int[] my_arr, int arr_len) {
+        int m = getMaxVal(my_arr, arr_len);
+        for (int exp = 1; m/exp > 0; exp *= 10)
+            countSort(my_arr, arr_len, exp);
+        return my_arr;
+    }
+
 }
 
