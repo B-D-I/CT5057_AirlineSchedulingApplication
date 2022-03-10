@@ -6,8 +6,4 @@ public class Main {
 
         new ApplicationMenu();
     }
-    // TO DO:
-    /// UNIT TESTING
-    /// CREATE VIDEO
-    /// COMPILE INTO EXECUTABLE
 }
