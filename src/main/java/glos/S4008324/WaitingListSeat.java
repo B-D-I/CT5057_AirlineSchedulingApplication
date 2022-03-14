@@ -17,12 +17,12 @@ public class WaitingListSeat extends Seat{
         try {
             // add to specific flight form
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", true));
-            out.write("\n" + passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n");
+            out.write(passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n");
             out.close();
             // add to generic passenger form
-            BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", true));
-            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
-            out2.close();
+//            BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", true));
+//            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n\n");
+//            out2.close();
 
             System.out.println("\nPassenger added to waiting list");
 

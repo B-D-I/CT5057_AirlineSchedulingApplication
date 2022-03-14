@@ -133,14 +133,14 @@ public class WaitingListDatabase implements Database {
             // remove passenger
             waitingQueue.poll();
             try {
-                // remove from WaitingLists.txt
+                // find passenger in hashmap using passport number and remove from WaitingLists.txt
                 for(WaitingListSeat waitingListSeating: waitingPassenger.values()){
                     String passportNumber = waitingListSeating.seatPassengerPassportNumber;
                     passengerDatabase.removePassengerFromList("WaitingLists", passportNumber);
                 }
-                // rewrite specific WaitingList.txt
+                // rewrite amended WaitingList.txt
                 waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
-                // offer next passenger
+                // offer seat to next passenger
                 offerFreeSeat(waitingQueue, flightNumber, seatNumber, seatClass);
             } catch (Exception e) {
                 e.printStackTrace();

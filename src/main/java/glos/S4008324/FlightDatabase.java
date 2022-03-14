@@ -88,7 +88,7 @@ public class FlightDatabase implements Database {
             System.out.println("Sorted departure dates");
             for (int j : arr) System.out.print(j + " ");
         } else if (option.equals("search")){
-            System.out.println("\n\t\tTHIS FLIGHT IS IN " + Database.search(arr, date) + " FLIGHTS TIME!\n\n");
+            System.out.println("\n\t\tTHIS FLIGHT IS IN " + Database.binarySearch(arr, date) + " FLIGHTS TIME!\n\n");
         }
     }
 

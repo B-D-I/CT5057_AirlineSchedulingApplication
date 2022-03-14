@@ -9,14 +9,14 @@ import java.util.Scanner;
 /**
  * The Flight class contains all attributes associated to a flight, accessible via getter and setter methods.
  */
-public class Flight {
+public class Flight extends AirlineObject{
 
     private String flightNumber;
     private String departure ;
     private String destination;
     private String departureDate;
 
-    Scanner scanRead = new Scanner(System.in);
+
     UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
     SeatDatabase seatDatabase = new SeatDatabase();
 

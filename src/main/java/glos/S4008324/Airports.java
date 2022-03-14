@@ -11,7 +11,7 @@ import java.util.Map;
  * methods for adding departure and destination vertices, along with counting and confirming the vertices and edges
  * @param <T>: The graph contains one generic type, of which can be any data-type.
  */
-public class Airports<T> {
+public class Airports<T> extends AirlineObject{
     // Hash Map stores graph edges
     private final Map<T, List<T>> airportMap = new HashMap<>();
 

@@ -19,13 +19,13 @@ public final class ScheduledSeat extends Seat{
         try{
             // add to specific flight seating
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt", true));
-            out.write("\n" + passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n" + seatNumber + "\n");
+            out.write(passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n" + seatNumber + "\n\n");
             out.close();
 
             // add to generic passenger form
-            BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/BookedFlights.txt", true));
-            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
-            out2.close();
+//            BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/BookedFlights.txt", true));
+//            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
+//            out2.close();
 
             System.out.println("\nPassenger added");
         } catch (IOException e) {
@@ -37,7 +37,7 @@ public final class ScheduledSeat extends Seat{
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt", false));
             for(ScheduledSeat scheduledSeat: scheduledPassengers.values())
-                out.write("\n" + scheduledSeat.getSeatPassengerPassportNumber() + "\n" + scheduledSeat.getSeatPassengerName() +
+                out.write(scheduledSeat.getSeatPassengerPassportNumber() + "\n" + scheduledSeat.getSeatPassengerName() +
                         "\n" + scheduledSeat.getSeatClass() + "\n" + scheduledSeat.getSeatNumber() + "\n\n");
             out.close();
         } catch (IOException e) {
