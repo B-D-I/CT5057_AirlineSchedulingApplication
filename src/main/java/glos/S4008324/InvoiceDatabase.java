@@ -17,7 +17,7 @@ public class InvoiceDatabase implements Database{
      */
     public InvoiceBinarySearchTree createInvoiceInformation(String invoiceDetail) {
         try {
-            File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Invoices.txt");
+            File myObj = new File("../CT5057_AirlineSchedulingApplication/TxtFiles/Invoices.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 // read and assign flights.txt information

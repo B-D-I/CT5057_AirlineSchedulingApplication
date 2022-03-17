@@ -16,7 +16,6 @@ public class Flight extends AirlineObject{
     private String destination;
     private String departureDate;
 
-
     UnallocatedSeat unallocatedSeat = new UnallocatedSeat();
     SeatDatabase seatDatabase = new SeatDatabase();
 

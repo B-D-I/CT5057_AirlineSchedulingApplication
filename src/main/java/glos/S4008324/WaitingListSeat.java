@@ -16,13 +16,13 @@ public class WaitingListSeat extends Seat{
     public void addPassengerToWaitingList(String flightNumber, String seatClass, Passenger passenger) {
         try {
             // add to specific flight form
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", true));
+            BufferedWriter out = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/WaitingList" + flightNumber + ".txt", true));
             out.write(passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n");
             out.close();
             // add to generic passenger form
-//            BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", true));
-//            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n\n");
-//            out2.close();
+            BufferedWriter out2 = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/WaitingLists.txt", true));
+            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n\n");
+            out2.close();
 
             System.out.println("\nPassenger added to waiting list");
 
@@ -32,7 +32,7 @@ public class WaitingListSeat extends Seat{
     }
     public void modifyScheduledSeating(Queue<HashMap<String, WaitingListSeat>> waitingQueue , String flightNumber){
         try {
-            BufferedWriter outAgain = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", false));
+            BufferedWriter outAgain = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/WaitingList" + flightNumber + ".txt", false));
             for (HashMap<String, WaitingListSeat> passengers : waitingQueue) {
                 for (WaitingListSeat waitingListSeat : passengers.values()) {
                     outAgain.write(waitingListSeat.getSeatPassengerPassportNumber() + "\n" + waitingListSeat.getSeatPassengerName() +
@@ -45,7 +45,7 @@ public class WaitingListSeat extends Seat{
     }
     public void modifyWaitingList(HashMap<String, String> bookedFlights){
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/WaitingLists.txt", false));
+            BufferedWriter out = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/WaitingLists.txt", false));
             for(Map.Entry<String, String> flights: bookedFlights.entrySet()){
                 String passport = flights.getKey();
                 String flight = flights.getValue();

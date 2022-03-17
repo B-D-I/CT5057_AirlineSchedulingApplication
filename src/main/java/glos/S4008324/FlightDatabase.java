@@ -20,7 +20,8 @@ public class FlightDatabase implements Database {
      */
     public HashMap<String, Flight> createFlightObjectsMap() {
         try {
-            File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Flights.txt");
+            // C:\Users\nathh\IdeaProjects\CT5057_AirlineSchedulingApplication\TxtFiles
+            File myObj = new File("../CT5057_AirlineSchedulingApplication/TxtFiles/Flights.txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
@@ -320,7 +321,7 @@ public class FlightDatabase implements Database {
     // check credentials for advanced options
     public boolean restrictedMenuLogin(String username, String password) {
         String adminUsername = "nathan";
-        String adminPassword = "password";
+        String adminPassword = "ct5057";
         return username.equals(adminUsername) && password.equals(adminPassword);
     }
 }

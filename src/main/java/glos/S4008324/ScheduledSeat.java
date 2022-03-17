@@ -18,14 +18,14 @@ public final class ScheduledSeat extends Seat{
     public void addPassengerToScheduledSeat(String flightNumber, String seatNumber, String seatClass, Passenger passenger) {
         try{
             // add to specific flight seating
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt", true));
+            BufferedWriter out = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/ScheduledSeating" + flightNumber + ".txt", true));
             out.write(passenger.getPassportNumber() + "\n" + passenger.getName() + "\n" + seatClass + "\n" + seatNumber + "\n\n");
             out.close();
 
             // add to generic passenger form
-//            BufferedWriter out2 = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/BookedFlights.txt", true));
-//            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
-//            out2.close();
+            BufferedWriter out2 = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/BookedFlights.txt", true));
+            out2.write("\n" + passenger.getPassportNumber() + "\n" + flightNumber + "\n");
+            out2.close();
 
             System.out.println("\nPassenger added");
         } catch (IOException e) {
@@ -35,7 +35,7 @@ public final class ScheduledSeat extends Seat{
     // Hashmap (passport number : seat object)
     public void modifyScheduledSeating(HashMap<String, ScheduledSeat> scheduledPassengers, String flightNumber){
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt", false));
+            BufferedWriter out = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/ScheduledSeating" + flightNumber + ".txt", false));
             for(ScheduledSeat scheduledSeat: scheduledPassengers.values())
                 out.write(scheduledSeat.getSeatPassengerPassportNumber() + "\n" + scheduledSeat.getSeatPassengerName() +
                         "\n" + scheduledSeat.getSeatClass() + "\n" + scheduledSeat.getSeatNumber() + "\n\n");
@@ -46,7 +46,7 @@ public final class ScheduledSeat extends Seat{
     }
     public void modifyBookedFlights(HashMap<String, String> bookedFlights){
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/BookedFlights.txt", false));
+            BufferedWriter out = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/BookedFlights.txt", false));
             for(Map.Entry<String, String> flights: bookedFlights.entrySet()){
                 String passport = flights.getKey();
                 String flight = flights.getValue();

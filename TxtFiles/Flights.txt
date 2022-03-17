@@ -2,7 +2,7 @@
 LHR
 2022-02-19
 MIA
-{11=Economy, 13=Economy, 15=Economy, 16=Economy, 17=Economy, 6=Business, 10=Business}
+{11=Economy, 13=Economy, 16=Economy, 17=Economy, 6=Business, 10=Business}
 
 222
 LTN

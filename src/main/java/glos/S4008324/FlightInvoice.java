@@ -50,7 +50,7 @@ public class FlightInvoice extends AirlineObject{
     public void addInvoiceToTxt(FlightInvoice flightInvoice) {
         try{
             // add to specific flight seating
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/Invoices.txt", true));
+            BufferedWriter out = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/Invoices.txt", true));
             out.write("\n" + flightInvoice.getInvoiceID() + "\n" + flightInvoice.getInvoiceCharge() + "\n" + flightInvoice.getInvoiceDate() + "\n");
             out.close();
             System.out.println("Invoice created: "+flightInvoice.getInvoiceID());
