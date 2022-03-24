@@ -86,7 +86,7 @@ public final class SeatDatabase implements Database {
      */
     public HashMap<String, ScheduledSeat> createScheduledPassengers(String flightNumber) {
         try {
-            File myObj = new File("../CT5057_AirlineSchedulingApplication/TxtFiles/ScheduledSeating" + flightNumber + ".txt");
+            File myObj = new File("target/classes/glos/S4008324/TxtFiles/ScheduledSeating" + flightNumber + ".txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {

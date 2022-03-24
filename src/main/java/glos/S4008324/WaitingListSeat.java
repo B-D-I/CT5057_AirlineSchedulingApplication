@@ -32,7 +32,7 @@ public class WaitingListSeat extends Seat{
     }
     public void modifyScheduledSeating(Queue<HashMap<String, WaitingListSeat>> waitingQueue , String flightNumber){
         try {
-            BufferedWriter outAgain = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/WaitingList" + flightNumber + ".txt", false));
+            BufferedWriter outAgain = new BufferedWriter(new FileWriter("target/classes/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt", false));
             for (HashMap<String, WaitingListSeat> passengers : waitingQueue) {
                 for (WaitingListSeat waitingListSeat : passengers.values()) {
                     outAgain.write(waitingListSeat.getSeatPassengerPassportNumber() + "\n" + waitingListSeat.getSeatPassengerName() +
@@ -45,7 +45,7 @@ public class WaitingListSeat extends Seat{
     }
     public void modifyWaitingList(HashMap<String, String> bookedFlights){
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("../CT5057_AirlineSchedulingApplication/TxtFiles/WaitingLists.txt", false));
+            BufferedWriter out = new BufferedWriter(new FileWriter("target/classes/glos/S4008324/TxtFiles/WaitingLists.txt", false));
             for(Map.Entry<String, String> flights: bookedFlights.entrySet()){
                 String passport = flights.getKey();
                 String flight = flights.getValue();

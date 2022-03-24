@@ -81,7 +81,7 @@ public class PassengerDatabase implements Database {
      */
     public HashMap<String, String> createPassengerBookingsObject(String listType) {
         try{
-            File myObj = new File("../CT5057_AirlineSchedulingApplication/TxtFiles/"+listType+".txt");
+            File myObj = new File("target/classes/glos/S4008324/TxtFiles/"+listType+".txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {

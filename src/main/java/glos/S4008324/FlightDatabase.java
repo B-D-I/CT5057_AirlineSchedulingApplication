@@ -20,8 +20,11 @@ public class FlightDatabase implements Database {
      */
     public HashMap<String, Flight> createFlightObjectsMap() {
         try {
-            // C:\Users\nathh\IdeaProjects\CT5057_AirlineSchedulingApplication\TxtFiles
-            File myObj = new File("../CT5057_AirlineSchedulingApplication/TxtFiles/Flights.txt");
+            // C:\Users\nathh\IdeaProjects\CT5057_AirlineSchedulingApplication\src\main\java\glos\S4008324\TxtFiles
+            // C:\Users\nathh\IdeaProjects\CT5057_AirlineSchedulingApplication\out\artifacts\CT5057_AirlineSchedulingApplication_jar\TxtFiles
+            //"target/classes/glos/S4008324/TxtFiles/Flights.txt
+            File myObj = new File("target/classes/glos/S4008324/TxtFiles/Flights.txt");
+
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
