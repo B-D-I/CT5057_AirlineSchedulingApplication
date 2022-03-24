@@ -20,7 +20,11 @@ public class FlightDatabase implements Database {
      */
     public HashMap<String, Flight> createFlightObjectsMap() {
         try {
-            File myObj = new File("src/main/java/glos/S4008324/TxtFiles/Flights.txt");
+            // C:\Users\nathh\IdeaProjects\CT5057_AirlineSchedulingApplication\src\main\java\glos\S4008324\TxtFiles
+            // C:\Users\nathh\IdeaProjects\CT5057_AirlineSchedulingApplication\out\artifacts\CT5057_AirlineSchedulingApplication_jar\TxtFiles
+            //"target/classes/glos/S4008324/TxtFiles/Flights.txt
+            File myObj = new File("target/classes/glos/S4008324/TxtFiles/Flights.txt");
+
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
@@ -88,7 +92,7 @@ public class FlightDatabase implements Database {
             System.out.println("Sorted departure dates");
             for (int j : arr) System.out.print(j + " ");
         } else if (option.equals("search")){
-            System.out.println("\n\t\tTHIS FLIGHT IS IN " + Database.search(arr, date) + " FLIGHTS TIME!\n\n");
+            System.out.println("\n\t\tTHIS FLIGHT IS IN " + Database.binarySearch(arr, date) + " FLIGHTS TIME!\n\n");
         }
     }
 
@@ -320,7 +324,7 @@ public class FlightDatabase implements Database {
     // check credentials for advanced options
     public boolean restrictedMenuLogin(String username, String password) {
         String adminUsername = "nathan";
-        String adminPassword = "password";
+        String adminPassword = "ct5057";
         return username.equals(adminUsername) && password.equals(adminPassword);
     }
 }

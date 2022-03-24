@@ -24,7 +24,7 @@ interface Database {
     ArrayList<Integer> flightDates = new ArrayList<>();
 
     // static method to perform binary search of an array
-    static int search(int[] numberArray, int targetNumber) {
+    static int binarySearch(int[] numberArray, int targetNumber) {
         int start = 0;
         int end = numberArray.length - 1;
 

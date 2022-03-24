@@ -30,10 +30,12 @@ public class ApplicationMenu {
 
     private void startApplication() {
         System.out.println("""
+                              
+                              
                                 
-                  **      WELCOME TO FLIGHT SCHEDULER         **
+                             **      WELCOME TO FLIGHT SCHEDULER         **
                                 
-                  **     PRESS ENTER TO START APPLICATION    **
+                             **     PRESS ENTER TO START APPLICATION    **
                                 
                 """);
         scanRead.nextLine();

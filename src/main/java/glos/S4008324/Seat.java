@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Seat abstract class provides variables and Getter & Setter methods for Seating subclasses
  */
-abstract class Seat {
+abstract class Seat extends AirlineObject{
     protected Scanner scanner = new Scanner(System.in);
     protected String seatPassengerPassportNumber = null;
     protected String seatPassengerName = null;

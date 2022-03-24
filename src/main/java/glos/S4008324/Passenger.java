@@ -3,7 +3,7 @@ package glos.S4008324;
 /**
  * Passenger class for all passenger attributes.
  */
-public class Passenger {
+public class Passenger extends AirlineObject{
 
     private String name;
     private String passportNumber;

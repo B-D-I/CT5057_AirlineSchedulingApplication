@@ -2,10 +2,6 @@ import glos.S4008324.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class FlightTest {
     Flight flight = new Flight();
     FlightDatabase flightDatabase = new FlightDatabase();
@@ -30,7 +26,7 @@ public class FlightTest {
     @Test
     public void testLogin(){
         String username = "nathan";
-        String password = "password";
+        String password = "ct5057";
         String username2 = "testFalse";
         String password2 = "testFalse";
         Assertions.assertTrue(flightDatabase.restrictedMenuLogin(username, password));
@@ -51,7 +47,6 @@ public class FlightTest {
 
         Assertions.assertTrue(airports.hasAirport(trueAirport));
         Assertions.assertFalse(airports.hasAirport(falseAirport));
-
     }
 
     @Test

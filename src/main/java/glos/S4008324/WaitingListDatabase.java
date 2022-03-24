@@ -16,7 +16,7 @@ public class WaitingListDatabase implements Database {
      */
     public Queue<HashMap<String, WaitingListSeat>> createWaitingListObject(String flightNumber) {
         try {
-            File myObj = new File("src/main/java/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt");
+            File myObj = new File("target/classes/glos/S4008324/TxtFiles/WaitingList" + flightNumber + ".txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
@@ -133,14 +133,14 @@ public class WaitingListDatabase implements Database {
             // remove passenger
             waitingQueue.poll();
             try {
-                // remove from WaitingLists.txt
+                // find passenger in hashmap using passport number and remove from WaitingLists.txt
                 for(WaitingListSeat waitingListSeating: waitingPassenger.values()){
                     String passportNumber = waitingListSeating.seatPassengerPassportNumber;
                     passengerDatabase.removePassengerFromList("WaitingLists", passportNumber);
                 }
-                // rewrite specific WaitingList.txt
+                // rewrite amended WaitingList.txt
                 waitingListSeat.modifyScheduledSeating(waitingQueue, flightNumber);
-                // offer next passenger
+                // offer seat to next passenger
                 offerFreeSeat(waitingQueue, flightNumber, seatNumber, seatClass);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -3,13 +3,12 @@ package glos.S4008324;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * The flightInvoice class provides all attributes for an invoice. Along with a method to write Invoices to text files.
  */
-public class FlightInvoice {
-    Scanner scanner = new Scanner(System.in);
+public class FlightInvoice extends AirlineObject{
+
     private String invoiceID;
     private int invoiceCharge;
     private String invoiceDate;
@@ -51,12 +50,12 @@ public class FlightInvoice {
     public void addInvoiceToTxt(FlightInvoice flightInvoice) {
         try{
             // add to specific flight seating
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/java/glos/S4008324/TxtFiles/Invoices.txt", true));
+            BufferedWriter out = new BufferedWriter(new FileWriter("target/classes/glos/S4008324/TxtFiles/Invoices.txt", true));
             out.write("\n" + flightInvoice.getInvoiceID() + "\n" + flightInvoice.getInvoiceCharge() + "\n" + flightInvoice.getInvoiceDate() + "\n");
             out.close();
             System.out.println("Invoice created: "+flightInvoice.getInvoiceID());
             System.out.println("Charge: "+flightInvoice.getInvoiceCharge());
-            scanner.nextLine();
+            scanRead.nextLine();
         } catch (IOException e) {
             e.printStackTrace();
         }

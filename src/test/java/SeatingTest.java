@@ -21,7 +21,6 @@ public class SeatingTest {
 
         ArrayList<Integer> DupSortedArray = new ArrayList<>();
         for (int k : dupSortedArray) DupSortedArray.add(k);
-
         ArrayList<Integer> SortedTestArray = new ArrayList<>();
         for (int j : sortedTestArray) SortedTestArray.add(j);
 
@@ -33,11 +32,9 @@ public class SeatingTest {
         int[] testArray = {1, 2, 3, 9};
         int max = 9;
         int falseMax = 2;
-
         Assertions.assertEquals(DepartureDatesRadixSort.getMaxVal(testArray, testArray.length), max);
         Assertions.assertNotEquals(DepartureDatesRadixSort.getMaxVal(testArray, testArray.length), falseMax);
     }
-
     @Test
     public void testSeatObjects(){
         Assertions.assertNotNull(seatDatabase.createScheduledPassengers("101"));
@@ -46,5 +43,4 @@ public class SeatingTest {
     public void testWaitListObjects(){
         Assertions.assertNotNull(waitingListDatabase.createWaitingListObject("101"));
     }
-
 }

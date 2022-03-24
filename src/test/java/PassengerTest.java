@@ -15,7 +15,6 @@ public class PassengerTest {
     public void testPassengerObjects(){
         Assertions.assertNotNull(passengerDatabase.createPassengerBookingsObject("BookedFlights"));
         Assertions.assertNotNull(passengerDatabase.createPassengerBookingsObject("WaitingLists"));
-
     }
 
     @Test
